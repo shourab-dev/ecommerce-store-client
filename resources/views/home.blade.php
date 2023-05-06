@@ -10,7 +10,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="titlemb-30">
-                        <h2>Title {{ auth()->user()->hasRole('admin'); }}</h2>
+                        <h2>Dashboard </h2>
                     </div>
                 </div>
                 <!-- end col -->
