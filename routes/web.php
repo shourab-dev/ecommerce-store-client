@@ -25,4 +25,5 @@ Route::controller(RoleController::class)->prefix('role/')->name('role.')->group(
     //*  GET ALL ROLES
     Route::get('/all', 'allRoles')->name('all');
     Route::POST('/store', 'storeRole')->name('store');
+    Route::get('/edit/{id}', 'editRole')->name('edit');
 });

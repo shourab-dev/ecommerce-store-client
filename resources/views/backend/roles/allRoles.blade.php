@@ -41,7 +41,7 @@
                                 
                                 <td>
                                     <div class="action justify-content-center">
-                                        <a href="#" class="text-primary me-2">
+                                        <a href="{{ route('role.edit', $role->id) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
                                         <a href="#" class="text-danger">

@@ -27,4 +27,14 @@ class RoleController extends Controller
         return back()->with('success','Role created successfully');
         
     }
+
+
+    public function editRole($id)
+    {
+
+        $role = Role::with('permissions')->where('id',$id)->first();
+        return view('backend.roles.editRole',compact('role'));
+        
+    }
+
 }
