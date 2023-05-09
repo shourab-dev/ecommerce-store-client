@@ -8,21 +8,17 @@ use App\Http\Controllers\HomeController;
 /**
  * ALL ADMIN ROUTES
  */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::middleware(['isAdmin', 'auth'])->group(function () {
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    Route::controller(RoleController::class)->prefix('role/')->name('role.')->group(function () {
 
-Route::controller(RoleController::class)->prefix('role/')->name('role.')->group(function () {
-
-    //*  GET ALL ROLES
-    Route::get('/all', 'allRoles')->name('all');
-    Route::POST('/store', 'storeRole')->name('store');
+        //*  GET ALL ROLES
+        Route::get('/all', 'allRoles')->name('all');
+        Route::POST('/store', 'storeRole')->name('store');
+    });
 });
