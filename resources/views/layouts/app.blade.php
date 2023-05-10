@@ -263,6 +263,7 @@
     <script src="{{ asset('backend/assets/js/world-merc.js') }}"></script>
     <script src="{{ asset('backend/assets/js/polyfill.js') }}"></script>
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
+    @stack('customJs')
 </body>
 
 </html>

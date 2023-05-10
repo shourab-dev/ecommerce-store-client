@@ -17,20 +17,40 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'manage role',
-            'create role',
-            'edit role',
-            'delete role',
+            'role' => [
+                'names' => [
+                    'manage role',
+                    'create role',
+                    'edit role',
+                    'delete role',
+                ],
+                'description' => 'Manage Role',
+            ],
+            'employee' => [
+                'names' => [
+                    'manage employee',
+                    'create employee',
+                    'edit employee',
+                    'delete employee',
+                ],
+                'description' => 'Manage employee',
+            ],
+
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create([
-                'name' => $permission,
-            ]);
+        foreach ($permissions as $key => $permission) {
+            foreach ($permission['names'] as $name) {
+                Permission::create([
+                    'name' => $name,
+                    'group' => $key,
+                    'details' => $permission['description'],
+                ]);
+            }
         }
 
 
         $admin = Role::where('name', 'admin')->first();
-        $admin->syncPermissions($permissions);
+
+        $admin->syncPermissions(Permission::all());
     }
 }
