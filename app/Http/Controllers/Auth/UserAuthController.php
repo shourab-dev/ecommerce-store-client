@@ -23,7 +23,7 @@ class UserAuthController extends Controller
 
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
-
+            
             return redirect()->intended('dashboard');
         }
 

@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 //* ALL CUSTOMER ROUTES
 
+Route::get('login', [UserAuthController::class,'userLogin'])->name('user.login');
+Route::post('login', [UserAuthController::class,'handleUserLogin'])->name('user.login.check');
 
-Route::name('user.')->controller(UserAuthController::class)->group(function () {
+Route::middleware(['auth', 'isUser'])->name('user.')->controller(UserAuthController::class)->group(function () {
 
-    Route::get('/login', 'userLogin')->name('login');
-    Route::post('/login', 'handleUserLogin')->name('login.check');
 
     //* CUSTOMER DASHBOARD URL
 
