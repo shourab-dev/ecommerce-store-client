@@ -21,12 +21,10 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         //*  GET ALL ROLES
         Route::get('/all', 'allRoles')->name('all');
         Route::POST('/store', 'storeRole')->name('store');
+        Route::get('/edit/{id}', 'editRole')->name('edit');
     });
 
-    //*  GET ALL ROLES
-    Route::get('/all', 'allRoles')->name('all');
-    Route::POST('/store', 'storeRole')->name('store');
-    Route::get('/edit/{id}', 'editRole')->name('edit');
+
     //* COUNTRY ROUTES
     Route::controller(CountryController::class)->prefix('admin/country')->name('admin.country.')->group(function () {
         Route::get('/add', 'addCountry')->name('add');
