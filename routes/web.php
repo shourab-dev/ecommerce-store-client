@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\QuestionPaperController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -29,5 +30,13 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     Route::controller(CountryController::class)->prefix('admin/country')->name('admin.country.')->group(function () {
         Route::get('/add', 'addCountry')->name('add');
         Route::post('/store', 'storeCountry')->name('store');
+        Route::get('/edit/{editedCountry}', 'editCountry')->name('edit');
+        Route::post('/update/{country}', 'updateCountry')->name('update');
+    });
+
+
+    //* QUESTION PAPER ROUTES
+    Route::controller(QuestionPaperController::class)->prefix('admin/questions/')->name('admin.questions.')->group(function () {
+        Route::get('/', 'getAllQuestions')->name('all');
     });
 });

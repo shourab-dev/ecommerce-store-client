@@ -10,7 +10,7 @@ class CountryController extends Controller
 {
     public function addCountry()
     {
-        $countries = Country::orderBy('name', 'ASC')->get();
+        $countries = Country::getAllCountry();
         return view('backend.country.allCountry', compact('countries'));
     }
 
@@ -21,9 +21,35 @@ class CountryController extends Controller
             'code' => 'required|unique:countries,code',
         ]);
         $country = new Country();
+        $this->saveCountry($country, $req);
+        return back();
+    }
+
+
+    public function editCountry(Country $editedCountry)
+    {
+
+        $countries = Country::getAllCountry();
+        return view('backend.country.allCountry', compact('editedCountry', 'countries'));
+    }
+
+
+    public function updateCountry(Request $req,Country $country)
+    {
+        $req->validate([
+            'name' => 'required',
+            'code' => 'required',
+        ]);
+        $this->saveCountry($country, $req);
+
+        return back();
+    }
+
+
+    private function saveCountry($country, $req)
+    {
         $country->name = $req->name;
         $country->code = $req->code;
         $country->save();
-        return back();
     }
 }

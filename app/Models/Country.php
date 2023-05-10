@@ -12,4 +12,17 @@ class Country extends Model
         'name',
         'code'
     ];
+
+
+
+    public function scopeGetAllCountry($query)
+    {
+        return $query->orderBy('name', 'ASC')->get();
+    }
+
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

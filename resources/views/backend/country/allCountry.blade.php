@@ -41,10 +41,13 @@
                                 <td class="min-width">
                                     <p><a href="#0">{{ str()->headline($country->name) }}</a></p>
                                 </td>
+                                <td class="min-width">
+                                    <p><a href="#0">{{ $country->code }}</a></p>
+                                </td>
 
                                 <td>
                                     <div class="action justify-content-center">
-                                        <a href="#" class="text-primary me-2">
+                                        <a href="{{ route('admin.country.edit', $country) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
                                         <a href="#" class="text-danger">
@@ -67,14 +70,14 @@
 
         <div class="card-style col-lg-4 align-self-start">
             <div class="card-header">
-                <h3 class="mb-2">Add Country</h3>
+                <h3 class="mb-2">{{ isset($editedCountry) ? 'Edit' : 'Add' }} Country</h3>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('admin.country.store') }}">
+                <form method="post" action="{{ isset($editedCountry) ? route('admin.country.update', $editedCountry) :  route('admin.country.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Country Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
+                        <input type="text" class="form-control" id="name" name="name" value="{{ isset($editedCountry) ? $editedCountry->name : old('name') }}"
                             placeholder="Example: China | Bangladesh | India">
                         @error('name')
                         <div class="text-danger my-2">{{ $message }}</div>
@@ -82,13 +85,13 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Country Code</label>
-                        <input type="text" class="form-control" id="name" name="code" value="{{ old('code') }}"
+                        <input type="text" class="form-control" id="name" name="code" value="{{ isset($editedCountry) ? $editedCountry->code : old('code') }}"
                             placeholder="AU | UAE | BD | IN">
                         @error('code')
                         <div class="text-danger my-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="mt-2 btn btn-primary w-100">Submit</button>
+                    <button type="submit" class="mt-2 btn btn-primary w-100">{{ isset($editedCountry) ? 'Update Country'  : 'Submit' }}</button>
                 </form>
             </div>
 
