@@ -21,6 +21,7 @@ class QuestionFactory extends Factory
         return [
             'country_id' => $this->faker->numberBetween(1, Country::count()),
             'question_name' => $this->faker->word(3),
+            'slug' => str()->slug($this->faker->unique()->word(3)),
             'question' => $this->faker->paragraph(3),
             'date' => $this->faker->dateTimeBetween()
         ];

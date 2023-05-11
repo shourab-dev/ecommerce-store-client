@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('question_name')->default('Un-sorted');
+            $table->string('slug')->unique();
             $table->longText('question')->nullable();
             $table->date('date');
             $table->timestamps();

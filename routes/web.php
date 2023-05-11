@@ -41,5 +41,6 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/', 'getAllQuestions')->name('all');
         Route::get('/filter', 'filterQuestions')->name('filter');
         Route::get('/create', 'createQuestions')->name('create');
+        Route::post('/create', 'storeQuestions')->name('store');
     });
 });
