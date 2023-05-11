@@ -38,7 +38,7 @@
         <li class="nav-item  {{ request()->routeIs('admin.country.*') ? 'active' : '' }}">
             <a href="{{ route('admin.country.add') }}">
                 <span class="icon">
-                    <i class="lni lni-users"></i>
+                    <i class="lni lni-money-location"></i>
                 </span>
                 <span class="text">Countries</span>
             </a>
@@ -50,7 +50,7 @@
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#questions"
                 aria-controls="ddmenu_2" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon">
-                    <i class="lni lni-users"></i>
+                   <i class="lni lni-files"></i>
                 </span>
                 <span class="text">Questions Manage </span>
             </a>
