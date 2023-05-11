@@ -20,8 +20,7 @@ class QuestionFactory extends Factory
     {
         return [
             'country_id' => $this->faker->numberBetween(1, Country::count()),
-            'question_type_id' => $this->faker->numberBetween(1, QuestionType::count()),
-            'question_name' => $this->faker->paragraph(2),
+            'question_name' => $this->faker->word(3),
             'question' => $this->faker->paragraph(3),
             'date' => $this->faker->dateTimeBetween()
         ];

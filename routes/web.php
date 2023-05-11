@@ -23,6 +23,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/all', 'allRoles')->name('all');
         Route::POST('/store', 'storeRole')->name('store');
         Route::get('/edit/{id}', 'editRole')->name('edit');
+        
     });
 
 
@@ -38,5 +39,6 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     //* QUESTION PAPER ROUTES
     Route::controller(QuestionPaperController::class)->prefix('admin/questions/')->name('admin.questions.')->group(function () {
         Route::get('/', 'getAllQuestions')->name('all');
+        Route::get('/filter', 'filterQuestions')->name('filter');
     });
 });

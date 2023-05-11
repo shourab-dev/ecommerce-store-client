@@ -12,4 +12,10 @@ class QuestionType extends Model
     protected $fillable = [
         'type'
     ];
+
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'question_types_questions', 'question_type_id', 'question_id');
+    }
 }

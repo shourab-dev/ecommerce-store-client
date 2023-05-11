@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('question_types_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('question_name')->default('Un-sorted');
-            $table->longText('question')->nullable();
-            $table->string('pdf')->nullable();
-            $table->date('date');
+            $table->foreignId('question_type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('question_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('question_types_questions');
     }
 };
