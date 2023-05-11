@@ -10,21 +10,37 @@ use Illuminate\Http\Request;
 
 class QuestionPaperController extends Controller
 {
+    /**
+     * * @RES ALL QUESTIONS
+     */
     public function getAllQuestions($questions =  null)
     {
         if ($questions == null) {
-            $questions = Question::with('types')->paginate(10);
+            $questions = Question::withCount('pdfs as hasPdf')->with('types')->paginate(10);
         }
+
         $countries = Country::get();
         $types = QuestionType::get();
-        
+
         return view('backend.questions.allQuestions', compact('questions', 'countries', 'types'));
     }
 
-
+    /**
+     * * @RES FILTERED QUESTIONS
+     */
     public function filterQuestions(Request $req)
     {
-        $questions = Question::filterQuestions(req: $req)->paginate(10);
+        $questions = Question::withCount('pdfs as hasPdf')->filterQuestions(req: $req)->paginate(10);
         return $this->getAllQuestions($questions);
+    }
+
+
+    /**
+     * *@RES CREATE VIEW 
+     */
+
+    public function createQuestions()
+    {
+        return view('backend.questions.addQuestions');
     }
 }

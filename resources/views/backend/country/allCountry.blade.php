@@ -73,11 +73,13 @@
                 <h3 class="mb-2">{{ isset($editedCountry) ? 'Edit' : 'Add' }} Country</h3>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ isset($editedCountry) ? route('admin.country.update', $editedCountry) :  route('admin.country.store') }}">
+                <form method="post"
+                    action="{{ isset($editedCountry) ? route('admin.country.update', $editedCountry) :  route('admin.country.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Country Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ isset($editedCountry) ? $editedCountry->name : old('name') }}"
+                        <input type="text" class="form-control" id="name" name="name"
+                            value="{{ isset($editedCountry) ? $editedCountry->name : old('name') }}"
                             placeholder="Example: China | Bangladesh | India">
                         @error('name')
                         <div class="text-danger my-2">{{ $message }}</div>
@@ -85,13 +87,15 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Country Code</label>
-                        <input type="text" class="form-control" id="name" name="code" value="{{ isset($editedCountry) ? $editedCountry->code : old('code') }}"
+                        <input type="text" class="form-control" id="name" name="code"
+                            value="{{ isset($editedCountry) ? $editedCountry->code : old('code') }}"
                             placeholder="AU | UAE | BD | IN">
                         @error('code')
                         <div class="text-danger my-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="mt-2 btn btn-primary w-100">{{ isset($editedCountry) ? 'Update Country'  : 'Submit' }}</button>
+                    <button type="submit" class="mt-2 btn btn-primary w-100">{{ isset($editedCountry) ? 'Update Country'
+                        : 'Submit' }}</button>
                 </form>
             </div>
 

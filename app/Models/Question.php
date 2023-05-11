@@ -22,6 +22,11 @@ class Question extends Model
         return $this->belongsToMany(QuestionType::class, 'question_types_questions',  'question_id', 'question_type_id');
     }
 
+    public function pdfs()
+    {
+        return $this->hasMany(PdfQuestion::class);
+    }
+
 
 
     public function scopeFilterQuestions($query, $req)

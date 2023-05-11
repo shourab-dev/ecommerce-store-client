@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('login', [UserAuthController::class,'userLogin'])->name('user.login');
 Route::post('login', [UserAuthController::class,'handleUserLogin'])->name('user.login.check');
 
-Route::middleware(['auth', 'isUser'])->name('user.')->controller(UserAuthController::class)->group(function () {
+Route::middleware([ 'isUser'])->name('user.')->controller(UserAuthController::class)->group(function () {
 
 
     //* CUSTOMER DASHBOARD URL

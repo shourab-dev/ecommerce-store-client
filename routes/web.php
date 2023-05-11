@@ -40,5 +40,6 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     Route::controller(QuestionPaperController::class)->prefix('admin/questions/')->name('admin.questions.')->group(function () {
         Route::get('/', 'getAllQuestions')->name('all');
         Route::get('/filter', 'filterQuestions')->name('filter');
+        Route::get('/create', 'createQuestions')->name('create');
     });
 });

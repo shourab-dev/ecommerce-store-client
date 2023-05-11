@@ -46,8 +46,8 @@
 
 
 
-    <div class="card bg-light round-md p-3 border-0 shadow-sm mt-5">
-        <table>
+    <div class="card text-center bg-light round-md p-3 border-0 shadow-sm mt-5">
+        <table class="table table-responsive table-border">
             <tr>
                 <th>
                     #
@@ -68,12 +68,18 @@
             @foreach ($questions as $key=>$question)
 
             <tr>
-                <td width="5%">{{ ++$key }}</td>
+                <td width="5%">{{ $questions->firstItem() + $key}}</td>
                 <td width="40%">{{ $question->question_name }}</td>
-                <td width="10%">{{ $question->pdf }}</td>
+                <td width="10%">
+                    @if ($question->hasPdf > 0)
+                      <span class="badge bg-primary">{{ $question->hasPdf }} pdf found</span>
+                    @else
+                    <span class="text-sm ">{{ "No pdf found" }}</span>
+                    @endif
+                </td>
                 <td width="30%">
                     @forelse ($question->types as $type)
-                        <span class="badge bg-primary text-white rounded-0">{{ $type->type }}</span>
+                    <span class="badge bg-primary text-white rounded-0">{{ $type->type }}</span>
                     @empty
                     <span class="badge bg-danger text-white">{{ "Un-sorted" }}</span>
                     @endforelse
@@ -87,20 +93,20 @@
             @endforeach
         </table>
 
-        
+
     </div>
 
-  
+
     @if($questions->lastPage() > 1)
     <div class="card mt-2 p-2 border-0 shadow-sm">
-        
-        <div >
-            
+
+        <div>
+
             {{ $questions->links() }}
         </div>
     </div>
     @endif
-    
+
 
 
 </div>

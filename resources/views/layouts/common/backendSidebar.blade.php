@@ -56,7 +56,7 @@
             </a>
             <ul id="questions" class="collapse ">
                 <li>
-                    <a href="">
+                    <a href="{{ route('admin.questions.create') }}">
                         Add Questions
                     </a>
                 </li>
