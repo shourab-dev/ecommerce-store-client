@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('class_rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('class_room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('subject_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('question_name')->default('Un-sorted');
+            $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->longText('question')->nullable();
-            $table->date('date');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('class_rooms');
     }
 };

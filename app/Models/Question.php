@@ -12,9 +12,13 @@ class Question extends Model
 
 
 
-    public function country()
+    public function classRoom()
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(ClassRoom::class);
+    }
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
     }
 
     public function types()
@@ -33,7 +37,30 @@ class Question extends Model
     {
         //* REQ HAS COUNTRY
         if ($req->has('country')) {
-            $query->where('country_id', $req->country);
+            $query->with('classRoom')->whereHas(
+                'classRoom',
+                function ($q) use ($req) {
+                    $q->where('country_id', $req->country);
+                }
+            );
+        }
+        //* REQ HAS ClassRoom
+        if ($req->classRoom != null) {
+            $query->with('classRoom')->whereHas(
+                'classRoom',
+                function ($q) use ($req) {
+                    $q->where('id', $req->classRoom);
+                }
+            );
+        }
+        //* REQ HAS Subject
+        if ($req->subject != null) {
+            $query->with('subject')->whereHas(
+                'subject',
+                function ($q) use ($req) {
+                    $q->where('id', $req->subject);
+                }
+            );
         }
 
         //* REQ HAS TYPE

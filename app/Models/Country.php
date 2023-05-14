@@ -25,4 +25,10 @@ class Country extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+
+    public function classRooms()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
 }

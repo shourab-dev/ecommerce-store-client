@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\QuestionType;
+
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CustomerSeeder::class,
             CountrySeeder::class,
+            ClassRoomSeeder::class,
+            SubjectSeeder::class,
             QuestionTypeSeeder::class,
             QuestionPaperSeeder::class,
         ]);
