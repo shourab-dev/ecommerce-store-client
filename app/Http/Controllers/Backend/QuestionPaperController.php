@@ -71,7 +71,7 @@ class QuestionPaperController extends Controller
      */
     public function filterQuestions(Request $req)
     {
-        $questions = Question::select('id', 'class_room_id', 'question_name', 'date')->withCount('pdfs as hasPdf')->filterQuestions(req: $req)->oldest()->paginate(10);
+        $questions = Question::select('id', 'class_room_id', 'question_name', 'date')->withCount('pdfs as hasPdf')->filterQuestions(req: $req)->latest()->paginate(10);
         return $this->getAllQuestions($questions);
     }
 
@@ -107,8 +107,10 @@ class QuestionPaperController extends Controller
         $question = new Question();
         $question->question_name = $req->name;
         $question->slug = str()->slug($req->name);
-        $question->country_id = $req->country;
+        
         $question->question = $req->question;
+        $question->class_room_id = $req->classRoom;
+        $question->subject_id = $req->subject;
         $question->date = $req->date ?? Carbon::today();
         $question->save();
 
