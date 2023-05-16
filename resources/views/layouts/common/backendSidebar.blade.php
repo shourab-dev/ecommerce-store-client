@@ -18,7 +18,7 @@
                 <span class="icon">
                     <i class="lni lni-users"></i>
                 </span>
-                <span class="text">User Manage </span>
+                <span class="text"> Manage User </span>
             </a>
             <ul id="ddmenu_2" class="collapse ">
                 <li>
@@ -44,6 +44,26 @@
             </a>
 
         </li>
+        <li class="nav-item  {{ request()->routeIs('admin.class.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.class.add') }}">
+                <span class="icon">
+                   <i class="lni lni-enter"></i>
+                </span>
+                <span class="text">Manage Class</span>
+            </a>
+
+        </li>
+        <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.subject.add') }}">
+                <span class="icon">
+                   <i class="lni lni-write"></i>
+                </span>
+                <span class="text">Manage Subjects</span>
+            </a>
+
+        </li>
+
+
 
 
         <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">

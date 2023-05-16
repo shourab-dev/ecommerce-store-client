@@ -9,7 +9,7 @@ class Subject extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'country_id',
+      
         'name',
         'slug'
     ];

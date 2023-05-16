@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Backend\ClassRoomController;
 use App\Http\Controllers\Backend\QuestionPaperController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\SubjectController;
 use App\Http\Controllers\Bakend\CountryController;
 
 /**
@@ -23,7 +25,6 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/all', 'allRoles')->name('all');
         Route::POST('/store', 'storeRole')->name('store');
         Route::get('/edit/{id}', 'editRole')->name('edit');
-        
     });
 
 
@@ -33,6 +34,23 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/store', 'storeCountry')->name('store');
         Route::get('/edit/{editedCountry}', 'editCountry')->name('edit');
         Route::post('/update/{country}', 'updateCountry')->name('update');
+    });
+
+
+    //* CLASS ROOM ROUTES
+    Route::controller(ClassRoomController::class)->prefix('admin/class-room')->name('admin.class.')->group(function () {
+        Route::get('/add', 'addClassRoom')->name('add');
+        Route::post('/store', 'storeClassRoom')->name('store');
+        Route::get('/edit/{editedClassRoom}', 'editClassRoom')->name('edit');
+        Route::post('/update/{classRoom}', 'updateClassRoom')->name('update');
+    });
+
+    //* Subject ROUTES
+    Route::controller(SubjectController::class)->prefix('admin/subjects')->name('admin.subject.')->group(function () {
+        Route::get('/add', 'addSubject')->name('add');
+        Route::post('/store', 'storeSubject')->name('store');
+        Route::get('/edit/{editedSubject}', 'editSubject')->name('edit');
+        Route::post('/update/{subject}', 'updateSubject')->name('update');
     });
 
 
