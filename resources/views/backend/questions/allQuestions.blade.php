@@ -99,7 +99,7 @@
                     @endforelse
                 </td>
                 <td width="25%">
-                    <a href="#">
+                    <a href="{{ route('admin.questions.show', $question->id) }}">
                         <i class="lni lni-eye"></i>
                     </a>
                 </td>

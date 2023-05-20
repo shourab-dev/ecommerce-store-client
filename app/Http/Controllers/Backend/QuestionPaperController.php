@@ -107,7 +107,7 @@ class QuestionPaperController extends Controller
         $question = new Question();
         $question->question_name = $req->name;
         $question->slug = str()->slug($req->name);
-        
+
         $question->question = $req->question;
         $question->class_room_id = $req->classRoom;
         $question->subject_id = $req->subject;
@@ -124,6 +124,17 @@ class QuestionPaperController extends Controller
             $pdfQuestion->pdf = $pdf;
             $pdfQuestion->save();
         }
+    }
+
+
+    /**
+     * * @ SHOW A QUESTION
+     */
+
+    public function getQuestion($id)
+    {
+        $question = Question::find($id);
+        
     }
 
 
