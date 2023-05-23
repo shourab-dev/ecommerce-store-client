@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\ClassRoomController;
 use App\Http\Controllers\Backend\QuestionPaperController;
 use Illuminate\Support\Facades\Auth;
@@ -63,5 +64,12 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/create', 'createQuestions')->name('create');
         Route::post('/create', 'storeQuestions')->name('store');
         Route::get('/show/{id}', 'getQuestion')->name('show');
+    });
+
+
+
+    //* BOOKS ROUTES 
+    Route::controller(BookController::class)->prefix('admin/books/')->name('admin.books.')->group(function () {
+        Route::get('/add', 'addBook')->name('create');
     });
 });

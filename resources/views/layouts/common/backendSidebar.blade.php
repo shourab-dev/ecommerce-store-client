@@ -1,5 +1,6 @@
 <nav class="sidebar-nav">
     <ul>
+        {{-- * DASHBAORD --}}
         <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="collapsed">
                 <span class="icon">
@@ -12,6 +13,9 @@
             </a>
 
         </li>
+        {{-- * DASHBAORD END--}}
+
+        {{-- * MANAGE USERS --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('role.*') ? 'active' : '' }}">
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +38,9 @@
 
             </ul>
         </li>
+        {{-- * MANAGE USERS END--}}
 
+        {{-- * MANAGE COUTRY --}}
         <li class="nav-item  {{ request()->routeIs('admin.country.*') ? 'active' : '' }}">
             <a href="{{ route('admin.country.add') }}">
                 <span class="icon">
@@ -44,33 +50,62 @@
             </a>
 
         </li>
+        {{-- * MANAGE COUTRY END--}}
+
+        {{-- * MANAGE CLASS --}}
         <li class="nav-item  {{ request()->routeIs('admin.class.*') ? 'active' : '' }}">
             <a href="{{ route('admin.class.add') }}">
                 <span class="icon">
-                   <i class="lni lni-enter"></i>
+                    <i class="lni lni-enter"></i>
                 </span>
                 <span class="text">Manage Class</span>
             </a>
 
         </li>
+        {{-- * MANAGE CLASS END--}}
+
+        {{-- * MANAGE SUBJECT--}}
         <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
             <a href="{{ route('admin.subject.add') }}">
                 <span class="icon">
-                   <i class="lni lni-write"></i>
+                    <i class="lni lni-write"></i>
                 </span>
                 <span class="text">Manage Subjects</span>
             </a>
 
         </li>
+        {{-- * MANAGE SUBJECT END--}}
 
+        {{-- * MANAGE BOARD --}}
+        <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
+            <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#boards" aria-controls="ddmenu_2"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon">
+                  <i class="lni lni-flag"></i>
+                </span>
+                <span class="text">Boards Manage </span>
+            </a>
+            <ul id="boards" class="collapse ">
+                <li>
+                    <a href="{{ route('admin.questions.create') }}">
+                        Add Board
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.questions.all') }}">
+                        Boards List
+                    </a>
+                </li>
 
-
-
+            </ul>
+        </li>
+        {{-- * MANAGE BOARD END--}}
+        {{-- * MANAGE QUESTION --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#questions"
                 aria-controls="ddmenu_2" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon">
-                   <i class="lni lni-files"></i>
+                    <i class="lni lni-files"></i>
                 </span>
                 <span class="text">Questions Manage </span>
             </a>
@@ -88,6 +123,32 @@
 
             </ul>
         </li>
+        {{-- * MANAGE QUESTION END--}}
+
+        {{-- * MANAGE BOOKS --}}
+        <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.books.*') ? 'active' : '' }}">
+            <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#books" aria-controls="ddmenu_2"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon">
+                    <i class="lni lni-book"></i>
+                </span>
+                <span class="text">Manage Books</span>
+            </a>
+            <ul id="books" class="collapse ">
+                <li>
+                    <a href="{{ route('admin.books.create') }}">
+                        Add Book
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.questions.all') }}">
+                        Books List
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        {{-- * MANAGE BOOKS ENDS --}}
 
     </ul>
 </nav>

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             ClassRoomSeeder::class,
             SubjectSeeder::class,
+            BoardSeeder::class,
             QuestionTypeSeeder::class,
             QuestionPaperSeeder::class,
         ]);
