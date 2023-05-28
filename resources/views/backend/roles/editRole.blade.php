@@ -5,18 +5,19 @@
         <h2>Edit User</h2>
     </div>
     <div class="card-body mt-2">
-        <form action="" class="d-flex">
+        <form action="{{ route('role.update', $role->id)  }}" method="POST" class="d-flex">
+            @csrf
             <div class="col-10 mx-2"><input type="text" name="name" class="form-control" value="{{ $role->name }}">
             </div>
             <button class="btn btn-primary ">Update Role</button>
-        </form>
+       
     </div>
 
 
     <hr>
 
 
-    <form action="" method="POST">
+   
         @csrf
         @foreach ($permissions as $key=>$permissionGrp)
         <div class="row">

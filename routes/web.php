@@ -26,6 +26,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/all', 'allRoles')->name('all');
         Route::POST('/store', 'storeRole')->name('store');
         Route::get('/edit/{id}', 'editRole')->name('edit');
+        Route::post('/update/{id}', 'updateRole')->name('update');
+        Route::get('/authors', 'getAuthors')->name('authors');
     });
 
 
@@ -70,6 +72,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
 
     //* BOOKS ROUTES 
     Route::controller(BookController::class)->prefix('admin/books/')->name('admin.books.')->group(function () {
-        Route::get('/add', 'addBook')->name('create');
+        Route::get('/', 'addBook')->name('create');
+        Route::post('/', 'storeBook')->name('store');
     });
 });

@@ -29,6 +29,10 @@ class RoleSeeder extends Seeder
                 'guard' => 'web'
             ],
             [
+                'name' => 'author',
+                'guard' => 'web'
+            ],
+            [
                 'name' => 'user',
                 'guard' => 'user',
             ],
@@ -40,12 +44,5 @@ class RoleSeeder extends Seeder
                 'guard_name' => $role['guard']
             ]);
         }
-
-
-
-
-
-
-        
     }
 }

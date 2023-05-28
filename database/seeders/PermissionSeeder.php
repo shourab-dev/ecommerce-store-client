@@ -35,6 +35,15 @@ class PermissionSeeder extends Seeder
                 ],
                 'description' => 'Manage employee',
             ],
+            'author' => [
+                'names' => [
+                    'manage books',
+                    'create book',
+                    'edit book',
+                    'delete book',
+                ],
+                'description' => 'Manage Books',
+            ],
 
         ];
 
