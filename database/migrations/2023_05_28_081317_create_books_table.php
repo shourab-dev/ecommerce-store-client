@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('detail')->nullable();
             $table->boolean('isPaid');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->integer('selling_price')->nullable();
             $table->string('lang');
             $table->string('thumbnail')->nullable();
