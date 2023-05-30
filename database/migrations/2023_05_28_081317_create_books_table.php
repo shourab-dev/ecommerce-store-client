@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('class_room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('subject_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->longText('detail')->nullable();
             $table->boolean('isPaid');
             $table->integer('price')->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->string('dummy_pdf')->nullable();
             $table->string('book_pdf')->nullable();
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

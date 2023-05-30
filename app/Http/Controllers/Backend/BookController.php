@@ -8,12 +8,12 @@ use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaUploader;
-
+use App\Http\Helpers\SlugGenerator;
 use Carbon\Carbon;
 
 class BookController extends Controller
 {
-    use MediaUploader;
+    use MediaUploader, SlugGenerator;
     /**
      * * VALIDATION RULES
      */
@@ -47,22 +47,23 @@ class BookController extends Controller
         //* validation
         $request->validate($this->rules, $this->msg);
         //* STORING FILES ON SERVER
-        $thumbnail = $this->uploadSingleMedia($request->thumbnail, 'thumbnails');
+        $thumbnail = $this->uploadSingleMedia($request->thumbnail, 'thumbnails', str($request->name)->slug());
         if ($request->hasFile('demoPdf')) {
 
-            $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos');
+            $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos', null , 'public');
         }
-        $bookFile = $this->uploadSingleMedia($request->book, 'books', 'local');
+        $bookFile = $this->uploadSingleMedia($request->book, 'books', null, 'local');
 
         //* BOOK STORE
         $book = new Book();
-        $book->user_id = auth()->user()->id;
-        $book->country_id = $request->country_id;
-        $book->class_room_id = $request->class_room_id;
-        $book->subject_id = $request->subject_id;
+        $book->user_id = $request->author;
+        $book->country_id = $request->country;
+        $book->class_room_id = $request->classRoom;
+        $book->subject_id = $request->subject;
         $book->title = $request->name;
+        $book->slug =  $this->getSlug($request,Book::class); 
         $book->detail = $request->detail;
-        $book->isPaid = $request->type;
+        $book->isPaid = $request->type ?? false ;
         $book->price = $request->price;
         $book->selling_price = $request->sellPrice;
         $book->lang = $request->lang;

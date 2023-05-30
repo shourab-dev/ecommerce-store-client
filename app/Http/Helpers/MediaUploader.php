@@ -7,9 +7,9 @@ use Carbon\Carbon;
 trait MediaUploader
 {
 
-    public function uploadSingleMedia($media, $path = 'books', $storage = 'public')
+    public function uploadSingleMedia($media, $path = 'books', $slug = null, $storage = 'public')
     {
-        $name = str($media->getClientOriginalName() . '-' . Carbon::today()->format("d-m-y"))->slug() . '.' . $media->getClientOriginalExtension();
+        $name = str(($slug ?? $media->getClientOriginalName() . '-' . Carbon::today()->format("d-m-y-h-i")))->slug() . '.' . $media->getClientOriginalExtension();
         $media->storeAs($path, $name, $storage);
         return $name;
     }

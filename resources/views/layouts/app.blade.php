@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Blank Page | PlainAdmin Demo</title>
+    <title>Talley</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap.min.css') }}" />
@@ -21,8 +21,9 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
-            <a href="index.html">
-                <img src="{{ asset('backend/assets/images/logo/logo.svg') }}" alt="logo" />
+            <a href="{{ route('frontend.home') }}">
+                <img src="{{ asset('frontend/logo.png') }}" alt="logo" / height="60">
+                <h2>Talley</h2>
             </a>
         </div>
         @include('layouts.common.backendSidebar')
