@@ -71,7 +71,7 @@
 
                         </li>
                         @endauth
-                        @auth
+                        @auth('user')
                         <li class="nav-item">
 
                             <a id="sidebarNavToggler1" href="javascript:;" role="button"
@@ -81,9 +81,9 @@
                                 data-unfold-type="css-animation" data-unfold-overlay="{
                                     &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
                                     &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
-                                    &quot;animationSpeed&quot;: 500
+                                    &quot;animationSpeed&quot;: 250
                                 }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
-                                data-unfold-duration="500">
+                                data-unfold-duration="250">
                                 <span
                                     class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0">3</span>
                                 <i class="glph-icon flaticon-icon-126515"></i>
@@ -351,6 +351,100 @@
     {{-- *FRONTEND LOGIN LG ENDS --}}
     @endguest
 
+    @auth('user')
+    {{-- * CART --}}
+    <aside id="sidebarContent1" class="u-sidebar u-sidebar__xl u-unfold--css-animation fadeInRight"
+        aria-labelledby="sidebarNavToggler1" style="animation-duration: 250ms; right: 0px;">
+        <div class="u-sidebar__scroller js-scrollbar mCustomScrollbar _mCS_3 mCS-autoHide"
+            style="position: relative; overflow: visible;">
+            <div id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside"
+                style="max-height: none;" tabindex="0">
+                <div id="mCSB_3_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+                    <div class="u-sidebar__container">
+                        <div class="u-header-sidebar__footer-offset">
+
+                            <div
+                                class="d-flex align-items-center position-absolute top-0 right-0 z-index-2 mt-5 mr-md-6 mr-4">
+                                <button type="button" class="close ml-auto target-of-invoker-has-unfolds active"
+                                    aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="true"
+                                    data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                                    data-unfold-target="#sidebarContent1" data-unfold-type="css-animation"
+                                    data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
+                                    data-unfold-duration="500">
+                                    <span aria-hidden="true">Close <i class="fas fa-times ml-2"></i></span>
+                                </button>
+                            </div>
+
+
+                            <div class="u-sidebar__body">
+                                <div class="u-sidebar__content u-header-sidebar__content">
+
+                                    <header class="border-bottom px-4 px-md-6 py-4">
+                                        <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
+                                                class="flaticon-icon-126515 mr-3 font-size-5"></i>Your shopping bag (3)
+                                        </h2>
+                                    </header>
+
+                                    <div class="px-4 py-5 px-md-6 border-bottom">
+                                        <div class="media">
+                                            <a href="#" class="d-block"><img src="../../assets/img/120x180/img6.jpg"
+                                                    class="img-fluid mCS_img_loaded" alt="image-description"></a>
+                                            <div class="media-body ml-4d875">
+                                                <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate">
+                                                    <a href="#">Hard Cover</a>
+                                                </div>
+                                                <h2
+                                                    class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
+                                                    <a href="#" class="text-dark">The Ride of a Lifetime: Lessons
+                                                        Learned
+                                                        from 15 Years as CEO</a>
+                                                </h2>
+                                                <div class="font-size-2 mb-1 text-truncate"><a href="#"
+                                                        class="text-gray-700">Robert Iger</a></div>
+                                                <div
+                                                    class="price d-flex align-items-center font-weight-medium font-size-3">
+                                                    <span class="woocommerce-Price-amount amount">1 x <span
+                                                            class="woocommerce-Price-currencySymbol">$</span>125.30</span>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 ml-3">
+                                                <a href="#" class="text-dark"><i class="fas fa-times"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
+                                        <h4 class="mb-0 font-size-3">Subtotal:</h4>
+                                        <div class="font-weight-medium">$750.00</div>
+                                    </div>
+                                    <div class="px-4 mb-8 px-md-6">
+                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View
+                                            Cart</a>
+                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mCSB_3_scrollbar_vertical"
+                class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical"
+                style="display: block;">
+                <div class="mCSB_draggerContainer">
+                    <div id="mCSB_3_dragger_vertical" class="mCSB_dragger"
+                        style="position: absolute; min-height: 50px; top: 0px; display: block; height: 351px; max-height: 609px;">
+                        <div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+                    </div>
+                    <div class="mCSB_draggerRail"></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    {{-- * CART ENDS --}}
+    @endauth
 
     {{-- * FRONTEND MENU SIDEBAR --}}
 
@@ -387,12 +481,12 @@
                                 <h2 class="font-size-3 mb-3">HELP & SETTINGS </h2>
                                 <ul class="list-group list-group-flush list-group-borderless">
                                     @auth('user')
-                                    <li class="list-group-item px-0 py-2 border-0"><a href="{{ route('user.dashboard') }}"
-                                            class="h-primary">Your Account</a></li>
+                                    <li class="list-group-item px-0 py-2 border-0"><a
+                                            href="{{ route('user.dashboard') }}" class="h-primary">Your Account</a></li>
                                     @endauth
                                     <li class="list-group-item px-0 py-2 border-0"><a href="index.html#"
                                             class="h-primary">Help</a></li>
-                                   
+
 
                                 </ul>
                             </div>
@@ -682,6 +776,7 @@
     <script src="{{ asset('frontend/assets/js/components/hs.slick-carousel.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/components/hs.selectpicker.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/components/hs.show-animation.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script>
@@ -732,7 +827,47 @@
                 });
             });
     </script>
+   
     @stack('customJs')
+    {{-- * ADD TO CART --}}
+    <script>
+        $(document).on('ready', function () {
+    
+                //* SWEET ALERT
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                
+                
+    
+                //* ADD TO CART AJAX
+                let addToCartBtns = $('.addToCart')
+                function addToCartAjax(e){
+                    e.preventDefault()
+                    $.ajax({
+                        method:'GET',
+                        url: $(this).attr('href'),
+                        success: function(res){
+                            Toast.fire({
+                            icon: 'success',
+                            title: `${res} has been added to your Cart`
+                            })
+                           
+                        }
+                    })
+                }
+                addToCartBtns.click(addToCartAjax)
+            })
+    </script>
+    {{-- * ADD TO CART ENDS--}}
 </body>
 
 </html>

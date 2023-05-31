@@ -271,6 +271,7 @@
 
         </ul>
         <div class="tab-content" id="featuredBooksContent">
+            {{-- * FEATURED PRODUCTS --}}
             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                 <ul
                     class="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-6 border-top border-left my-0">
@@ -321,8 +322,8 @@
                                     </div>
                                 </div>
                                 <div class="product__hover d-flex align-items-center">
-                                    <a href="../shop/single-product-v1.html"
-                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
+                                    <a href="{{ route('cart.add', $featureBook->id) }}"
+                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart"
                                         data-toggle="tooltip" data-placement="right" title="ADD TO CART">
                                         <span class="product__add-to-cart">ADD TO CART</span>
                                         <span class="product__add-to-cart-icon font-size-4"><i
@@ -342,6 +343,8 @@
 
                 </ul>
             </div>
+            {{-- * FEATURED PRODUCTS END--}}
+            {{-- *ON SALE --}}
             <div class="tab-pane fade" id="onsale" role="tabpanel" aria-labelledby="onsale-tab">
                 <ul
                     class="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-6 border-top border-left my-0">
@@ -349,7 +352,7 @@
 
                 </ul>
             </div>
-
+            {{-- *ON SALE END--}}
         </div>
     </div>
 </section>
@@ -380,153 +383,52 @@
                      &quot;slidesToShow&quot;: 1
                    }
                 }]">
+            @foreach ($newBooks as $newBook)
             <div class="product product__card border-right">
                 <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img1.jpg"
-                            alt="image-description"></a>
+                    <a href="../shop/single-product-v1.html" class="d-block"><img src="{{ $newBook->thumbnail }}"
+                            width="120px" alt="image-description"></a>
                     <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
+                        <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                            <a class="mr-2" href="../shop/single-product-v1.html">{{ $newBook->class->name }}</a>
+                            <a href="../shop/single-product-v1.html">{{ $newBook->subject->name }}</a>
+                        </div>
                         <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">The Rural Diaries: Love, Livestock, and Big
-                                Life Lessons Down on Mischief Farm</a>
+                            <a href="../shop/single-product-v1.html">{{ $newBook->title }}</a>
                         </h2>
                         <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
+                                class="text-gray-700">{{ $newBook->author->name }}</a></div>
                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                            @if ($newBook->price !=null)
+                            @if ($newBook->selling_price)
+                            <span class="woocommerce-Price-amount amount mr-2"
+                                style="color:#888; text-decoration:line-through;"><span
+                                    class="woocommerce-Price-currencySymbol">$</span>{{ $newBook->price }}</span>
                             <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
+                                    class="woocommerce-Price-currencySymbol">$</span>{{ $newBook->selling_price
+                                }}</span>
+
+                            @else
+                            <span class="woocommerce-Price-amount amount"><span
+                                    class="woocommerce-Price-currencySymbol">$</span>{{ $newBook->price }}</span>
+                            @endif
+
+                            @else
+                            <span class="woocommerce-Price-amount amount">Free</span>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img2.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">The Ride of a Lifetime: Lessons Learned from 15
-                                Years as CEO...</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img3.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">Russians Among Us: Sleeper Cells, Ghost
-                                Stories, and the Hunt...</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img4.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">The Rural Diaries: Love, Livestock, and Big
-                                Life Lessons Down on Mischief Farm</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img5.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">The Ride of a Lifetime: Lessons Learned from 15
-                                Years as CEO...</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img6.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">Russians Among Us: Sleeper Cells, Ghost
-                                Stories, and the Hunt...</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product product__card border-right">
-                <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="assets/img/120x180/img7.jpg"
-                            alt="image-description"></a>
-                    <div class="media-body ml-4d875">
-                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                href="../shop/single-product-v1.html">Hard Cover</a></div>
-                        <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">The Rural Diaries: Love, Livestock, and Big
-                                Life Lessons Down on Mischief Farm</a>
-                        </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
-                                class="text-gray-700">Hillary Burton</a></div>
-                        <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            <span class="woocommerce-Price-amount amount"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>15</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
         </div>
     </div>
 </section>
 {{-- * Book Shop ENDs--}}
 
 {{-- * ALL AUTHORS --}}
-
+@if (count($authors) > 0)
 <section class="space-bottom-3">
     <div class="container">
         <header class="d-md-flex justify-content-between align-items-center mb-8">
@@ -559,89 +461,26 @@
                         &quot;slidesToShow&quot;: 1
                     }
                 }]">
+            @foreach ($authors as $author)
             <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img1.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
+                <a href="#" class="text-reset">
+                    <img width="120" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $author->name }}"
+                        class="mx-auto mb-5 d-block rounded-circle" alt="image-description">
                     <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Barbara O'Neil</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
+                        <h2 class="author__name h6 mb-0">{{ str($author->name)->slug() }}</h2>
+                        <div class="text-gray-700 font-size-2">{{ $author->numOfBooks }} Published Books</div>
                     </div>
                 </a>
             </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img2.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Stephen King</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img3.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">David Walliams</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img4.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Joe Wicks</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img5.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Jessica Simpson</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img6.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">David Walliams</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img7.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Joe Wicks</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
-            <li class="author col">
-                <a href="../others/authors-single.html" class="text-reset">
-                    <img src="assets/img/140x140/img8.jpg" class="mx-auto mb-5 d-block rounded-circle"
-                        alt="image-description">
-                    <div class="author__body text-center">
-                        <h2 class="author__name h6 mb-0">Barbara O'Neil</h2>
-                        <div class="text-gray-700 font-size-2">25 Published Books</div>
-                    </div>
-                </a>
-            </li>
+
+
+
+            @endforeach
+
         </ul>
     </div>
 </section>
+@endif
 {{-- * ALL AUTHORS ENS --}}
 
 @push('customJs')
@@ -656,62 +495,64 @@
         success: function(res) {
         let discountedBooks = JSON.parse(res)
         let listOfBooks = []
+        console.log(discountedBooks[0].class.name);
         discountedBooks.map(discountBook=> {
-let li = `<li class="product col">
+        let url = '{{ route("cart.add", ":id") }}'
+        url = url.replace(':id', discountBook.id)
+        
+
+    let li = `<li class="product col">
     <div class="product__inner overflow-hidden p-3 p-md-4d875">
         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
             <div class="woocommerce-loop-product__thumbnail">
                 <a href="#" class="d-block"><img src="${discountBook.thumbnail}"
                         class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                        alt="image-description"></a>
+                        alt="${discountBook.title}"></a>
             </div>
             <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                 <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                        href="../shop/single-product-v1.html">hi</a></div>
+                        href="../shop/single-product-v1.html">${discountBook.class.name}</a>
+                        <a href="../shop/single-product-v1.html">${discountBook.subject.name}</a></div>
                 <h2
                     class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                    <a href="../shop/single-product-v1.html">Think Like a Monk: Train Your Mind
-                        for Peace and Purpose Everyday</a>
+                    <a href="../shop/single-product-v1.html">${discountBook.title}</a>
                 </h2>
                 <div class="font-size-2  mb-1 text-truncate"><a
-                        href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/home/others/authors-single.html"
-                        class="text-gray-700">Jay Shetty</a></div>
+                        href="#"
+                        class="text-gray-700">${discountBook.author.name}</a></div>
                 <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                   
+                    <span class="woocommerce-Price-amount amount mr-2" style="text-decoration:line-through;"><span
+                            class="woocommerce-Price-currencySymbol">$</span>${discountBook.price}</span>
                     <span class="woocommerce-Price-amount amount"><span
-                            class="woocommerce-Price-currencySymbol">$</span>29</span>
+                            class="woocommerce-Price-currencySymbol">$</span>${discountBook.selling_price}</span>
                 </div>
             </div>
             <div class="product__hover d-flex align-items-center">
-                <a href="../shop/single-product-v1.html"
-                    class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip"
-                    data-placement="right" title="ADD TO CART">
+                <a href="${url}" target="__blank"
+                    class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart" data-toggle="tooltip"
+                    data-placement="right" title="ADD TO CART" >
                     <span class="product__add-to-cart">ADD TO CART</span>
                     <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
                 </a>
-                <a href="../shop/single-product-v1.html" class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                    <i class="flaticon-switch"></i>
-                </a>
-                <a href="../shop/single-product-v1.html" class="h-p-bg btn btn-outline-primary border-0">
-                    <i class="flaticon-heart"></i>
-                </a>
+                
               </div>
             </div>
         </div>
-</li>`
+    </li>`
 
     listOfBooks.push(li)
 
-        })
+    })
 
         onsale.html(listOfBooks)
-        
 
 
         }
         });
         }
         
-        isClickedOnSale = true;
+       
        
     })
 </script>

@@ -20,4 +20,12 @@ class Customer extends Authenticatable
         'email_verified_at',
         'password',
     ];
+
+
+
+    //* GET USER CART
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
