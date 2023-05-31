@@ -1,6 +1,6 @@
 @extends('layouts.frontendLayouts')
 @section('frontendContent')
-{{-- *BANNER  --}}
+{{-- *BANNER --}}
 <section class="space-bottom-3">
     <div class="bg-gray-200 space-2 space-lg-0 bg-img-hero"
         style="background-image: url(assets/img/1920x588/img1.jpg);">
@@ -118,7 +118,8 @@
             <li class="product-category col mb-4 mb-xl-0">
                 <div class="product-category__inner bg-indigo-light px-6 py-5">
                     <div class="product-category__icon font-size-12 text-primary-indigo">
-                        <i class="glyph-icon flaticon-gallery"></i> </div>
+                        <i class="glyph-icon flaticon-gallery"></i>
+                    </div>
                     <div class="product-category__body">
                         <h3 class="text-truncate font-size-3">Class One</h3>
                         <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
@@ -178,7 +179,7 @@
             <h2 class="font-size-7 mb-3 mb-md-0">Bestselling Books</h2>
             <a href="../shop/v1.html" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
         </header>
-    <div class="js-slick-carousel products no-gutters border-top border-left border-right"
+        <div class="js-slick-carousel products no-gutters border-top border-left border-right"
             data-pagi-classes="d-xl-none text-center position-absolute right-0 left-0 u-slick__pagination mt-4 mb-0"
             data-arrows-classes="d-none d-xl-block u-slick__arrow u-slick__arrow-centered--y"
             data-arrow-left-classes="fas fa-chevron-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-n10"
@@ -240,12 +241,12 @@
                                 <span class="product__add-to-cart-icon font-size-4"><i
                                         class="flaticon-icon-126515"></i></span>
                             </a>
-                           
+
                         </div>
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </section>
@@ -260,43 +261,63 @@
         <ul class="nav justify-content-md-center nav-gray-700 mb-5 flex-nowrap flex-md-wrap overflow-auto overflow-md-visible"
             id="featuredBooks" role="tablist">
             <li class="nav-item mx-5 mb-1 flex-shrink-0 flex-md-shrink-1">
-                <a class="nav-link px-0 active" id="featured-tab" data-toggle="tab" data-target="#featured" href="index.html#featured"
-                    role="tab" aria-controls="featured" aria-selected="true">Featured</a>
+                <a class="nav-link px-0 active" id="featured-tab" data-toggle="tab" data-target="#featured"
+                    href="index.html#featured" role="tab" aria-controls="featured" aria-selected="true">Featured</a>
             </li>
             <li class="nav-item mx-5 mb-1 flex-shrink-0 flex-md-shrink-1">
-                <a class="nav-link px-0" id="onsale-tab" data-toggle="tab" data-target="#onsale" href="index.html#onsale" role="tab"
-                    aria-controls="onsale" aria-selected="false">On Sale</a>
+                <a class="nav-link px-0" id="onsale-tab" data-toggle="tab" data-target="#onsale"
+                    href="index.html#onsale" role="tab" aria-controls="onsale" aria-selected="false">On Sale</a>
             </li>
-           
+
         </ul>
         <div class="tab-content" id="featuredBooksContent">
             <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
                 <ul
                     class="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-6 border-top border-left my-0">
+                    @forelse ($featuredBooks as $featureBook)
                     <li class="product col">
                         <div class="product__inner overflow-hidden p-3 p-md-4d875">
                             <div
                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                 <div class="woocommerce-loop-product__thumbnail">
                                     <a href="../shop/single-product-v1.html" class="d-block"><img
-                                            src="assets/img/120x180/img1.jpg"
+                                            src="{{ $featureBook->thumbnail }}"
                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                             alt="image-description"></a>
                                 </div>
                                 <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                            href="../shop/single-product-v1.html">Paperback</a></div>
+                                    <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                        <a class="mr-2" href="../shop/single-product-v1.html">{{
+                                            $featureBook->class->name }}</a>
+                                        <a href="../shop/single-product-v1.html">{{ $featureBook->subject->name }}</a>
+
+
+                                    </div>
                                     <h2
                                         class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                        <a href="../shop/single-product-v1.html">Think Like a Monk: Train Your Mind
-                                            for Peace and Purpose Everyday</a>
+                                        <a href="../shop/single-product-v1.html">{{ $featureBook->title }}</a>
                                     </h2>
-                                    <div class="font-size-2  mb-1 text-truncate"><a
-                                            href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/home/others/authors-single.html"
-                                            class="text-gray-700">Jay Shetty</a></div>
+                                    <div class="font-size-2  mb-1 text-truncate"><a href="#" class="text-gray-700">{{
+                                            str($featureBook->author->name)->headline() }}</a></div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                        @if ($featureBook->price != null)
+                                        @if ($featureBook->selling_price)
+                                        <span class="woocommerce-Price-amount amount mr-2"
+                                            style="text-decoration: line-through;color: #888;"><span
+                                                class="woocommerce-Price-currencySymbol">$</span>{{ $featureBook->price
+                                            }}</span>
                                         <span class="woocommerce-Price-amount amount"><span
-                                                class="woocommerce-Price-currencySymbol">$</span>29</span>
+                                                class="woocommerce-Price-currencySymbol">$</span>{{
+                                            $featureBook->selling_price }}</span>
+                                        @else
+                                        <span class="woocommerce-Price-amount amount"><span
+                                                class="woocommerce-Price-currencySymbol">$</span>{{ $featureBook->price
+                                            }}</span>
+                                        @endif
+                                        @else
+                                        <span class="woocommerce-Price-amount amount">Free</span>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="product__hover d-flex align-items-center">
@@ -307,74 +328,28 @@
                                         <span class="product__add-to-cart-icon font-size-4"><i
                                                 class="flaticon-icon-126515"></i></span>
                                     </a>
-                                    <a href="../shop/single-product-v1.html"
-                                        class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                        <i class="flaticon-switch"></i>
-                                    </a>
-                                    <a href="../shop/single-product-v1.html"
-                                        class="h-p-bg btn btn-outline-primary border-0">
-                                        <i class="flaticon-heart"></i>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
                     </li>
-                   
+                    @empty
+                    <li>
+                        <h3>No Featured Product Found !</h3>
+                    </li>
+                    @endforelse
+
+
                 </ul>
             </div>
             <div class="tab-pane fade" id="onsale" role="tabpanel" aria-labelledby="onsale-tab">
                 <ul
                     class="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-6 border-top border-left my-0">
-                    <li class="product col">
-                        <div class="product__inner overflow-hidden p-3 p-md-4d875">
-                            <div
-                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
-                                <div class="woocommerce-loop-product__thumbnail">
-                                    <a href="../shop/single-product-v1.html" class="d-block"><img
-                                            src="assets/img/120x180/img1.jpg"
-                                            class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                                            alt="image-description"></a>
-                                </div>
-                                <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                    <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                            href="../shop/single-product-v1.html">hi</a></div>
-                                    <h2
-                                        class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                        <a href="../shop/single-product-v1.html">Think Like a Monk: Train Your Mind
-                                            for Peace and Purpose Everyday</a>
-                                    </h2>
-                                    <div class="font-size-2  mb-1 text-truncate"><a
-                                            href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/home/others/authors-single.html"
-                                            class="text-gray-700">Jay Shetty</a></div>
-                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                        <span class="woocommerce-Price-amount amount"><span
-                                                class="woocommerce-Price-currencySymbol">$</span>29</span>
-                                    </div>
-                                </div>
-                                <div class="product__hover d-flex align-items-center">
-                                    <a href="../shop/single-product-v1.html"
-                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto"
-                                        data-toggle="tooltip" data-placement="right" title="ADD TO CART">
-                                        <span class="product__add-to-cart">ADD TO CART</span>
-                                        <span class="product__add-to-cart-icon font-size-4"><i
-                                                class="flaticon-icon-126515"></i></span>
-                                    </a>
-                                    <a href="../shop/single-product-v1.html"
-                                        class="mr-1 h-p-bg btn btn-outline-primary border-0">
-                                        <i class="flaticon-switch"></i>
-                                    </a>
-                                    <a href="../shop/single-product-v1.html"
-                                        class="h-p-bg btn btn-outline-primary border-0">
-                                        <i class="flaticon-heart"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                   
+
+
                 </ul>
             </div>
-            
+
         </div>
     </div>
 </section>
@@ -668,5 +643,78 @@
     </div>
 </section>
 {{-- * ALL AUTHORS ENS --}}
+
+@push('customJs')
+<script>
+    let isClickedOnSale = false;
+    let onsale = $('#onsale ul')
+    $('#onsale-tab').click(function(){
+       if(isClickedOnSale != true){
+        $.ajax({
+        method:'GET',
+        url: '{{ route('frontend.onSale') }}',
+        success: function(res) {
+        let discountedBooks = JSON.parse(res)
+        let listOfBooks = []
+        discountedBooks.map(discountBook=> {
+let li = `<li class="product col">
+    <div class="product__inner overflow-hidden p-3 p-md-4d875">
+        <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
+            <div class="woocommerce-loop-product__thumbnail">
+                <a href="#" class="d-block"><img src="${discountBook.thumbnail}"
+                        class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
+                        alt="image-description"></a>
+            </div>
+            <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
+                <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
+                        href="../shop/single-product-v1.html">hi</a></div>
+                <h2
+                    class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
+                    <a href="../shop/single-product-v1.html">Think Like a Monk: Train Your Mind
+                        for Peace and Purpose Everyday</a>
+                </h2>
+                <div class="font-size-2  mb-1 text-truncate"><a
+                        href="https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/html-demo/home/others/authors-single.html"
+                        class="text-gray-700">Jay Shetty</a></div>
+                <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                    <span class="woocommerce-Price-amount amount"><span
+                            class="woocommerce-Price-currencySymbol">$</span>29</span>
+                </div>
+            </div>
+            <div class="product__hover d-flex align-items-center">
+                <a href="../shop/single-product-v1.html"
+                    class="text-uppercase text-dark h-dark font-weight-medium mr-auto" data-toggle="tooltip"
+                    data-placement="right" title="ADD TO CART">
+                    <span class="product__add-to-cart">ADD TO CART</span>
+                    <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                </a>
+                <a href="../shop/single-product-v1.html" class="mr-1 h-p-bg btn btn-outline-primary border-0">
+                    <i class="flaticon-switch"></i>
+                </a>
+                <a href="../shop/single-product-v1.html" class="h-p-bg btn btn-outline-primary border-0">
+                    <i class="flaticon-heart"></i>
+                </a>
+              </div>
+            </div>
+        </div>
+</li>`
+
+    listOfBooks.push(li)
+
+        })
+
+        onsale.html(listOfBooks)
+        
+
+
+        }
+        });
+        }
+        
+        isClickedOnSale = true;
+       
+    })
+</script>
+@endpush
 
 @endsection

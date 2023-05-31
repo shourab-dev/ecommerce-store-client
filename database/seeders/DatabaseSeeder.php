@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             BoardSeeder::class,
             QuestionTypeSeeder::class,
             QuestionPaperSeeder::class,
+            BookSeeder::class,
         ]);
     }
 }

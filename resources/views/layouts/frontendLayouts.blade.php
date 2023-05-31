@@ -483,7 +483,7 @@
                         <div class="col-lg-4 mb-6 mb-lg-0">
                             <div class="pb-6">
                                 <a href="index.html" class="d-inline-block mb-5">
-                                    <img src="{{ asset('frontend/logo.png') }}" alt="">
+                                    <img src="{{ asset('frontend/logo.png') }}" alt="" height="60">
                                 </a>
                                 <address class="font-size-2 mb-5">
                                     <span class="mb-2 font-weight-normal text-dark">
@@ -732,6 +732,7 @@
                 });
             });
     </script>
+    @stack('customJs')
 </body>
 
 </html>
