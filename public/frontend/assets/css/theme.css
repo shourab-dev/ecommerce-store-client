@@ -23975,6 +23975,14 @@ footer .widget select.custom-select,
         width: 37.5rem;
     }
 }
+
+@media (max-width: 767px) {
+    .u-sidebar__xl {
+        width:100%;
+    }
+}
+
+
 .u-sidebar__body,
 .u-sidebar__content {
     height: 100%;

@@ -322,6 +322,10 @@
                                     </div>
                                 </div>
                                 <div class="product__hover d-flex align-items-center">
+
+
+
+                                    @auth('user')
                                     <a href="{{ route('cart.add', $featureBook->id) }}"
                                         class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart"
                                         data-toggle="tooltip" data-placement="right" title="ADD TO CART">
@@ -329,6 +333,17 @@
                                         <span class="product__add-to-cart-icon font-size-4"><i
                                                 class="flaticon-icon-126515"></i></span>
                                     </a>
+                                    @endauth
+                                    @guest('user')
+                                    <a href="{{ route('user.login') }}" target="__blank"
+                                        class="text-uppercase text-dark h-dark font-weight-medium mr-auto Login"
+                                        data-toggle="tooltip" data-placement="right" title="Login">
+                                        <span class="product__add-to-cart">Login</span>
+                                        <span class="product__add-to-cart-icon font-size-3"><i
+                                                class="glph-icon flaticon-user mr-2"></i> Login</span>
+                                    </a>
+
+                                    @endguest
 
                                 </div>
                             </div>
@@ -529,12 +544,22 @@
                 </div>
             </div>
             <div class="product__hover d-flex align-items-center">
+                @auth('user')
                 <a href="${url}" target="__blank"
                     class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart" data-toggle="tooltip"
                     data-placement="right" title="ADD TO CART" >
                     <span class="product__add-to-cart">ADD TO CART</span>
-                    <span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
+                    <span class="product__add-to-cart-icon font-size-3"><i class="flaticon-icon-126515 mr-2"></i> Add To Cart</span>
                 </a>
+                @endauth
+                @guest('user')
+                 <a href="{{ route('user.login') }}" target="__blank" class="text-uppercase text-dark h-dark font-weight-medium mr-auto Login"
+                    data-toggle="tooltip" data-placement="right" title="Login">
+                    <span class="product__add-to-cart">Login</span>
+                    <span class="product__add-to-cart-icon font-size-3"><i class="glph-icon flaticon-user mr-2"></i> Login</span>
+                </a>
+                   
+                @endguest
                 
               </div>
             </div>

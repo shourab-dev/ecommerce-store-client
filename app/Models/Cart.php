@@ -16,7 +16,10 @@ class Cart extends Model
     ];
 
 
-
+    public function scopeGetTotalQuantity($query, $customerId)
+    {
+        $query->where('customer_id', $customerId);
+    }
 
     
 

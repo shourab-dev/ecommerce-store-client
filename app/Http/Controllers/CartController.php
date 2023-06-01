@@ -29,6 +29,7 @@ class CartController extends Controller
             'book_id' => $book->id,
             'price' => $bookPrice,
         ]);
-        return response($book->title, 200);
+        $totalCart = Cart::where('customer_id', auth()->guard('user')->user()->id)->count();
+        return response(json_encode(["title" => $book->title, "cartCount" => $totalCart]), 200);
     }
 }

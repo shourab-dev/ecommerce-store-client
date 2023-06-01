@@ -75,17 +75,19 @@
                         <li class="nav-item">
 
                             <a id="sidebarNavToggler1" href="javascript:;" role="button"
-                                class="nav-link link-black-100 position-relative" aria-controls="sidebarContent1"
-                                aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
-                                data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1"
-                                data-unfold-type="css-animation" data-unfold-overlay="{
+                                class="nav-link link-black-100 position-relative cartTogglerBtn"
+                                aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false"
+                                data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                                data-unfold-target="#sidebarContent1" data-unfold-type="css-animation"
+                                data-unfold-overlay="{
                                     &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
                                     &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
                                     &quot;animationSpeed&quot;: 250
                                 }" data-unfold-animation-in="fadeInRight" data-unfold-animation-out="fadeOutRight"
                                 data-unfold-duration="250">
                                 <span
-                                    class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0">3</span>
+                                    class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0">{{
+                                    $cartTotalCount }}</span>
                                 <i class="glph-icon flaticon-icon-126515"></i>
                             </a>
 
@@ -130,6 +132,7 @@
                     <ul class="d-md-none nav mr-md-n3 ml-auto">
                         <li class="nav-item">
 
+                            @guest('user')
                             <a id="sidebarNavToggler9" href="javascript:;" role="button"
                                 class="px-2 nav-link link-black-100" aria-controls="sidebarContent9"
                                 aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
@@ -142,7 +145,26 @@
                                 data-unfold-duration="500">
                                 <i class="glph-icon flaticon-user"></i>
                             </a>
-
+                            @endguest
+                            <a id="sidebarNavToggler1" href="javascript:;" role="button"
+                                class="nav-link link-black-100 position-relative cartTogglerBtn" aria-controls="sidebarContent1"
+                                aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
+                                data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1"
+                                data-unfold-type="css-animation" data-unfold-overlay="{
+                                                                &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
+                                                                &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
+                                                                &quot;animationSpeed&quot;: 250
+                                                            }" data-unfold-animation-in="fadeInRight"
+                                data-unfold-animation-out="fadeOutRight" data-unfold-duration="250">
+                                <span
+                                    class="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0">{{
+                                    $cartTotalCount }}</span>
+                                <i class="glph-icon flaticon-icon-126515"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('user.dashboard') }}" target="__blank" class="nav-link">{{
+                                str(auth()->guard('user')->user()->name)->headline() }}</a>
                         </li>
                     </ul>
                     <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
@@ -827,7 +849,10 @@
                 });
             });
     </script>
-   
+    <script>
+
+    </script>
+
     @stack('customJs')
     {{-- * ADD TO CART --}}
     <script>
@@ -846,25 +871,31 @@
                     }
                 })
                 
-                
-    
                 //* ADD TO CART AJAX
-                let addToCartBtns = $('.addToCart')
+                
                 function addToCartAjax(e){
                     e.preventDefault()
                     $.ajax({
                         method:'GET',
                         url: $(this).attr('href'),
                         success: function(res){
+                            res = JSON.parse(res)
+                            //* UPDATE CART NUMBER
+                            $('.cartTogglerBtn > span').html(res.cartCount)
+                            //* UPDATE CART NUMBER
+                            //* SUCCESS MSG
                             Toast.fire({
-                            icon: 'success',
-                            title: `${res} has been added to your Cart`
+                                icon: 'success',
+                                title: `${res['title']} has been added to your Cart`
                             })
-                           
+                            //* SUCCESS MSG                 
+                        },
+                        error: function(error){
+                            console.log(error);
                         }
                     })
                 }
-                addToCartBtns.click(addToCartAjax)
+                $(document).on('click', '.addToCart', addToCartAjax)
             })
     </script>
     {{-- * ADD TO CART ENDS--}}
