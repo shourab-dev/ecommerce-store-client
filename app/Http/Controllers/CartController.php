@@ -10,11 +10,16 @@ use Illuminate\Http\Client\ResponseSequence;
 
 class CartController extends Controller
 {
+    /**
+     * * ADD TO CART
+     */
     public function addToCart($productId)
     {
 
-        $book = Book::where('id', $productId)->select('id', 'title', 'thumbnail', 'isPaid', 'price', 'selling_price')->first();
-
+        $book = Book::where('id', $productId)->select('id', 'title',  'isPaid', 'price', 'selling_price')->first();
+        /**
+         * CART PRICE SET [MAY BE DELETE IN NEXT VERSION]
+         */
         if ($book->isPaid == 0) {
             $bookPrice = 0;
         } else {
@@ -24,8 +29,12 @@ class CartController extends Controller
                 $bookPrice = $book->price;
             }
         }
+        /** CART PRICE SET */
 
-        $cart = Cart::create([
+        $cart = Cart::updateOrCreate([
+            'book_id' => $book->id,
+            'customer_id' => auth()->guard('user')->user()->id,
+        ], [
             'customer_id' => auth()->guard('user')->user()->id,
             'book_id' => $book->id,
             'price' => $bookPrice,
@@ -34,28 +43,36 @@ class CartController extends Controller
         return response(json_encode(["title" => $book->title, "cartCount" => $totalCart]), 200);
     }
 
-
     /**
      * * GET ALL CART
      */
 
     public function getAllCart()
     {
+        //* AUTH ID
         $authId =  auth()->guard('user')->user()->id;
+        //* GET USER CART DATA
         $carts = Cart::with(['books' => function ($query) {
             $query->select('id', "user_id", "title", "slug", "price", "isPaid", "selling_price", "thumbnail")->getAuthorName();
         }])->where('customer_id', $authId)->latest()->get();
 
 
-
-        // $totalDiscountedPrice = Book::getCartDiscountPrice($authId);
-        // $totalNormalPrice = Book::getCartRegularPrice($authId);
+        //* GET CART TOTAL PRICE
         $totalPrice = Book::getCartSubTotal($authId);
 
-
-        // $totalPrice = $totalNormalPrice + $totalDiscountedPrice;
-
+        //* COMPACTING DATA
         $data = ["carts" => $carts, "totalPrice" => $totalPrice];
         return response(json_encode($data), 200);
+    }
+
+    /**
+     * * DELETE ITEMS FROM CART
+     */
+
+    public function removeCartItem($id)
+    {
+        $cart = Cart::find($id);
+        $cart->delete();
+        return back();
     }
 }

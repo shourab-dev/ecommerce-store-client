@@ -411,42 +411,16 @@
                                         </h2>
                                     </header>
 
-                                    <div class="px-4 py-5 px-md-6 border-bottom">
-                                        <div class="media">
-                                            <a href="#" class="d-block"><img src="../../assets/img/120x180/img6.jpg"
-                                                    class="img-fluid mCS_img_loaded" alt="image-description"></a>
-                                            <div class="media-body ml-4d875">
-                                                <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate">
-                                                    <a href="#">Hard Cover</a>
-                                                </div>
-                                                <h2
-                                                    class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
-                                                    <a href="#" class="text-dark">The Ride of a Lifetime: Lessons
-                                                        Learned
-                                                        from 15 Years as CEO</a>
-                                                </h2>
-                                                <div class="font-size-2 mb-1 text-truncate"><a href="#"
-                                                        class="text-gray-700">Robert Iger</a></div>
-                                                <div
-                                                    class="price d-flex align-items-center font-weight-medium font-size-3">
-                                                    <span class="woocommerce-Price-amount amount">1 x <span
-                                                            class="woocommerce-Price-currencySymbol">$</span>125.30</span>
-                                                </div>
-                                            </div>
-                                            <div class="mt-3 ml-3">
-                                                <a href="#" class="text-dark"><i class="fas fa-times"></i></a>
-                                            </div>
-                                        </div>
+                                    <div class="itemContainer">
+
                                     </div>
 
-                                    <div
-                                        class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
+                                    <div class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
                                         <h4 class="mb-0 font-size-3">Subtotal:</h4>
-                                        <div class="font-weight-medium">$750.00</div>
+                                        <div id="subtotalCartPrice" class="font-weight-medium"></div>
                                     </div>
                                     <div class="px-4 mb-8 px-md-6">
-                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View
-                                            Cart</a>
+                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
                                         <a href="#" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
                                     </div>
                                 </div>
@@ -868,34 +842,36 @@
                    //* RESPONSE TO DYNAMIC - HTML 
                    let cartLists = []
                    res.carts.map(cart=> {
+                    let url = '{{ route("cart.remove",":id") }}'
+                    url = url.replace(":id", cart.id)
                     let cartItem = `
                         <div class="px-4 py-5 px-md-6 border-bottom">
                             <div class="media">
-                                <a href="#" class="d-block"><img src="#" class="img-fluid mCS_img_loaded"
-                                        alt="image-description"></a>
+                                <a href="#" class="d-block">
+                                    <img src="#" class="img-fluid mCS_img_loaded" alt="${cart.books.title}"></a>
                                 <div class="media-body ml-4d875">
-                                    <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate">
-                                        <a href="#">Hard Cover</a>
-                                    </div>
+                                   
                                     <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
-                                        <a href="#" class="text-dark">The Ride of a Lifetime: Lessons
-                                            Learned
-                                            from 15 Years as CEO</a>
+                                        <a href="#" class="text-dark">${cart.books.title}</a>
                                     </h2>
-                                    <div class="font-size-2 mb-1 text-truncate"><a href="#" class="text-gray-700">Robert Iger</a></div>
+                                    <div class="font-size-2 mb-1 text-truncate">
+                                        <a href="#" class="text-gray-700">${cart.books.author.name}</a>
+                                        </div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                        <span class="woocommerce-Price-amount amount">1 x <span
-                                                class="woocommerce-Price-currencySymbol">$</span>125.30</span>
+                                        <span class="woocommerce-Price-amount amount"> 
+                                            <span class="woocommerce-Price-currencySymbol">tk</span> ${cart.books.selling_price ? cart.books.selling_price : cart.books.price} </span>
                                     </div>
                                 </div>
                                 <div class="mt-3 ml-3">
-                                    <a href="#" class="text-dark"><i class="fas fa-times"></i></a>
+                                    <a href="${url}" class="text-dark"><i class="fas fa-times"></i></a>
                                 </div>
                             </div>
                         </div>
                     `;
+                    cartLists.push(cartItem)
                    })
-
+                   $('#sidebarContent1 .itemContainer').html(cartLists)
+                   $('#subtotalCartPrice').html(res.totalPrice+" tk")
                 
                 }
             })
