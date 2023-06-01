@@ -1,7 +1,4 @@
-@charset "UTF-8"; /*!* Bootstrap v4.4.1 (https://getbootstrap.com/)
-* Copyright 2011-2019 The Bootstrap Authors
-* Copyright 2011-2019 Twitter, Inc.
-* Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*/
+
 :root {
     --blue: #3259ea;
     --indigo: #a200fc;
@@ -21235,41 +21232,6 @@ h6.text-white > a,
     .product-4-1-4 .product-4 .products .product__add-to-cart-icon {
         display: block;
     }
-}
-@font-face {
-    font-family: cerebri sans;
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Light.eot);
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Light.ttf);
-    font-weight: 300;
-    font-style: normal;
-}
-@font-face {
-    font-family: cerebri sans;
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Regular.eot);
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Regular.ttf);
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: cerebri sans;
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Medium.eot);
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Medium.ttf);
-    font-weight: 500;
-    font-style: normal;
-}
-@font-face {
-    font-family: cerebri sans;
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-SemiBold.eot);
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-SemiBold.ttf);
-    font-weight: 600;
-    font-style: normal;
-}
-@font-face {
-    font-family: cerebri sans;
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Bold.eot);
-    src: url(https://demo2.madrasthemes.com/bookworm-html/redesigned-octo-fiesta/assets/fonts/Cerebri-Sans/CerebriSans-Bold.ttf);
-    font-weight: 700;
-    font-style: normal;
 }
 .link-black-100 {
     color: #19110b;

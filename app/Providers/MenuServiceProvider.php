@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Cart;
 use App\Models\Subject;
 use App\Models\ClassRoom;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -44,14 +45,9 @@ class MenuServiceProvider extends ServiceProvider
     //* GET TOTAL CART COUNT IN MENU
     private function getCartTotalCount()
     {
-        if (auth()->guard('user')) {
-            return view()->composer('layouts.frontendLayouts', function ($view) {
-                $view->with('cartTotalCount', Cart::getTotalQuantity(auth()->guard('user')->user()->id)->count());
-            });
-        } else{
-            return view()->composer('layouts.frontendLayouts', function ($view) {
-                $view->with('cartTotalCount', 0);
-            });
-        }
+
+        return view()->composer('layouts.frontendLayouts', function ($view) {
+            $view->with('cartTotalCount', Cart::getTotalQuantity(auth()->guard('user')->user()->id ?? 0)->count());
+        });
     }
 }

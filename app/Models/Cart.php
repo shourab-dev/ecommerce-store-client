@@ -21,6 +21,12 @@ class Cart extends Model
         $query->where('customer_id', $customerId);
     }
 
+    //* GET PRODUCT DETAILS
+    public function books()
+    {
+        return $this->belongsTo(Book::class, 'book_id');
+    }
+
     
 
 }

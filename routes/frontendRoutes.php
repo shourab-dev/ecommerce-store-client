@@ -16,4 +16,5 @@ Route::name('frontend.')->controller(HomeController::class)->group(function () {
 //* CART ROUTE
 Route::middleware('isUser')->controller(CartController::class)->name('cart.')->group(function () {
     Route::get('/cart/{productId}', 'addToCart')->name('add');
+    Route::get('/carts', 'getAllCart')->name('all');
 });

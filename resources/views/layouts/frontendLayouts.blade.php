@@ -68,7 +68,6 @@
                                 <i class="glph-icon flaticon-user"></i> {{
                                 str(auth()->guard('user')->user()->name)->headline() }}
                             </a>
-
                         </li>
                         @endauth
                         @auth('user')
@@ -147,10 +146,11 @@
                             </a>
                             @endguest
                             <a id="sidebarNavToggler1" href="javascript:;" role="button"
-                                class="nav-link link-black-100 position-relative cartTogglerBtn" aria-controls="sidebarContent1"
-                                aria-haspopup="true" aria-expanded="false" data-unfold-event="click"
-                                data-unfold-hide-on-scroll="false" data-unfold-target="#sidebarContent1"
-                                data-unfold-type="css-animation" data-unfold-overlay="{
+                                class="nav-link link-black-100 position-relative cartTogglerBtn"
+                                aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false"
+                                data-unfold-event="click" data-unfold-hide-on-scroll="false"
+                                data-unfold-target="#sidebarContent1" data-unfold-type="css-animation"
+                                data-unfold-overlay="{
                                                                 &quot;className&quot;: &quot;u-sidebar-bg-overlay&quot;,
                                                                 &quot;background&quot;: &quot;rgba(0, 0, 0, .7)&quot;,
                                                                 &quot;animationSpeed&quot;: 250
@@ -162,10 +162,13 @@
                                 <i class="glph-icon flaticon-icon-126515"></i>
                             </a>
                         </li>
+                        @auth('user')
+
                         <li class="nav-item">
                             <a href="{{ route('user.dashboard') }}" target="__blank" class="nav-link">{{
                                 str(auth()->guard('user')->user()->name)->headline() }}</a>
                         </li>
+                        @endauth
                     </ul>
                     <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
                         <form class="form-inline">
@@ -403,7 +406,8 @@
 
                                     <header class="border-bottom px-4 px-md-6 py-4">
                                         <h2 class="font-size-3 mb-0 d-flex align-items-center"><i
-                                                class="flaticon-icon-126515 mr-3 font-size-5"></i>Your shopping bag (3)
+                                                class="flaticon-icon-126515 mr-3 font-size-5"></i>Your shopping bag
+                                            (<span>3</span>)
                                         </h2>
                                     </header>
 
@@ -849,9 +853,57 @@
                 });
             });
     </script>
+    {{-- * GET ALL CART ITEMS --}}
     <script>
+        
+        function getCartItemsAjax() {
+            $.ajax({
+                method: 'GET',
+                url: "{{ route('cart.all') }}",
+                success: function(res){
 
+                    res = JSON.parse(res)
+                    console.log(res);
+                   $('#sidebarContent1 header span').html(res.carts.length)
+                   //* RESPONSE TO DYNAMIC - HTML 
+                   let cartLists = []
+                   res.carts.map(cart=> {
+                    let cartItem = `
+                        <div class="px-4 py-5 px-md-6 border-bottom">
+                            <div class="media">
+                                <a href="#" class="d-block"><img src="#" class="img-fluid mCS_img_loaded"
+                                        alt="image-description"></a>
+                                <div class="media-body ml-4d875">
+                                    <div class="text-primary text-uppercase font-size-1 mb-1 text-truncate">
+                                        <a href="#">Hard Cover</a>
+                                    </div>
+                                    <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
+                                        <a href="#" class="text-dark">The Ride of a Lifetime: Lessons
+                                            Learned
+                                            from 15 Years as CEO</a>
+                                    </h2>
+                                    <div class="font-size-2 mb-1 text-truncate"><a href="#" class="text-gray-700">Robert Iger</a></div>
+                                    <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                        <span class="woocommerce-Price-amount amount">1 x <span
+                                                class="woocommerce-Price-currencySymbol">$</span>125.30</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 ml-3">
+                                    <a href="#" class="text-dark"><i class="fas fa-times"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                   })
+
+                
+                }
+            })
+
+        }
+        $('.cartTogglerBtn').click(getCartItemsAjax)
     </script>
+    {{-- * GET ALL CART ITEMS ENDS --}}
 
     @stack('customJs')
     {{-- * ADD TO CART --}}
