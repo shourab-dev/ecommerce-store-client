@@ -4,14 +4,22 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Book;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\BestSellingBook;
 
 class HomeController extends Controller
 {
+    use BestSellingBook;
     public function index()
     {
+
+
+        $mostSellingBooks = $this->getBestSellingBooks(6)->with('author:id,name')->get();
+        
 
         $featuredBooks = Book::where('is_featured', 1)->latest()->select('id', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->subjectName()->classroomName()->take(12)->get();
@@ -21,7 +29,7 @@ class HomeController extends Controller
         $authors = User::has('books')->select('id', 'name')->withCount('books as numOfBooks')->get();
 
 
-        return view('frontend.index', compact('featuredBooks', 'newBooks', 'authors'));
+        return view('frontend.index', compact('featuredBooks', 'newBooks', 'authors', 'mostSellingBooks'));
     }
 
 

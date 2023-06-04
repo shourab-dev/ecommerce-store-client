@@ -724,34 +724,11 @@
             </div>
             <div class="space-1">
                 <div class="container">
-                    <div class="d-lg-flex text-center text-lg-left justify-content-between align-items-center">
+                    <div class="d-lg-flex text-center  text-lg-left justify-content-center align-items-center">
 
                         <p class="mb-3 mb-lg-0 font-size-2">©2020 Book Worm. All rights reserved</p>
 
-                        <div class="ml-auto d-lg-flex align-items-center">
-                            <div class="mb-4 mb-lg-0 mr-5">
-                                <img class="img-fluid" src="assets/img/324x38/img1.png" alt="Image-Description">
-                            </div>
-
-                            <select class="js-select selectpicker dropdown-select mb-3 mb-lg-0"
-                                data-style="border px-4 py-2 rounded-0 height-5 outline-none shadow-none form-control font-size-2"
-                                data-dropdown-align-right="true">
-                                <option value="one" selected>English (United States)</option>
-                                <option value="two">Deutsch</option>
-                                <option value="three">Français</option>
-                                <option value="four">Español</option>
-                            </select>
-
-
-                            <select class="js-select selectpicker dropdown-select ml-md-3"
-                                data-style="border px-4 py-2 rounded-0 height-5 outline-none shadow-none form-control font-size-2"
-                                data-dropdown-align-right="true" data-width="fit">
-                                <option value="one" selected>$ USD</option>
-                                <option value="two">€ EUR</option>
-                                <option value="three">₺ TL</option>
-                                <option value="four">₽ RUB</option>
-                            </select>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
