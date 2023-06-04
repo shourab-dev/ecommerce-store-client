@@ -65,6 +65,27 @@ class CartController extends Controller
         return response(json_encode($data), 200);
     }
 
+
+
+    public function getAllCartsItems()
+    {
+        //* AUTH ID
+        $authId =  auth()->guard('user')->user()->id;
+        //* GET USER CART DATA
+        $carts = Cart::with(['books' => function ($query) {
+            $query->select('id', "user_id", "title", "slug", "price", "isPaid", "selling_price", "thumbnail")->getAuthorName();
+        }])->where('customer_id', $authId)->latest()->get();
+
+
+        //* GET CART TOTAL PRICE
+        $totalPrice = Book::getCartSubTotal($authId);
+        // dd($carts);
+        //* COMPACTING DATA
+        $data = ["carts" => $carts, "totalPrice" => $totalPrice];
+        return view('frontend.cart', compact('data'));
+    }
+
+
     /**
      * * DELETE ITEMS FROM CART
      */

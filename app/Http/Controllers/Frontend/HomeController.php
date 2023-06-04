@@ -6,20 +6,22 @@ use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 
 class HomeController extends Controller
 {
     public function index()
     {
+
         $featuredBooks = Book::where('is_featured', 1)->latest()->select('id', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->subjectName()->classroomName()->take(12)->get();
         $newBooks = Book::latest()->select('id', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->subjectName()->classroomName()->take(8)->get();
 
         $authors = User::has('books')->select('id', 'name')->withCount('books as numOfBooks')->get();
-        
 
-        return view('frontend.index', compact('featuredBooks', 'newBooks','authors'));
+
+        return view('frontend.index', compact('featuredBooks', 'newBooks', 'authors'));
     }
 
 

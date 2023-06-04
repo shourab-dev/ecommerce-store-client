@@ -420,7 +420,7 @@
                                         <div id="subtotalCartPrice" class="font-weight-medium"></div>
                                     </div>
                                     <div class="px-4 mb-8 px-md-6">
-                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
+                                        <a href="{{ route('cart.all.items') }}" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
                                         <a href="#" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
                                     </div>
                                 </div>

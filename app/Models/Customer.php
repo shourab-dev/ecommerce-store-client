@@ -28,4 +28,14 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Cart::class);
     }
+    //* GET USER Orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+    //* GET USER Orders Items
+    public function orderedBooks()
+    {
+        return $this->hasManyThrough(OrderItem::class, Order::class);
+    }
 }
