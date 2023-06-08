@@ -17,15 +17,19 @@ class OrderItem extends Model
         return $this->belongsTo(Book::class)->select('id', 'title', 'slug', 'detail', 'lang', 'thumbnail', 'book_pdf');
     }
 
-   
 
-    public function scopeGetBestSellingBooksId($query, $limit= 5)
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+
+    public function scopeGetBestSellingBooksId($query, $limit = 5)
     {
         $query->select('book_id')
             ->groupBy('book_id')
             ->orderByRaw('COUNT(*) DESC')
             ->withOut('book')
             ->limit($limit);
-            
     }
 }

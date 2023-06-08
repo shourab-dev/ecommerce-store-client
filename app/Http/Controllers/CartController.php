@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\OrderItem;
 use Illuminate\Http\Client\ResponseSequence;
 
 class CartController extends Controller
@@ -16,7 +17,17 @@ class CartController extends Controller
     public function addToCart($productId)
     {
 
+        $hasAlreadyOrdered = OrderItem::where('book_id', $productId)->whereHas('order', function($q){
+            $q->where('customer_id', auth()->guard('user')->user()->id);
+        })->exists();
+        
+        
+
         $book = Book::where('id', $productId)->select('id', 'title',  'isPaid', 'price', 'selling_price')->first();
+        if ($hasAlreadyOrdered == true) {
+            return response(json_encode(["title" => $book->title, "msg"=> 'You have already purchased ']), 200);
+            exit();
+        }
         /**
          * CART PRICE SET [MAY BE DELETE IN NEXT VERSION]
          */

@@ -415,13 +415,15 @@
 
                                     </div>
 
-                                    <div class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
+                                    <div
+                                        class="px-4 py-5 px-md-6 d-flex justify-content-between align-items-center font-size-3">
                                         <h4 class="mb-0 font-size-3">Subtotal:</h4>
                                         <div id="subtotalCartPrice" class="font-weight-medium"></div>
                                     </div>
                                     <div class="px-4 mb-8 px-md-6">
-                                        <a href="{{ route('cart.all.items') }}" class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
-                                        <a href="#" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
+                                        <a href="{{ route('cart.all.items') }}"
+                                            class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
+                                        <a href="{{ route('cart.all.items') }}" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -728,7 +730,7 @@
 
                         <p class="mb-3 mb-lg-0 font-size-2">©2020 Book Worm. All rights reserved</p>
 
-                     
+
                     </div>
                 </div>
             </div>
@@ -806,7 +808,6 @@
     </script>
     {{-- * GET ALL CART ITEMS --}}
     <script>
-        
         function getCartItemsAjax() {
             $.ajax({
                 method: 'GET',
@@ -825,7 +826,7 @@
                         <div class="px-4 py-5 px-md-6 border-bottom">
                             <div class="media">
                                 <a href="#" class="d-block">
-                                    <img src="#" class="img-fluid mCS_img_loaded" alt="${cart.books.title}"></a>
+                                    <img src="${cart.books.thumbnail}" class="img-fluid mCS_img_loaded" alt="${cart.books.title}" width="100"></a>
                                 <div class="media-body ml-4d875">
                                    
                                     <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
@@ -889,10 +890,18 @@
                             $('.cartTogglerBtn > span').html(res.cartCount)
                             //* UPDATE CART NUMBER
                             //* SUCCESS MSG
-                            Toast.fire({
+                            if(res.msg){
+                                Toast.fire({
+                                icon: 'success',
+                                title: `${res['msg']} ${res['title']}`
+                                })
+                            } else{
+                                Toast.fire({
                                 icon: 'success',
                                 title: `${res['title']} has been added to your Cart`
-                            })
+                                })
+                            }
+                           
                             //* SUCCESS MSG                 
                         },
                         error: function(error){

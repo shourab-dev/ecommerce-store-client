@@ -18,8 +18,8 @@ class HomeController extends Controller
     {
 
 
-        $mostSellingBooks = $this->getBestSellingBooks(6)->with('author:id,name')->get();
-        
+        $mostSellingBooks = $this->getBestSellingBooks(6)->classroomName()->subjectName()->with('author:id,name')->get();
+    // dd($mostSellingBooks);        
 
         $featuredBooks = Book::where('is_featured', 1)->latest()->select('id', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->subjectName()->classroomName()->take(12)->get();
