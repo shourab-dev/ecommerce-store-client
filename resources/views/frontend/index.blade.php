@@ -141,29 +141,41 @@
                      &quot;slidesToShow&quot;: 1
                    }
                 }]">
+            
+            @forelse ($mostSellingBooks as $mostSellingBook)
+                
             <div class="product">
                 <div class="product__inner overflow-hidden p-3 p-md-4d875">
                     <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                         <div class="woocommerce-loop-product__thumbnail">
-                            <a href="../shop/single-product-v1.html" class="d-block"><img
-                                    src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Prof.%20Elwyn%20Hintz%20V"
+                            <a href="#" class="d-block">
+                                <img src="{{ $mostSellingBook->thumbnail }}"
                                     class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
-                                    alt="image-description"></a>
+                                    alt="image-description">
+                                </a>
                         </div>
                         <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                            <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
-                                    href="../shop/single-product-v1.html">Paperback</a></div>
+                            <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                <a href="../shop/single-product-v1.html">{{ $mostSellingBook->class->name }}</a>
+                                <a href="../shop/single-product-v1.html">{{ $mostSellingBook->subject->name }}</a>
+                            </div>
                             <h2
                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                <a href="../shop/single-product-v1.html">Think Like a Monk: Train Your Mind for
-                                    Peace and Purpose Everyday</a>
+                                <a href="../shop/single-product-v1.html">{{ $mostSellingBook->title }}</a>
                             </h2>
                             <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html"
-                                    class="text-gray-700">Jay Shetty</a></div>
-                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                                <span class="woocommerce-Price-amount amount"><span
-                                        class="woocommerce-Price-currencySymbol">$</span>29</span>
-                            </div>
+                                    class="text-gray-700">{{ $mostSellingBook->author->name }}</a></div>
+                           <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                            @if ($mostSellingBook->selling_price)
+                           <span class="woocommerce-Price-amount amount mr-2" style="text-decoration: line-through;color: #888;"><span
+                                    class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price }}</span>
+                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->selling_price }}</span>     
+                            @else
+                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price }}</span>     
+                            @endif
+                           
+                        
+                        </div>
                         </div>
                         <div class="product__hover d-flex align-items-center">
                             <a href="../shop/single-product-v1.html"
@@ -177,6 +189,9 @@
                     </div>
                 </div>
             </div>
+            @empty
+            <h4 class="mt-5">No Best Selling Books</h4>
+            @endforelse
 
         </div>
     </div>

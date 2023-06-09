@@ -48,9 +48,10 @@ class BookController extends Controller
         $request->validate($this->rules, $this->msg);
         //* STORING FILES ON SERVER
         $thumbnail = $this->uploadSingleMedia($request->thumbnail, 'thumbnails', str($request->name)->slug());
+
         if ($request->hasFile('demoPdf')) {
 
-            $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos', null , 'public');
+            $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos', null, 'public');
         }
         $bookFile = $this->uploadSingleMedia($request->book, 'books', null, 'local');
 
@@ -61,13 +62,14 @@ class BookController extends Controller
         $book->class_room_id = $request->classRoom;
         $book->subject_id = $request->subject;
         $book->title = $request->name;
-        $book->slug =  $this->getSlug($request,Book::class); 
+        $book->slug =  $this->getSlug($request, Book::class);
         $book->detail = $request->detail;
-        $book->isPaid = $request->type ?? false ;
+        $book->isPaid = $request->type ?? false;
         $book->price = $request->price;
         $book->selling_price = $request->sellPrice;
         $book->lang = $request->lang;
-        $book->thumbnail = $thumbnail;
+        $book->thumbnail = $thumbnail['url'];
+        $book->thumbnail_path = $thumbnail['name'];
         $book->dummy_pdf = $request->hasFile('dummyPdf') ?  $dummyFile : null;
         $book->book_pdf = $bookFile;
         $book->save();

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('selling_price')->nullable();
             $table->string('lang');
             $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_path')->nullable();
             $table->string('dummy_pdf')->nullable();
             $table->string('book_pdf')->nullable();
             $table->boolean('is_featured')->default(false);

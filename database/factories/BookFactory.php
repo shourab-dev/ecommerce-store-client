@@ -30,7 +30,7 @@ class BookFactory extends Factory
             'price' => $this->faker->numberBetween(100, 500),
             'selling_price' => $this->faker->numberBetween(100, 300),
             'lang' => 'english',
-            'thumbnail' => 'https://api.dicebear.com/6.x/fun-emoji/svg?seed=' . $this->faker->name(),
+            'thumbnail' => "http://127.0.0.1:8000/storage/thumbnails/funEmoji.svg",
             'book_pdf' => 'mainBook.pdf',
             'is_featured' => $this->faker->numberBetween(0, 1)
 
