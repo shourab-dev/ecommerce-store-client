@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\Frontend\AuthorController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\SslCommerzPaymentController;
 
 Route::name('frontend.')->controller(HomeController::class)->group(function () {
@@ -12,6 +13,20 @@ Route::name('frontend.')->controller(HomeController::class)->group(function () {
     //* GET DISCOUNT PRODUCT
     Route::get('/product/sales/{limit?}', 'onSaleProducts')->name('onSale');
 });
+
+Route::name('frontend.product.')->controller(ProductController::class)->group(function () {
+    //* ROUTE PRODUCT VIEW 
+    Route::get('/books/{slug?}', 'show')->name('show');
+});
+
+Route::name('frontend.author.')->controller(AuthorController::class)->group(function () {
+    //* ROUTE GET AUTHOR ALL BOOKS
+    Route::get('/author/{id}', 'getBooksByAuthor')->name('all');
+});
+
+
+
+
 
 
 //* CART ROUTE

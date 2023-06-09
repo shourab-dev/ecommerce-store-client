@@ -1,6 +1,6 @@
 <ul class="nav">
-    <li class="nav-item"><a href="index.html#"
-            class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium active border-bottom border-primary border-width-2">Home</a>
+    <li class="nav-item"><a href="{{ url('/') }}"
+            class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium {{ request()->routeIs('frontend.home') ? 'active' : '' }} border-bottom border-primary border-width-2">Home</a>
     </li>
     <li class="nav-item dropdown">
         <a id="homeDropdownInvoker" href="index.html#"
@@ -42,6 +42,9 @@
     </li>
 
 
+    <li class="nav-item"><a href="{{ route('frontend.product.show') }}"
+            class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium active border-bottom border-primary border-width-2">Shop</a>
+    </li>
 
 
     <li class="nav-item"><a href="index.html#"

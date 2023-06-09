@@ -25,11 +25,13 @@
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight"
                             data-scs-animation-delay="500">
-                            <img class="img-fluid" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Prof.%20Elwyn%20Hintz%20V" alt="image-description">
+                            <img class="img-fluid"
+                                src="https://api.dicebear.com/6.x/fun-emoji/svg?seed=Prof.%20Elwyn%20Hintz%20V"
+                                alt="image-description">
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -141,18 +143,18 @@
                      &quot;slidesToShow&quot;: 1
                    }
                 }]">
-            
+
             @forelse ($mostSellingBooks as $mostSellingBook)
-                
+
             <div class="product">
                 <div class="product__inner overflow-hidden p-3 p-md-4d875">
                     <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                         <div class="woocommerce-loop-product__thumbnail">
-                            <a href="#" class="d-block">
+                            <a href="{{ route('frontend.product.show', $mostSellingBook->slug) }}" class="d-block">
                                 <img src="{{ $mostSellingBook->thumbnail }}"
                                     class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                     alt="image-description">
-                                </a>
+                            </a>
                         </div>
                         <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                             <div class="text-uppercase font-size-1 mb-1 text-truncate">
@@ -161,29 +163,48 @@
                             </div>
                             <h2
                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                <a href="../shop/single-product-v1.html">{{ $mostSellingBook->title }}</a>
+                                <a href="{{ route('frontend.product.show', $mostSellingBook->slug) }}">{{ $mostSellingBook->title }}</a>
                             </h2>
                             <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html"
                                     class="text-gray-700">{{ $mostSellingBook->author->name }}</a></div>
-                           <div class="price d-flex align-items-center font-weight-medium font-size-3">
-                            @if ($mostSellingBook->selling_price)
-                           <span class="woocommerce-Price-amount amount mr-2" style="text-decoration: line-through;color: #888;"><span
-                                    class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price }}</span>
-                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->selling_price }}</span>     
-                            @else
-                            <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price }}</span>     
-                            @endif
-                           
-                        
-                        </div>
+                            <div class="price d-flex align-items-center font-weight-medium font-size-3">
+                                @if ($mostSellingBook->selling_price)
+                                <span class="woocommerce-Price-amount amount mr-2"
+                                    style="text-decoration: line-through;color: #888;"><span
+                                        class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price
+                                    }}</span>
+                                <span class="woocommerce-Price-amount amount"><span
+                                        class="woocommerce-Price-currencySymbol">$</span>{{
+                                    $mostSellingBook->selling_price }}</span>
+                                @else
+                                <span class="woocommerce-Price-amount amount"><span
+                                        class="woocommerce-Price-currencySymbol">$</span>{{ $mostSellingBook->price
+                                    }}</span>
+                                @endif
+
+
+                            </div>
                         </div>
                         <div class="product__hover d-flex align-items-center">
-                            <a href="../shop/single-product-v1.html"
-                                class="text-uppercase text-dark h-dark font-weight-medium mr-auto">
+                            @guest('user')
+                            <a href="{{ route('user.login') }}" target="__blank"
+                                class="text-uppercase text-dark h-dark font-weight-medium mr-auto Login"
+                                data-toggle="tooltip" data-placement="right" title="Login">
+                                <span class="product__add-to-cart">Login</span>
+                                <span class="product__add-to-cart-icon font-size-3"><i
+                                        class="glph-icon flaticon-user mr-2"></i> Login</span>
+                            </a>
+
+                            @endguest
+                            @auth('user')
+
+                            <a href="{{ route('cart.add', $mostSellingBook->id) }}"
+                                class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart">
                                 <span class="product__add-to-cart">ADD TO CART</span>
                                 <span class="product__add-to-cart-icon font-size-4"><i
                                         class="flaticon-icon-126515"></i></span>
                             </a>
+                            @endauth
 
                         </div>
                     </div>
@@ -227,7 +248,7 @@
                             <div
                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                 <div class="woocommerce-loop-product__thumbnail">
-                                    <a href="../shop/single-product-v1.html" class="d-block"><img
+                                    <a href="{{ route('frontend.product.show', $featureBook->slug) }}" class="d-block"><img
                                             src="{{ $featureBook->thumbnail }}"
                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                             alt="image-description"></a>
@@ -242,7 +263,7 @@
                                     </div>
                                     <h2
                                         class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                        <a href="../shop/single-product-v1.html">{{ $featureBook->title }}</a>
+                                        <a href="{{ route('frontend.product.show', $featureBook->slug) }}">{{ $featureBook->title }}</a>
                                     </h2>
                                     <div class="font-size-2  mb-1 text-truncate"><a href="#" class="text-gray-700">{{
                                             str($featureBook->author->name)->headline() }}</a></div>
@@ -347,7 +368,7 @@
             @foreach ($newBooks as $newBook)
             <div class="product product__card border-right">
                 <div class="media p-3 p-md-4d875">
-                    <a href="../shop/single-product-v1.html" class="d-block"><img src="{{ $newBook->thumbnail }}"
+                    <a href="{{ route('frontend.product.show', $newBook->slug) }}" class="d-block"><img src="{{ $newBook->thumbnail }}"
                             width="120px" alt="image-description"></a>
                     <div class="media-body ml-4d875">
                         <div class="text-uppercase font-size-1 mb-1 text-truncate">
@@ -355,7 +376,7 @@
                             <a href="../shop/single-product-v1.html">{{ $newBook->subject->name }}</a>
                         </div>
                         <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                            <a href="../shop/single-product-v1.html">{{ $newBook->title }}</a>
+                            <a href="{{ route('frontend.product.show', $newBook->slug) }}">{{ $newBook->title }}</a>
                         </h2>
                         <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
                                 class="text-gray-700">{{ $newBook->author->name }}</a></div>
@@ -461,12 +482,15 @@
         let url = '{{ route("cart.add", ":id") }}'
         url = url.replace(':id', discountBook.id)
         
+        let displayUrl = `{{ route('frontend.product.show',':slug') }}`
+        displayUrl = displayUrl.replace(':slug', discountBook.slug)
+
 
     let li = `<li class="product col">
     <div class="product__inner overflow-hidden p-3 p-md-4d875">
         <div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
             <div class="woocommerce-loop-product__thumbnail">
-                <a href="#" class="d-block"><img src="${discountBook.thumbnail}"
+                <a href="${displayUrl}" class="d-block"><img src="${discountBook.thumbnail}"
                         class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                         alt="${discountBook.title}"></a>
             </div>
@@ -476,7 +500,7 @@
                         <a href="../shop/single-product-v1.html">${discountBook.subject.name}</a></div>
                 <h2
                     class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                    <a href="../shop/single-product-v1.html">${discountBook.title}</a>
+                    <a href="${displayUrl}">${discountBook.title}</a>
                 </h2>
                 <div class="font-size-2  mb-1 text-truncate"><a
                         href="#"
