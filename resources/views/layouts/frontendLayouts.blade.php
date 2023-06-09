@@ -120,7 +120,7 @@
                         </a>
                     </div>
                     <div class="site-branding pr-md-4">
-                        <a href="index.html" class="d-flex align-items-center mb-1">
+                        <a href="{{ url('/') }}" class="d-flex align-items-center mb-1">
                             <img src="{{ asset('frontend/logo.png') }}" alt="" height="60">
                             <h2 class="ml-2 text-dark">Tally</h2>
                         </a>
