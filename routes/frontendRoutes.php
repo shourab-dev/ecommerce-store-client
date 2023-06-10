@@ -17,6 +17,10 @@ Route::name('frontend.')->controller(HomeController::class)->group(function () {
 Route::name('frontend.product.')->controller(ProductController::class)->group(function () {
     //* ROUTE PRODUCT VIEW 
     Route::get('/books/{slug?}', 'show')->name('show');
+
+    //* ROUTE FOR CLASSROOM & SUBJECT WITH BOOKS
+    Route::get('/class/{slug}', 'getBooksByClassOrSubject')->name('class');
+    Route::get('/subject/{slug}', 'getBooksByClassOrSubject')->name('subject');
 });
 
 Route::name('frontend.author.')->controller(AuthorController::class)->group(function () {

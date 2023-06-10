@@ -19,11 +19,26 @@ class ProductController extends Controller
         } else {
             $book = null;
             $relatedBooks =  Book::select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
-                ->getAuthorName()->subjectName()->classroomName()->paginate(12);
-                // dd($relatedBooks);
-            return view('frontend.shop');
-
-            
+                ->getAuthorName()->subjectName()->classroomName()->orderByType(request()->orderby)->latest()->paginate(12);
+            return view('frontend.shop', compact('relatedBooks'));
         }
+    }
+
+
+    public function getBooksByClassOrSubject(Request $req, $slug)
+    {
+        $query = Book::query();
+        if ($req->routeIs('frontend.product.class')) {
+            $query->whereHas('class', function ($q) use ($req) {
+                $q->where('slug', $req->slug);
+            });
+        } else if ($req->routeIs('frontend.product.subject')) {
+            $query->whereHas('subject', function ($q) use ($req) {
+                $q->where('slug', $req->slug);
+            });
+        }
+
+        $relatedBooks = $query->orderByType(request()->orderby)->latest()->paginate(12);
+        return view('frontend.shop', compact('relatedBooks'));
     }
 }

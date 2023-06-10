@@ -165,7 +165,7 @@
                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                                 <a href="{{ route('frontend.product.show', $mostSellingBook->slug) }}">{{ $mostSellingBook->title }}</a>
                             </h2>
-                            <div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html"
+                            <div class="font-size-2  mb-1 text-truncate"><a href="{{ route('frontend.author.all', $mostSellingBook->author->id) }}"
                                     class="text-gray-700">{{ $mostSellingBook->author->name }}</a></div>
                             <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                 @if ($mostSellingBook->selling_price)
@@ -265,7 +265,7 @@
                                         class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                                         <a href="{{ route('frontend.product.show', $featureBook->slug) }}">{{ $featureBook->title }}</a>
                                     </h2>
-                                    <div class="font-size-2  mb-1 text-truncate"><a href="#" class="text-gray-700">{{
+                                    <div class="font-size-2  mb-1 text-truncate"><a href="{{ route('frontend.author.all', $featureBook->author->id) }}" class="text-gray-700">{{
                                             str($featureBook->author->name)->headline() }}</a></div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                         @if ($featureBook->price != null)
@@ -378,7 +378,7 @@
                         <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                             <a href="{{ route('frontend.product.show', $newBook->slug) }}">{{ $newBook->title }}</a>
                         </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="../others/authors-single.html"
+                        <div class="font-size-2 mb-1 text-truncate"><a href="{{ route('frontend.author.all', $newBook->author->id) }}"
                                 class="text-gray-700">{{ $newBook->author->name }}</a></div>
                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                             @if ($newBook->price !=null)
@@ -445,7 +445,7 @@
                 }]">
             @foreach ($authors as $author)
             <li class="author col">
-                <a href="#" class="text-reset">
+                <a href="{{ route('frontend.author.all', $author->id) }}" class="text-reset">
                     <img width="120" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $author->name }}"
                         class="mx-auto mb-5 d-block rounded-circle" alt="image-description">
                     <div class="author__body text-center">
@@ -485,6 +485,9 @@
         let displayUrl = `{{ route('frontend.product.show',':slug') }}`
         displayUrl = displayUrl.replace(':slug', discountBook.slug)
 
+        let authorUrl = `{{ route('frontend.author.all',':authorId') }}`
+        authorUrl = authorUrl.replace(':authorId', discountBook.author.id)
+
 
     let li = `<li class="product col">
     <div class="product__inner overflow-hidden p-3 p-md-4d875">
@@ -503,7 +506,7 @@
                     <a href="${displayUrl}">${discountBook.title}</a>
                 </h2>
                 <div class="font-size-2  mb-1 text-truncate"><a
-                        href="#"
+                        href="${authorUrl}"
                         class="text-gray-700">${discountBook.author.name}</a></div>
                 <div class="price d-flex align-items-center font-weight-medium font-size-3">
                    

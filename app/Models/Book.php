@@ -89,6 +89,25 @@ class Book extends Model
     public function scopeGetCartSubTotal($query, $authId)
     {
         return $this->getCartDiscountPrice($authId) + $this->getCartRegularPrice($authId);
+    }
 
+    //* GET SORTED PRODUCT
+    public function scopeOrderByType($query, $type)
+    {
+        if ($type == 'popularity') {
+
+
+            return  $query->where('is_featured', true);
+        } elseif ($type == 'price') {
+
+            return $query->orderBy('price', "asc");
+        } elseif ($type == 'price-desc') {
+
+
+            return $query->orderBy('price', 'desc');
+        } else {
+
+            return $query;
+        }
     }
 }
