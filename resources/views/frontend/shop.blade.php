@@ -126,8 +126,8 @@
             </div>
             <div id="secondary" class="sidebar widget-area col-lg-4 order-1" role="complementary">
                 <form action="{{ request()->getRequestUri() }}" method="get">
-                    @csrf
-
+                    
+                    
                     <div id="widgetAccordion">
                         <div id="woocommerce_product_categories-2"
                             class="widget p-4d875 border woocommerce widget_product_categories">
@@ -135,7 +135,7 @@
                                 <a class="d-flex align-items-center justify-content-between text-dark" href="v1.html#"
                                     data-toggle="collapse" data-target="#widgetCollapseOne" aria-expanded="true"
                                     aria-controls="widgetCollapseOne">
-                                    <h3 class="widget-title mb-0 font-weight-medium font-size-3">Categories</h3>
+                                    <h3 class="widget-title mb-0 font-weight-medium font-size-3">Categories </h3>
                                     <svg class="mins" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="2px">
                                         <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
@@ -150,94 +150,15 @@
                             </div>
                             <div id="widgetCollapseOne" class="mt-3 widget-content collapse show"
                                 aria-labelledby="widgetHeadingOne" data-parent="#widgetAccordion">
-                                <ul class="product-categories">
-                                    <li class="cat-item cat-item-9 cat-parent">
-                                        <a href="v3.html">Clothing</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-121"><a href="v1.html#/clothing/bags/">Bags</a>
-                                            </li>
-                                            <li class="cat-item cat-item-44"><a
-                                                    href="v1.html#/clothing/blouses/">Blouses</a></li>
-                                            <li class="cat-item cat-item-41"><a
-                                                    href="v1.html#/clothing/dresses/">Dresses</a></li>
-                                            <li class="cat-item cat-item-56"><a
-                                                    href="v1.html#/clothing/footwear/">Footwear</a></li>
-                                            <li class="cat-item cat-item-54"><a href="v1.html#/clothing/hats/">Hats</a>
-                                            </li>
-                                            <li class="cat-item cat-item-10"><a
-                                                    href="v1.html#/clothing/hoodies/">Hoodies</a></li>
-                                            <li class="cat-item cat-item-55"><a
-                                                    href="v1.html#/clothing/shirts/">Shirts</a>
-                                            </li>
-                                            <li class="cat-item cat-item-47"><a
-                                                    href="v1.html#/clothing/skirts/">Skirts</a>
-                                            </li>
-                                            <li class="cat-item cat-item-14"><a
-                                                    href="v1.html#/clothing/t-shirts/">T-shirts</a></li>
-                                            <li class="cat-item cat-item-49"><a
-                                                    href="v1.html#/clothing/trousers/">Trousers</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-69 cat-parent">
-                                        <a href="v3.html">Electronics</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-71 cat-parent"><a
-                                                    href="v1.html#/electronics/cameras/">Cameras</a>
-                                                <ul class="children">
-                                                    <li class="cat-item cat-item-114"><a
-                                                            href="v1.html#/electronics/cameras/accessories/">Accessories</a>
-                                                    </li>
-                                                    <li class="cat-item cat-item-112"><a
-                                                            href="v1.html#/electronics/cameras/lenses/">Lenses</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="cat-item cat-item-99"><a
-                                                    href="v1.html#/electronics/dvd-players/">DVD
-                                                    Players</a></li>
-                                            <li class="cat-item cat-item-72"><a
-                                                    href="v1.html#/electronics/headphones/">Headphones</a></li>
-                                            <li class="cat-item cat-item-91"><a
-                                                    href="v1.html#/electronics/mp3-players/">MP3
-                                                    Players</a></li>
-                                            <li class="cat-item cat-item-90"><a
-                                                    href="v1.html#/electronics/radios/">Radios</a></li>
-                                            <li class="cat-item cat-item-70"><a
-                                                    href="v1.html#/electronics/televisions/">Televisions</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-65 cat-parent">
-                                        <a href="v3.html">Kitchen</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-102"><a
-                                                    href="v1.html#/kitchen/blenders/">Blenders</a></li>
-                                            <li class="cat-item cat-item-103"><a
-                                                    href="v1.html#/kitchen/colanders/">Colanders</a></li>
-                                            <li class="cat-item cat-item-68"><a
-                                                    href="v1.html#/kitchen/kettles/">Kettles</a>
-                                            </li>
-                                            <li class="cat-item cat-item-101"><a
-                                                    href="v1.html#/kitchen/knives/">Knives</a>
-                                            </li>
-                                            <li class="cat-item cat-item-66"><a href="v1.html#/kitchen/pots-pans/">Pots
-                                                    &amp; Pans</a></li>
-                                            <li class="cat-item cat-item-67"><a
-                                                    href="v1.html#/kitchen/toasters/">Toasters</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-11 cat-parent"><a href="v3.html">Music</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-15"><a href="v1.html#/music/albums/">Albums</a>
-                                            </li>
-                                            <li class="cat-item cat-item-100"><a href="v1.html#/music/mp3/">MP3</a></li>
-                                            <li class="cat-item cat-item-13"><a
-                                                    href="v1.html#/music/singles/">Singles</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-12"><a href="v3.html">Posters</a></li>
-                                    <li class="cat-item cat-item-31"><a href="v3.html">Scuba gear</a></li>
-                                    <li class="cat-item cat-item-45"><a href="v3.html">Sweatshirts</a></li>
-                                </ul>
+                                <div class="row justify-content-between">
+                                    @foreach ($classRooms as $class)
+                                    <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="category{{ $class->id }}">
+                                        <input type="checkbox" value="{{ $class->id }}" name="class[]" id="category{{ $class->id }}"> {{ $class->name }}
+                                    </label>
+                                        
+                                    @endforeach
+                                </div>
+                               
                             </div>
                         </div>
                         <div id="woocommerce_product_categories-2"
@@ -261,95 +182,14 @@
                             </div>
                             <div id="subjectCollapse" class="mt-3 widget-content collapse show"
                                 aria-labelledby="subject" data-parent="#widgetAccordion">
-                                <ul class="product-categories">
-                                    <li class="cat-item cat-item-9 cat-parent">
-                                        <a href="v3.html">Clothing</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-121"><a href="v1.html#/clothing/bags/">Bags</a>
-                                            </li>
-                                            <li class="cat-item cat-item-44"><a
-                                                    href="v1.html#/clothing/blouses/">Blouses</a></li>
-                                            <li class="cat-item cat-item-41"><a
-                                                    href="v1.html#/clothing/dresses/">Dresses</a></li>
-                                            <li class="cat-item cat-item-56"><a
-                                                    href="v1.html#/clothing/footwear/">Footwear</a></li>
-                                            <li class="cat-item cat-item-54"><a href="v1.html#/clothing/hats/">Hats</a>
-                                            </li>
-                                            <li class="cat-item cat-item-10"><a
-                                                    href="v1.html#/clothing/hoodies/">Hoodies</a></li>
-                                            <li class="cat-item cat-item-55"><a
-                                                    href="v1.html#/clothing/shirts/">Shirts</a>
-                                            </li>
-                                            <li class="cat-item cat-item-47"><a
-                                                    href="v1.html#/clothing/skirts/">Skirts</a>
-                                            </li>
-                                            <li class="cat-item cat-item-14"><a
-                                                    href="v1.html#/clothing/t-shirts/">T-shirts</a></li>
-                                            <li class="cat-item cat-item-49"><a
-                                                    href="v1.html#/clothing/trousers/">Trousers</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-69 cat-parent">
-                                        <a href="v3.html">Electronics</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-71 cat-parent"><a
-                                                    href="v1.html#/electronics/cameras/">Cameras</a>
-                                                <ul class="children">
-                                                    <li class="cat-item cat-item-114"><a
-                                                            href="v1.html#/electronics/cameras/accessories/">Accessories</a>
-                                                    </li>
-                                                    <li class="cat-item cat-item-112"><a
-                                                            href="v1.html#/electronics/cameras/lenses/">Lenses</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="cat-item cat-item-99"><a
-                                                    href="v1.html#/electronics/dvd-players/">DVD
-                                                    Players</a></li>
-                                            <li class="cat-item cat-item-72"><a
-                                                    href="v1.html#/electronics/headphones/">Headphones</a></li>
-                                            <li class="cat-item cat-item-91"><a
-                                                    href="v1.html#/electronics/mp3-players/">MP3
-                                                    Players</a></li>
-                                            <li class="cat-item cat-item-90"><a
-                                                    href="v1.html#/electronics/radios/">Radios</a></li>
-                                            <li class="cat-item cat-item-70"><a
-                                                    href="v1.html#/electronics/televisions/">Televisions</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-65 cat-parent">
-                                        <a href="v3.html">Kitchen</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-102"><a
-                                                    href="v1.html#/kitchen/blenders/">Blenders</a></li>
-                                            <li class="cat-item cat-item-103"><a
-                                                    href="v1.html#/kitchen/colanders/">Colanders</a></li>
-                                            <li class="cat-item cat-item-68"><a
-                                                    href="v1.html#/kitchen/kettles/">Kettles</a>
-                                            </li>
-                                            <li class="cat-item cat-item-101"><a
-                                                    href="v1.html#/kitchen/knives/">Knives</a>
-                                            </li>
-                                            <li class="cat-item cat-item-66"><a href="v1.html#/kitchen/pots-pans/">Pots
-                                                    &amp; Pans</a></li>
-                                            <li class="cat-item cat-item-67"><a
-                                                    href="v1.html#/kitchen/toasters/">Toasters</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-11 cat-parent"><a href="v3.html">Music</a>
-                                        <ul class="children">
-                                            <li class="cat-item cat-item-15"><a href="v1.html#/music/albums/">Albums</a>
-                                            </li>
-                                            <li class="cat-item cat-item-100"><a href="v1.html#/music/mp3/">MP3</a></li>
-                                            <li class="cat-item cat-item-13"><a
-                                                    href="v1.html#/music/singles/">Singles</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="cat-item cat-item-12"><a href="v3.html">Posters</a></li>
-                                    <li class="cat-item cat-item-31"><a href="v3.html">Scuba gear</a></li>
-                                    <li class="cat-item cat-item-45"><a href="v3.html">Sweatshirts</a></li>
-                                </ul>
+                               <div class="row justify-content-between">
+                                @foreach ($subjects as $subject)
+                                <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="subject{{ $subject->id }}">
+                                    <input type="checkbox" name="subjects[]" value="{{ $subject->id }}" id="subject{{ $subject->id }}"> {{ $subject->name }}
+                                </label>
+                            
+                                @endforeach
+                            </div>
                             </div>
                         </div>
                         <div id="Authors" class="widget widget_search widget_author p-4d875 border">
@@ -372,37 +212,14 @@
                             </div>
                             <div id="widgetCollapse21" class="mt-4 widget-content collapse show"
                                 aria-labelledby="widgetHeading21" data-parent="#widgetAccordion">
-                                <form class="form-inline my-2 overflow-hidden">
-                                    <div class="input-group flex-nowrap w-100">
-                                        <div class="input-group-prepend">
-                                            <i
-                                                class="glph-icon flaticon-loupe py-2d75 bg-white-100 border-white-100 text-dark pl-3 pr-0 rounded-0"></i>
-                                        </div>
-                                        <input
-                                            class="form-control bg-white-100 py-2d75 height-4 border-white-100 rounded-0"
-                                            type="search" placeholder="Search" aria-label="Search">
-                                    </div>
-                                    <button class="btn btn-outline-success my-2 my-sm-0 sr-only"
-                                        type="submit">Search</button>
-                                </form>
-                                <ul class="product-categories">
-                                    <li class="cat-item cat-item-9 cat-parent">
-                                        <a href="../others/authors-single.html">A. J. Finn</a>
-                                    </li>
-                                    <li class="cat-item cat-item-69 cat-parent">
-                                        <a href="../others/authors-single.html">Anne Frank</a>
-                                    </li>
-                                    <li class="cat-item cat-item-65 cat-parent">
-                                        <a href="../others/authors-single.html">Camille Pagán</a>
-                                    </li>
-                                    <li class="cat-item cat-item-11 cat-parent"><a
-                                            href="../others/authors-single.html">Daniel H. Pink</a>
-                                    </li>
-                                    <li class="cat-item cat-item-12"><a href="../others/authors-single.html">Danielle
-                                            Steel</a></li>
-                                    <li class="cat-item cat-item-31"><a href="../others/authors-single.html">David
-                                            Quammen</a></li>
-                                </ul>
+                               <div class="row justify-content-between">
+                                @foreach ($authors as $author)
+                                <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="author{{ $author->id }}">
+                                    <input type="checkbox" name="authors[]" value="{{ $author->id }}" id="author{{ $author->id }}"> {{ str()->headline($author->name) }}
+                                </label>
+                            
+                                @endforeach
+                            </div>
                             </div>
                         </div>
                         <button class="btn btn-dark rounded-0 btn-wide py-3 font-weight-medium w-100">Apply Filter</button>

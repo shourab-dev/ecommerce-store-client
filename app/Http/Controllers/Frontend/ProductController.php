@@ -19,7 +19,7 @@ class ProductController extends Controller
         } else {
             $book = null;
             $relatedBooks =  Book::select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
-                ->getAuthorName()->subjectName()->classroomName()->orderByType(request()->orderby)->latest()->paginate(12);
+                ->getAuthorName()->subjectName()->classroomName()->filterBooks(request())->orderByType(request()->orderby)->latest()->paginate(12);
             return view('frontend.shop', compact('relatedBooks'));
         }
     }
@@ -40,5 +40,12 @@ class ProductController extends Controller
 
         $relatedBooks = $query->orderByType(request()->orderby)->latest()->paginate(12);
         return view('frontend.shop', compact('relatedBooks'));
+    }
+
+
+
+    //* GET SEARCH VIA AJAX
+    public function getSearchResultsViaAjax(Request $req)  {
+        return response(json_encode($req->search));
     }
 }

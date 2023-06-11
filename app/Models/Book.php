@@ -110,4 +110,20 @@ class Book extends Model
             return $query;
         }
     }
+
+
+    //* GET FILTERED PRODUCTS
+    public function scopeFilterBooks($query, $req)
+    {
+        if ($req->class) {
+            $query->whereIn('class_room_id', $req->class);
+        }
+        if ($req->subjects) {
+            $query->whereIn('subject_id', $req->subjects);
+        }
+        if ($req->authors) {
+            $query->whereIn('user_id', $req->authors);
+        }
+        return $query;
+    }
 }

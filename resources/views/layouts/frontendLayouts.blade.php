@@ -172,13 +172,37 @@
                     </ul>
                     <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
                         <form class="form-inline">
-                            <div class="input-group">
+                            <div class="input-group position-relative">
                                 <div class="input-group-prepend">
                                     <i
                                         class="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>
                                 </div>
-                                <input class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100"
-                                    type="search" placeholder="Search for Books by Keyword ..." aria-label="Search">
+                                <input id="searchBook"
+                                    class="form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100"
+                                    type="search" placeholder="Search for Books" aria-label="Search">
+
+
+                                <div class="search_result">
+                                    <ul>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <a href="#"><img width="80"
+                                                            src="{{ asset('storage/thumbnails/funEmoji.svg') }}"
+                                                            alt=""></a>
+                                                </div>
+                                                <div class="col-8">
+                                                    <a href="">
+                                                        <h4>Book Title</h4>
+                                                    </a>
+                                                    <span>Class 1</span>
+                                                    <span>Ict</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
                             <button class="btn btn-outline-success my-2 my-sm-0 sr-only" type="submit">Search</button>
                         </form>
@@ -423,7 +447,8 @@
                                     <div class="px-4 mb-8 px-md-6">
                                         <a href="{{ route('cart.all.items') }}"
                                             class="btn btn-block py-4 rounded-0 btn-outline-dark mb-4">View Cart</a>
-                                        <a href="{{ route('cart.all.items') }}" class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
+                                        <a href="{{ route('cart.all.items') }}"
+                                            class="btn btn-block py-4 rounded-0 btn-dark">Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -913,6 +938,32 @@
             })
     </script>
     {{-- * ADD TO CART ENDS--}}
+    {{-- * LIVE SEARCH --}}
+    <script>
+        $(document).ready(function(){
+             function liveSearchViaAjax(){
+                let value = $(this).val()
+                
+                if(value.length <= 4 ){return false;}
+                //* SEND AJAX REQ TO THE SERVER
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('frontend.product.search') }}",
+                    data: {
+                        search: value,
+                    },
+                    
+                    success: function(data){
+                        
+                        console.log(data);
+                    }
+                })
+
+             }
+            $('#searchBook').keyup(liveSearchViaAjax)
+        })
+    </script>
+    {{-- * LIVE SEARCH ENDS--}}
 </body>
 
 </html>

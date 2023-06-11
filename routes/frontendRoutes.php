@@ -21,6 +21,10 @@ Route::name('frontend.product.')->controller(ProductController::class)->group(fu
     //* ROUTE FOR CLASSROOM & SUBJECT WITH BOOKS
     Route::get('/class/{slug}', 'getBooksByClassOrSubject')->name('class');
     Route::get('/subject/{slug}', 'getBooksByClassOrSubject')->name('subject');
+
+    //* ROUTE FOR SEARCH
+    Route::get("/search", 'getSearchResultsViaAjax')->name('search');
+
 });
 
 Route::name('frontend.author.')->controller(AuthorController::class)->group(function () {
