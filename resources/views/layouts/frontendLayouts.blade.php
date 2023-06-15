@@ -184,23 +184,7 @@
 
                                 <div class="search_result">
                                     <ul>
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <a href="#"><img width="80"
-                                                            src="{{ asset('storage/thumbnails/funEmoji.svg') }}"
-                                                            alt=""></a>
-                                                </div>
-                                                <div class="col-8">
-                                                    <a href="">
-                                                        <h4>Book Title</h4>
-                                                    </a>
-                                                    <span>Class 1</span>
-                                                    <span>Ict</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -940,11 +924,17 @@
     {{-- * ADD TO CART ENDS--}}
     {{-- * LIVE SEARCH --}}
     <script>
+        let searchResult = $('.search_result ul')
         $(document).ready(function(){
              function liveSearchViaAjax(){
                 let value = $(this).val()
                 
-                if(value.length <= 4 ){return false;}
+                if(value.length <= 4 ){
+                    searchResult.html('')
+                    $('.search_result').hide()
+                }
+                else{
+                    $('.search_result').slideDown()
                 //* SEND AJAX REQ TO THE SERVER
                 $.ajax({
                     method: 'GET',
@@ -954,10 +944,38 @@
                     },
                     
                     success: function(data){
+                        let res = JSON.parse(data)
                         
-                        console.log(data);
+                        if(res.length == 0 ){
+                            searchResult.html('No Result Found')
+                            return false;
+                        }
+                        let lists = [];
+                        let bookSlugUrl = "{{ route('frontend.product.show', '::slug') }}"
+
+                        res.map(book => {
+                        bookSlugUrl = bookSlugUrl.replace('::slug', book.slug)
+                            let li = `<li>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="${bookSlugUrl}"><img width="80" src="${book.thumbnail}" alt="${book.title}"></a>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href="${bookSlugUrl}">
+                                            <h4>${book.title}</h4>
+                                        </a>
+                                        <span>${book.class.name}</span>
+                                        <span>${book.subject.name}</span>
+                                    </div>
+                                </div>
+                            </li>`;
+                            lists.push(li)
+                        })
+                        searchResult.html()
+                        searchResult.html(lists)
                     }
                 })
+                }
 
              }
             $('#searchBook').keyup(liveSearchViaAjax)

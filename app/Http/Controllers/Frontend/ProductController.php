@@ -46,6 +46,10 @@ class ProductController extends Controller
 
     //* GET SEARCH VIA AJAX
     public function getSearchResultsViaAjax(Request $req)  {
-        return response(json_encode($req->search));
+        $search = $req->search;
+
+        $books = Book::where('title', 'LIKE', "%".$search."%")->classRoomName()->subjectName()->select('title', 'class_room_id', 'subject_id', 'thumbnail','slug')->take(5)->get();
+        return response(json_encode($books), 200);
+
     }
 }

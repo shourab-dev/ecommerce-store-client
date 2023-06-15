@@ -24107,6 +24107,7 @@ footer .widget select.custom-select,
 }
 
 .search_result {
+    display: none;
     position: absolute;
     background-color: #fff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -24132,6 +24133,7 @@ footer .widget select.custom-select,
 .search_result h4 {
     color: #4f4f4f;
     margin-bottom: 5px;
+    font-size: 18px;
     
 }
 
