@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('thumbnail_path')->nullable();
             $table->string('dummy_pdf')->nullable();
             $table->string('book_pdf')->nullable();
+            $table->boolean('is_ebook')->default('true');
             $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });

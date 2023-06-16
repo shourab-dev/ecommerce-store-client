@@ -65,6 +65,7 @@ class Book extends Model
         return $query->with(['class' => function ($q) {
             $q->select('id', 'name', 'slug');
         }]);
+        
     }
 
     //* BOOK HAS BEEN ADDED IN CART

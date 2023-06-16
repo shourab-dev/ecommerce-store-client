@@ -951,9 +951,9 @@
                             return false;
                         }
                         let lists = [];
-                        let bookSlugUrl = "{{ route('frontend.product.show', '::slug') }}"
-
+                        
                         res.map(book => {
+                        let bookSlugUrl = "{{ route('frontend.product.show', '::slug') }}"
                         bookSlugUrl = bookSlugUrl.replace('::slug', book.slug)
                             let li = `<li>
                                 <div class="row">
