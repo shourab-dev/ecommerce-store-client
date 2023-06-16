@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ConfirmOrder;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'isAdmin' => IsAdmin::class,
         'isUser' => IsUser::class,
+        'confirmOrder' => ConfirmOrder::class,
     ];
 }
