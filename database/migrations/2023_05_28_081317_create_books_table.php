@@ -32,6 +32,11 @@ return new class extends Migration
             $table->string('book_pdf')->nullable();
             $table->boolean('is_ebook')->default(true);
             $table->boolean('is_featured')->default(false);
+            $table->string('format')->nullable();
+            $table->string('dimension')->nullable();
+            $table->string('publication_date')->nullable();
+            $table->string('total_pages')->nullable();
+
             $table->timestamps();
         });
     }

@@ -7,6 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>View Book</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       overflow-x: hidden;
     }
@@ -52,116 +58,140 @@
       margin: auto;
       display: block;
     }
-    :root{
+
+    @media (max-width:600px) {
+      canvas {
+        width: 100vw;
+      }
+    }
+
+    :root {
       --width: 300px;
     }
+
     input[type=range] {
-    height: 25px;
-    -webkit-appearance: none;
-    margin: 10px 0;
-    width: var(--width);
+      height: 25px;
+      -webkit-appearance: none;
+      margin: 10px 0;
+      width: var(--width);
     }
+
     input[type=range]:focus {
-    outline: none;
+      outline: none;
     }
+
     input[type=range]::-webkit-slider-runnable-track {
-    width: var(--width);
-    height: 5px;
-    cursor: pointer;
-    animate: 0.2s;
-    box-shadow: 0px 0px 0px #000000;
-    background: #2497E3;
-    border-radius: 1px;
-    border: 0px solid #000000;
+      width: var(--width);
+      height: 5px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 0px 0px 0px #000000;
+      background: #2497E3;
+      border-radius: 1px;
+      border: 0px solid #000000;
     }
+
     input[type=range]::-webkit-slider-thumb {
-    box-shadow: 0px 0px 0px #000000;
-    border: 1px solid #2497E3;
-    height: 18px;
-    width: 18px;
-    border-radius: 25px;
-    background: #A1D0FF;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -7px;
+      box-shadow: 0px 0px 0px #000000;
+      border: 1px solid #2497E3;
+      height: 18px;
+      width: 18px;
+      border-radius: 25px;
+      background: #A1D0FF;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -7px;
     }
+
     input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #2497E3;
+      background: #2497E3;
     }
+
     input[type=range]::-moz-range-track {
-    width: var(--width);
-    height: 5px;
-    cursor: pointer;
-    animate: 0.2s;
-    box-shadow: 0px 0px 0px #000000;
-    background: #2497E3;
-    border-radius: 1px;
-    border: 0px solid #000000;
+      width: var(--width);
+      height: 5px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 0px 0px 0px #000000;
+      background: #2497E3;
+      border-radius: 1px;
+      border: 0px solid #000000;
     }
+
     input[type=range]::-moz-range-thumb {
-    box-shadow: 0px 0px 0px #000000;
-    border: 1px solid #2497E3;
-    height: 18px;
-    width: 18px;
-    border-radius: 25px;
-    background: #A1D0FF;
-    cursor: pointer;
+      box-shadow: 0px 0px 0px #000000;
+      border: 1px solid #2497E3;
+      height: 18px;
+      width: 18px;
+      border-radius: 25px;
+      background: #A1D0FF;
+      cursor: pointer;
     }
+
     input[type=range]::-ms-track {
-    width: var(--width);
-    height: 5px;
-    cursor: pointer;
-    animate: 0.2s;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
+      width: var(--width);
+      height: 5px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
     }
+
     input[type=range]::-ms-fill-lower {
-    background: #2497E3;
-    border: 0px solid #000000;
-    border-radius: 2px;
-    box-shadow: 0px 0px 0px #000000;
+      background: #2497E3;
+      border: 0px solid #000000;
+      border-radius: 2px;
+      box-shadow: 0px 0px 0px #000000;
     }
+
     input[type=range]::-ms-fill-upper {
-    background: #2497E3;
-    border: 0px solid #000000;
-    border-radius: 2px;
-    box-shadow: 0px 0px 0px #000000;
+      background: #2497E3;
+      border: 0px solid #000000;
+      border-radius: 2px;
+      box-shadow: 0px 0px 0px #000000;
     }
+
     input[type=range]::-ms-thumb {
-    margin-top: 1px;
-    box-shadow: 0px 0px 0px #000000;
-    border: 1px solid #2497E3;
-    height: 18px;
-    width: 18px;
-    border-radius: 25px;
-    background: #A1D0FF;
-    cursor: pointer;
+      margin-top: 1px;
+      box-shadow: 0px 0px 0px #000000;
+      border: 1px solid #2497E3;
+      height: 18px;
+      width: 18px;
+      border-radius: 25px;
+      background: #A1D0FF;
+      cursor: pointer;
     }
+
     input[type=range]:focus::-ms-fill-lower {
-    background: #2497E3;
+      background: #2497E3;
     }
+
     input[type=range]:focus::-ms-fill-upper {
-    background: #2497E3;
+      background: #2497E3;
     }
-    body{
+
+    body {
       position: relative;
     }
-    .zoomButton{
+
+    .zoomButton {
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
       padding-bottom: 30px;
-      
+
     }
-    .zoomButton span{
+
+    .zoomButton span {
       width: 30px;
       height: 30px;
       background-color: dodgerblue;
       color: white;
       margin: 0 5px;
       line-height: 30px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -176,7 +206,7 @@
 
   </div>
   <input type="hidden" value="{{ $id }}" name="id">
-  <div class="zoomButton"><span>-</span><input type="range" id="zoom" min="0.8"  max="5"><span>+</span></div>
+  <div class="zoomButton"><span>-</span><input type="range" id="zoom" min="0.8" max="5"><span>+</span></div>
   <canvas id="the-canvas"></canvas>
 
 
@@ -291,8 +321,25 @@ pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
 
 zoom.addEventListener('input', ()=> {scale = zoom.value; renderPage(pageNum)})
 
+let btnsNode = document.querySelectorAll('.zoomButton span')
+let btns = Array.from(btnsNode)
+btns.map(btn=>{
+  btn.addEventListener('click', (e)=>{
+    
+    if(e.target.innerHTML  == "+"){
+      zoom.value = Number(zoom.value) + 1;
+      console.log(zoom.value);
+    } else{
+      zoom.value = Number(zoom.value) - 1;
+    }
+    
+    zoom.dispatchEvent(new Event('input'))
+  })
+})
+
+
   </script>
-{{-- 
+  {{--
   <script>
     document.addEventListener('keydown', event => {
         console.log(`User pressed: ${event.key}`);

@@ -24,7 +24,7 @@ class BookController extends Controller
         'classRoom' => 'required',
         'subject' => 'required',
         'thumbnail' => 'required|mimes:jpg,png,webp,jpeg',
-        'book' => 'required|mimes:jpg,png,webp,jpeg,pdf',
+        'book' => 'mimes:jpg,png,webp,jpeg,pdf',
 
     ];
     private $msg = [
@@ -72,15 +72,14 @@ class BookController extends Controller
         $book->thumbnail_path = $thumbnail['name'];
         $book->dummy_pdf = $request->hasFile('dummyPdf') ?  $dummyFile : null;
         $book->book_pdf = $bookFile;
+        $book->is_ebook = $request->isEbook;
+        $book->format = $request->format;
+        $book->dimension = $request->dimension;
+        $book->publication_date = $request->publication_date;
+        $book->total_pages = $request->totalPages;
+        $book->is_featured = $request->isFeatured ?? false;
         $book->save();
+
         dd($book);
-    }
-
-
-    private function uploadMedia($media, $path = 'books')
-    {
-        $name = str($media->getClientOriginalName() . '-' . Carbon::today()->format("d-m-y"))->slug() . '.' . $media->getClientOriginalExtension();
-        $media->storeAs($path, $name, 'public');
-        return $name;
     }
 }
