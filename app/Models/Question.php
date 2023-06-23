@@ -32,6 +32,24 @@ class Question extends Model
     }
 
 
+    //* GET SUBJECT NAME
+    public function scopeSubjectName($query)
+    {
+        return $query->with(['subject' => function ($q) {
+            $q->select('id', 'name');
+        }]);
+    }
+
+
+    //* GET Class NAME
+    public function scopeClassroomName($query)
+    {
+        return $query->with(['classRoom' => function ($q) {
+            $q->select('id', 'name');
+        }]);
+    }
+
+
 
     public function scopeFilterQuestions($query, $req)
     {
@@ -88,4 +106,38 @@ class Question extends Model
             $query->whereBetween('date', [$req->from, $req->to]);
         }
     }
+
+
+    //* FILTER QUESTION FOR FRONTEND
+    public function scopeFilterFrontendQuestions($query,$req)
+    {
+        if($req->question){
+              $query->where('question_name','LIKE',$req->question.'%');
+        }
+        if($req->class){
+            $query->whereIn("class_room_id",  $req->class);
+        }
+        if($req->subjects){
+            $query->whereIn("subject_id",  $req->subjects);
+        }
+
+        //* REQ HAS FROM DATE
+        if ($req->from != null && $req->to == null) {
+            $query->whereBetween('date', [$req->from, Carbon::today()]);
+        }
+        //* REQ HAS TO DATE
+        if ($req->to != null && $req->form == null) {
+            $query->where('date', '<=', $req->to);
+        }
+        //* REQ HAS BOTH DATES
+        if ($req->from != null && $req->to != null) {
+            $query->whereBetween('date', [$req->from, $req->to]);
+        }
+
+
+
+
+    }
+
+
 }

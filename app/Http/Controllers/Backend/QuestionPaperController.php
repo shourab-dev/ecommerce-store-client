@@ -145,8 +145,8 @@ class QuestionPaperController extends Controller
         $pdfFileNames = [];
         foreach ($req->pdfs as $pdf) {
             $pdf_name = uniqid() . '.' . $pdf->getClientOriginalExtension();
-            $pdf->storeAs('pdf', $pdf_name, 'public');
-            array_push($pdfFileNames, $pdf_name);
+            $pdf_path = $pdf->storeAs('pdf', $pdf_name, 'public');
+            array_push($pdfFileNames, $pdf_path);
         }
         return $pdfFileNames;
     }

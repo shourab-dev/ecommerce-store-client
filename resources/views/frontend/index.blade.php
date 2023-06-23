@@ -38,71 +38,7 @@
 </section>
 {{-- *BANNER ENDS--}}
 
-{{-- * FEATURED CLASSES --}}
-
-<section class="space-bottom-3">
-    <div class="container">
-        <header class="mb-5 d-md-flex justify-content-between align-items-center">
-            <h2 class="font-size-7 mb-3 mb-md-0">Featured Categories</h2>
-            <a href="../shop/v1.html" class="h-primary d-block">All Categories <i
-                    class="glyph-icon flaticon-next"></i></a>
-        </header>
-        <ul class="list-unstyled my-0 row row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-wd-5">
-            <li class="product-category col mb-4 mb-xl-0">
-                <div class="product-category__inner bg-indigo-light px-6 py-5">
-                    <div class="product-category__icon font-size-12 text-primary-indigo">
-                        <i class="glyph-icon flaticon-gallery"></i>
-                    </div>
-                    <div class="product-category__body">
-                        <h3 class="text-truncate font-size-3">Class One</h3>
-                        <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
-                    </div>
-                </div>
-            </li>
-            <li class="product-category col mb-4 mb-xl-0">
-                <div class="product-category__inner bg-tangerine-light px-6 py-5">
-                    <div class="product-category__icon font-size-12 text-tangerine"><i
-                            class="glyph-icon flaticon-cook"></i></div>
-                    <div class="product-category__body">
-                        <h3 class="text-truncate font-size-3">Food &amp; Drink</h3>
-                        <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
-                    </div>
-                </div>
-            </li>
-            <li class="product-category col mb-4 mb-xl-0">
-                <div class="product-category__inner bg-chili-light px-6 py-5">
-                    <div class="product-category__icon font-size-12 text-chili"><i class="glyph-icon flaticon-like"></i>
-                    </div>
-                    <div class="product-category__body">
-                        <h3 class="text-truncate font-size-3">Romance</h3>
-                        <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
-                    </div>
-                </div>
-            </li>
-            <li class="product-category col mb-4 mb-xl-0">
-                <div class="product-category__inner bg-carolina-light px-6 py-5">
-                    <div class="product-category__icon font-size-12 text-carolina"><i
-                            class="glyph-icon flaticon-doctor"></i></div>
-                    <div class="product-category__body">
-                        <h3 class="text-truncate font-size-3">Health</h3>
-                        <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
-                    </div>
-                </div>
-            </li>
-            <li class="product-category col mb-4 mb-xl-0 d-xl-none d-wd-block">
-                <div class="product-category__inner bg-punch-light px-6 py-5">
-                    <div class="product-category__icon font-size-12 text-punch"><i
-                            class="glyph-icon flaticon-resume"></i></div>
-                    <div class="product-category__body">
-                        <h3 class="text-truncate font-size-3">Biography</h3>
-                        <a href="../shop/v1.html" class="stretched-link text-dark">Shop Now</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</section>
-{{-- * FEATURED CLASSES ENDS--}}
+`
 
 {{-- * BEST SELLING --}}
 

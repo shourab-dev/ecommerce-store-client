@@ -48,7 +48,7 @@
     </li>
 
 
-    <li class="nav-item"><a href="index.html#"
+    <li class="nav-item"><a href="{{ route('frontend.questions.all') }}"
             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium  ">Questions
             Paper</a>
     </li>
