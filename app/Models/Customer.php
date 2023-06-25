@@ -38,4 +38,9 @@ class Customer extends Authenticatable
     {
         return $this->hasManyThrough(OrderItem::class, Order::class);
     }
+
+
+    function details(){
+        return $this->hasOne(CustomerAddress::class);
+    }
 }
