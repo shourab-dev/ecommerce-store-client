@@ -8,6 +8,8 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
@@ -53,5 +55,15 @@ class CustomerOrderController extends Controller
                 'Content-Disposition' => 'inline;'
             ]);
         }
+    }
+
+
+    /**
+     * * SEND INVOICE ON ORDER
+     */
+
+    public function sendOrderInvoice($orderId)
+    {
+        Mail::to("test@gmail.com")->queue(new InvoiceEmail());
     }
 }
