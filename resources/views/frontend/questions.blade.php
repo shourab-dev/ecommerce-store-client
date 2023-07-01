@@ -36,7 +36,7 @@
                                             </div>
                                             <h2
                                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                                <a href="#">{{
+                                                <a href="{{ route('frontend.questions.single' ,$question->slug) }}">{{
                                                     str($question->question_name)->headline() }}</a>
                                             </h2>
                                             <p>

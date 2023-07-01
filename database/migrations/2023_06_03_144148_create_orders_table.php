@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('address')->nullable();
+            $table->string('post_code');
+            $table->string('address');
             $table->integer('amount');
             $table->string('status');
             $table->string('currency');

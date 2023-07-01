@@ -17,8 +17,17 @@ class SslCommerzPaymentController extends Controller
         //* VALIDATE USER DATA
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required'
+            'email' => 'email',
+            'phone' => 'required',
+            'address' => 'required',
+            'postCode' => 'required'
+        ], [
+            'postCode.required' => "Please fill up your Post Code",
+            'name.required' => "Please fill up your name",
+            'email.email' => "Please make sure you enter a valid email",
+            'phone.required' => "Please fill up a your phone number",
+            'address.required' => "Please fill up a your address",
+
         ]);
 
         $authId =  auth()->guard('user')->user()->id;
@@ -121,28 +130,28 @@ class SslCommerzPaymentController extends Controller
         # CUSTOMER INFORMATION
         $post_data['cus_name'] = $data['name'];
         $post_data['cus_email'] = $data['email'];
-        $post_data['cus_add1'] = "Bangladesh";
+        $post_data['cus_add1'] = $data['address'];
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";
-        $post_data['cus_postcode'] = "";
+        $post_data['cus_postcode'] = $data['postCode'];
         $post_data['cus_country'] = "Bangladesh";
         $post_data['cus_phone'] = $data['phone'];
         $post_data['cus_fax'] = "";
 
         # SHIPMENT INFORMATION
-        $post_data['ship_name'] = "Store Test";
-        $post_data['ship_add1'] = "Dhaka";
-        $post_data['ship_add2'] = "Dhaka";
-        $post_data['ship_city'] = "Dhaka";
-        $post_data['ship_state'] = "Dhaka";
-        $post_data['ship_postcode'] = "1000";
-        $post_data['ship_phone'] = "";
+        $post_data['ship_name'] = $data['name'];
+        $post_data['ship_add1'] = $data['address'];
+        $post_data['ship_add2'] = "";
+        $post_data['ship_city'] = "";
+        $post_data['ship_state'] = $data['address'];
+        $post_data['ship_postcode'] = $data['postCode'];
+        $post_data['ship_phone'] = $data['phone'];
         $post_data['ship_country'] = "Bangladesh";
 
         $post_data['shipping_method'] = "NO";
         $post_data['product_name'] = "Books";
-        $post_data['product_category'] = "E-books";
+        $post_data['product_category'] = "Books";
         $post_data['product_profile'] = "Digital-goods";
 
         # OPTIONAL PARAMETERS
@@ -160,6 +169,8 @@ class SslCommerzPaymentController extends Controller
                 'name' => $post_data['cus_name'],
                 'email' => $post_data['cus_email'],
                 'phone' => $post_data['cus_phone'],
+                'address' => $post_data['cus_postcode'],
+                'post_code' => $post_data['cus_phone'],
                 'amount' => $post_data['total_amount'],
                 'status' => 'Pending',
                 'transaction_id' => $post_data['tran_id'],

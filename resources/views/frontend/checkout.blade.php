@@ -67,6 +67,7 @@
                         </div>
                     </div>
 
+
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
                         <input type="email" readonly value="{{ $data['email'] }}" name="customer_email"
@@ -76,14 +77,37 @@
                         </div>
                     </div>
 
-                  
+                    <div class="mb-3">
+                        <label for="mobile">Post Code</label>
+                        <div class="input-group">
+
+                            <input type="text" id="postCode" class="form-control" readonly
+                                value="{{ $data['postCode'] }}">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Your Post Code is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile">Address</label>
+                        <div class="input-group">
+
+                            <textarea id="address" style="resize: none" name="address" class="form-control"
+                                readonly>{{ $data['address'] }}</textarea>
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Your address is required
+                            </div>
+                        </div>
+                    </div>
+
+
 
 
 
                     <div class="row">
-                      
-                       
-                       
+
+
+
                     </div>
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
@@ -104,7 +128,7 @@
         </div>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">&copy; 2019 Company Name</p>
+            <p class="mb-1">&copy; {{ today()->format("Y") }} {{ env('APP_NAME') }}</p>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Privacy</a></li>
                 <li class="list-inline-item"><a href="#">Terms</a></li>
@@ -129,6 +153,8 @@
     obj.name = $('#customer_name').val();
     obj.phone = $('#mobile').val();
     obj.email = $('#email').val();
+    obj.address = $('#address').val();
+    obj.postCode = $('#postCode').val();
     obj.amount = $('#total_amount').val();
     // obj.country = $('#country').val();
     // obj.state = $('#state').val();

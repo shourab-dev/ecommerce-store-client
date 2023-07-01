@@ -12,9 +12,25 @@
                         <h5 class="mb-4">Check Out Form</h5>
                         @csrf
                         <input type="text" class="form-control my-2" value="{{ auth()->guard('user')->user()->name }}" name="name" placeholder="User Name">
+                        @error('name')
+                        <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        @enderror
                         <input type="text" class="form-control my-2" name="email" value="{{ auth()->guard('user')->user()->email }}" placeholder="Email">
+                        @error('email')
+                        <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        @enderror
                         <input type="text" class="form-control my-2" name="phone" placeholder="Phone">
-                        
+                        @error('phone')
+                        <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        @enderror
+                        <input type="number" class="form-control my-2" name="postCode" placeholder="Post Code">
+                        @error('postCode')
+                        <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        @enderror
+                        <textarea name="address" class="form-control my-2" placeholder="Your Address"></textarea>
+                        @error('address')
+                            <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        @enderror
                     
                     <div class="p-4d875 border">
                         <table class="shop_table shop_table_responsive">
