@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Blank Page | PlainAdmin Demo</title>
+    <title>Talley</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap.min.css') }}" />
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/fullcalendar.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
+    @stack('customerCss')
 </head>
 
 <body>
@@ -21,7 +22,7 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="index.html">
-                <img src="{{ asset('backend/assets/images/logo/logo.svg') }}" alt="logo" />
+                <img src="{{ asset('frontend/logo.png') }}" alt="logo" width="50" />
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -109,8 +110,8 @@
                                             <h6>{{ auth()->guard('user')->user()->name }}</h6>
 
                                             <div class="image">
-                                                <img src="{{ auth()->guard('user')->user()->profile_img_link ?? env('AVATAR_API').auth()->guard('user')->user()->name }}"
-                                                    alt="" />
+                                                <img src="{{ auth()->guard('user')->user()->profile_url ?? env('AVATAR_API').auth()->guard('user')->user()->name }}"
+                                                    alt="{{ auth()->guard('user')->user()->name }}" />
                                                 <span class="status"></span>
                                             </div>
 
@@ -120,15 +121,13 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
-                                        <a href="#0">
+                                        <a href="{{ route('user.profile') }}">
                                             <i class="lni lni-user"></i> View Profile
                                         </a>
                                     </li>
 
 
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
-                                    </li>
+                                   
                                     <li>
 
                                         <a href="{{ route('logout') }}"
@@ -200,6 +199,7 @@
     <script src="{{ asset('backend/assets/js/world-merc.js') }}"></script>
     <script src="{{ asset('backend/assets/js/polyfill.js') }}"></script>
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
+    @stack('customerJs')
 </body>
 
 </html>

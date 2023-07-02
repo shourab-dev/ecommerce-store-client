@@ -18,6 +18,10 @@ Route::middleware(['isUser'])->prefix('/dashboard')->name('user.')->group(functi
     //* CUSTOMER DASHBOARD URL
     Route::get('/', [UserAuthController::class, 'dashboard'])->name('dashboard');
 
+    //* CUSTOMER PROFILE URL
+    Route::get('/my-profile', [UserAuthController::class, 'myProfile'])->name('profile');
+    Route::post('/my-profile', [UserAuthController::class, 'updateProfileData'])->name('profile.update');
+
     //* CUSTOMER PURCHASE PRODUCT URL
     Route::prefix('my-orders')->name('myorder.')->controller(CustomerOrderController::class)->group(function () {
         Route::get('/ebook', 'getMyBooks')->name('ebook');
