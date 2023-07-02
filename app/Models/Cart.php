@@ -13,6 +13,7 @@ class Cart extends Model
         "customer_id",
         "book_id",
         "price",
+        "amount"
     ];
 
 

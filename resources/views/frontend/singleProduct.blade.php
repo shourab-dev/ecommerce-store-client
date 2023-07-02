@@ -58,9 +58,16 @@
                             </div>
 
 
-                            <form class="cart d-md-flex align-items-center" method="post" enctype="multipart/form-data">
+                            <div class="cart d-md-flex align-items-center" method="post" enctype="multipart/form-data">
                                 @auth('user')
-
+                                @if (!$book->is_ebook)
+                                <div class="col-lg-4 col-5  d-flex mb-3 mb-lg-0">
+                                    <button type="button" class="btn btn-outline-dark btn-sm col">+</button>
+                                    <input id="cartAmount" type="number" class="form-control col-7 text-center"
+                                        value="1" min="1">
+                                    <button type="button" class="btn btn-outline-dark btn-sm col">-</button>
+                                </div>
+                                @endif
 
                                 <a href="{{ route('cart.add',$book->id) }}" name="add-to-cart"
                                     class="btn btn-dark border-0 addToCart rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">Add
@@ -70,7 +77,7 @@
                                 <a href="{{ route('user.login') }}"
                                     class="btn btn-dark border-0  rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">Login</a>
                                 @endguest
-                            </form>
+                            </div>
                         </div>
 
                     </div>

@@ -67,6 +67,7 @@
                                             <tr>
                                                 <th class="product-name">Product</th>
                                                 <th class="product-price">Price</th>
+                                                <th class="product-price">Total</th>
                                                 <th class="product-remove">&nbsp;</th>
                                             </tr>
                                         </thead>
@@ -83,7 +84,7 @@
                                                                 alt>
                                                         </a>
                                                         <div class="ml-3 m-w-200-lg-down">
-                                                            <a href="cart.html#">{{ $cart->books->title }}</a>
+                                                            <a href="cart.html#">{{ $cart->books->title }}  ({{ $cart->amount }} pieces)</a>
                                                             <a href="cart.html#"
                                                                 class="text-gray-700 font-size-2 d-block"
                                                                 tabindex="0">{{ $cart->books->author->name }}</a>
@@ -91,9 +92,12 @@
                                                     </div>
                                                 </td>
                                                 <td class="product-price" data-title="Price">
-                                                    <span class="woocommerce-Price-amount amount"><span
-                                                            class="woocommerce-Price-currencySymbol">tk</span> {{
-                                                        $cart->books->selling_price ?? $cart->books->price }}</span>
+                                                    <span class="woocommerce-Price-amount amount"> {{
+                                                        $cart->books->selling_price ?? $cart->books->price }} <span class="woocommerce-Price-currencySymbol">tk</span></span>
+                                                </td>
+                                                <td class="product-price" data-title="Price">
+                                                    <span class="woocommerce-Price-amount amount"> {{
+                                                       ($cart->books->selling_price ?? $cart->books->price) * $cart->amount }} <span class="woocommerce-Price-currencySymbol">tk</span></span>
                                                 </td>
 
 

@@ -78,7 +78,7 @@
                                                 @else
                                                 <span class="woocommerce-Price-amount amount"><span
                                                         class="woocommerce-Price-currencySymbol">$</span>{{
-                                                    $newBook->price
+                                                    $book->price
                                                     }}</span>
                                                 @endif
 

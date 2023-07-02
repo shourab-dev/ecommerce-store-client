@@ -14,7 +14,7 @@ class OrderItem extends Model
     //* GET BOOKS
     public function book()
     {
-        return $this->belongsTo(Book::class)->select('id', 'title', 'slug', 'detail', 'lang', 'thumbnail', 'book_pdf');
+        return $this->belongsTo(Book::class)->select('id', 'title', 'slug', 'detail', 'lang', 'thumbnail', 'book_pdf','selling_price','price');
     }
 
 

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Book extends Model
 {
@@ -65,7 +66,6 @@ class Book extends Model
         return $query->with(['class' => function ($q) {
             $q->select('id', 'name', 'slug');
         }]);
-        
     }
 
     //* BOOK HAS BEEN ADDED IN CART
@@ -77,19 +77,48 @@ class Book extends Model
 
     public function scopeGetCartRegularPrice($query, $authId)
     {
-        return $query->whereHas('carts', function ($query) use ($authId) {
-            $query->where('customer_id', $authId);
-        })->select('selling_price', 'price')->where('price', '!=', null)->where('selling_price', null)->sum('price');
+        // return $query->whereHas('carts', function ($query) use ($authId) {
+        //     $query->where('customer_id', $authId);
+        // })->select('selling_price', 'price')->where('price', '!=', null)->where('selling_price', null)->sum('price');
+        return DB::table('books')
+            ->join('carts', 'books.id', '=', 'carts.book_id')
+            ->select(DB::raw('sum(books.price*carts.amount) AS regulars'))
+            ->where('carts.customer_id', $authId)
+            ->where('books.price', '!=', null)
+            ->where('books.selling_price', null)
+            ->first()->regulars;
     }
     public function scopeGetCartDiscountPrice($query, $authId)
     {
-        return $query->whereHas('carts', function ($query) use ($authId) {
-            $query->where('customer_id', $authId);
-        })->select('selling_price', 'price')->where('selling_price', '!=', null)->sum('selling_price');
+        // return  $query->whereHas('carts', function ($query) use ($authId) {
+        //     $query->where('customer_id', $authId);
+        // })->select('selling_price', 'price')->where('selling_price', '!=', null)->sum('selling_price');
+
+        return DB::table('books')
+            ->join('carts', 'books.id', '=', 'carts.book_id')
+            ->select(DB::raw('sum(books.selling_price*carts.amount) AS discounts'))
+            ->where('carts.customer_id', $authId)
+            ->where('books.selling_price', '!=', null)
+            ->first()->discounts;
     }
     public function scopeGetCartSubTotal($query, $authId)
     {
-        return $this->getCartDiscountPrice($authId) + $this->getCartRegularPrice($authId);
+        $regular = DB::table('books')
+            ->join('carts', 'books.id', '=', 'carts.book_id')
+            ->select(DB::raw('sum(books.price*carts.amount) AS regulars'))
+            ->where('carts.customer_id', $authId)
+            ->where('books.price', '!=', null)
+            ->where('books.selling_price', null)
+            ->first()->regulars;
+
+        $discount =
+            DB::table('books')
+            ->join('carts', 'books.id', '=', 'carts.book_id')
+            ->select(DB::raw('sum(books.selling_price*carts.amount) AS discounts'))
+            ->where('carts.customer_id', $authId)
+            ->where('books.selling_price', '!=', null)
+            ->first()->discounts;
+            return $regular + $discount;
     }
 
     //* GET SORTED PRODUCT

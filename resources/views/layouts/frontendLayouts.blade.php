@@ -839,14 +839,14 @@
                                 <div class="media-body ml-4d875">
                                    
                                     <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
-                                        <a href="#" class="text-dark">${cart.books.title}</a>
+                                        <a href="#" class="text-dark">${cart.books.title} (${cart.amount} pieces)</a>
                                     </h2>
                                     <div class="font-size-2 mb-1 text-truncate">
                                         <a href="#" class="text-gray-700">${cart.books.author.name}</a>
                                         </div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                         <span class="woocommerce-Price-amount amount"> 
-                                            <span class="woocommerce-Price-currencySymbol">tk</span> ${cart.books.selling_price ? cart.books.selling_price : cart.books.price} </span>
+                                            <span class="woocommerce-Price-currencySymbol">tk</span> ${(cart.books.selling_price ? cart.books.selling_price : cart.books.price)* cart.amount} </span>
                                     </div>
                                 </div>
                                 <div class="mt-3 ml-3">
@@ -872,6 +872,8 @@
     {{-- * ADD TO CART --}}
     <script>
         $(document).on('ready', function () {
+                let cartAmount = 1
+                
     
                 //* SWEET ALERT
                 const Toast = Swal.mixin({
@@ -890,9 +892,14 @@
                 
                 function addToCartAjax(e){
                     e.preventDefault()
+                    if($('#cartAmount').length > 0){
+                    cartAmount = $('#cartAmount').val()
+                    }
+                    console.log(cartAmount);
                     $.ajax({
                         method:'GET',
                         url: $(this).attr('href'),
+                        data: {amount: cartAmount},
                         success: function(res){
                             res = JSON.parse(res)
                             //* UPDATE CART NUMBER

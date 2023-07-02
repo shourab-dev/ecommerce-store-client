@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Customer;
 
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Customer;
-use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
 use App\Mail\InvoiceEmail;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
@@ -64,6 +65,9 @@ class CustomerOrderController extends Controller
 
     public function sendOrderInvoice($orderId)
     {
-        Mail::to("test@gmail.com")->queue(new InvoiceEmail());
+        $order = Order::with('orderItems')->find($orderId);
+        $totalPrice = Book::getCartSubTotal(auth()->guard('user')->user()->id);
+        
+        Mail::to("test@gmail.com")->send(new InvoiceEmail($order,$totalPrice));
     }
 }
