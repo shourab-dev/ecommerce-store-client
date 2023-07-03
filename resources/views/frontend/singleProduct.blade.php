@@ -61,11 +61,13 @@
                             <div class="cart d-md-flex align-items-center" method="post" enctype="multipart/form-data">
                                 @auth('user')
                                 @if (!$book->is_ebook)
-                                <div class="col-lg-4 col-5  d-flex mb-3 mb-lg-0">
-                                    <button type="button" class="btn btn-outline-dark btn-sm col">+</button>
+                                <div class="col-lg-4 col-5  d-flex mb-3 mb-lg-0 cartAmountBtns">
+                                    <button type="button" data-type="increment"
+                                        class="btn btn-outline-dark btn-sm col">+</button>
                                     <input id="cartAmount" type="number" class="form-control col-7 text-center"
                                         value="1" min="1">
-                                    <button type="button" class="btn btn-outline-dark btn-sm col">-</button>
+                                    <button type="button" data-type="decrement"
+                                        class="btn btn-outline-dark btn-sm col">-</button>
                                 </div>
                                 @endif
 
@@ -280,4 +282,25 @@
         </div>
     </main>
 </div>
+@push('customJs')
+<script>
+    $('.cartAmountBtns button').click(function()
+        {
+            let type = $(this).attr('data-type')
+            let value = Number($('#cartAmount').val())
+            if(type == 'increment'){
+                value += 1
+                
+            }
+            else{
+                if(value <= 1){
+                    return false;
+                }
+                value -= 1
+            }
+            $('#cartAmount').val(value)
+        })
+
+</script>
+@endpush
 @endsection

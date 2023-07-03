@@ -28,6 +28,9 @@
                                     <div class="input-style-1">
                                         <label>Email</label>
                                         <input type="email" name="email" placeholder="Email" />
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- end col -->
