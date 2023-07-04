@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Customer;
 
+
 use Dompdf\Dompdf;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Order;
-
 use App\Models\Customer;
 use App\Mail\InvoiceEmail;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class CustomerOrderController extends Controller
 {
@@ -67,7 +69,11 @@ class CustomerOrderController extends Controller
     public function sendOrderInvoice($orderId)
     {
         $order = Order::with('orderItems')->find($orderId);
-        
+        $data = ["order" => $order];
+        // return view('emails.test',compact('order'));
+        $pdf = Pdf::loadView('emails.downloadInvoice', $data);
+        return $pdf->download('HELLOW.pdf');
+        dd($pdf);
         // Mail::to("test@gmail.com")->send(new InvoiceEmail($order));
         // return view('frontend.paymentSuccess', ['customerOrderId' => $orderId]);
     }
