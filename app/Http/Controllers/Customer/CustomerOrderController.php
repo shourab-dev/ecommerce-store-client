@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Customer;
 
+use Dompdf\Dompdf;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Order;
-use App\Models\Customer;
 
+use App\Models\Customer;
 use App\Mail\InvoiceEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -66,8 +67,8 @@ class CustomerOrderController extends Controller
     public function sendOrderInvoice($orderId)
     {
         $order = Order::with('orderItems')->find($orderId);
-        $totalPrice = Book::getCartSubTotal(auth()->guard('user')->user()->id);
         
-        Mail::to("test@gmail.com")->send(new InvoiceEmail($order,$totalPrice));
+        // Mail::to("test@gmail.com")->send(new InvoiceEmail($order));
+        // return view('frontend.paymentSuccess', ['customerOrderId' => $orderId]);
     }
 }

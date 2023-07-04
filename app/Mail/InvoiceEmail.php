@@ -13,18 +13,18 @@ class InvoiceEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     public $order;
-    public $totalPrice;
+   
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($order, $totalPrice)
+    public function __construct($order)
     {
         $this->order = $order;
         
-        $this->totalPrice = $totalPrice;
+        
     }
 
     /**

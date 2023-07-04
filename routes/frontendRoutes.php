@@ -41,7 +41,6 @@ Route::name('frontend.questions.')->prefix('/questions/')->controller(QuestionPa
     Route::get('/', 'getAllQuestions')->name('all');
     Route::get('/view/{slug}', 'getAQuestion')->name('single');
     Route::get('/view-pdf/{id}', 'viewQuestionPDF')->name('pdf');
-
 });
 
 
@@ -73,5 +72,5 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
-
-Route::get('/send-invoice/{id}', [CustomerOrderController::class, 'sendOrderInvoice'])->name('send.invoice');
+//* DOWNLOAD INVOICE FOR THE SPECIFIC ORDER 
+Route::get('/send-invoice/{id}', [CustomerOrderController::class, 'sendOrderInvoice'])->name('send.invoice')->middleware('isUser');

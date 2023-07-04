@@ -81,9 +81,9 @@
                                 @foreach ($order->orderItems as $orderItem)
                                     <tr>
                                         <td class="col-3">{{ $orderItem['book']['title'] }}</td>
-                                        <td class="col-4 text-center">{{ $orderItem['book']['selling_price'] ?? $orderItem['book']["price"]  }}</td>
-                                        <td class="col-2 text-center">1 </td>
-                                        <td class="col-2 text-end">{{ $orderItem['book']["selling_price"] ?? $orderItem['book']["price"] }}</td>
+                                        <td class="col-4 text-center">{{ $orderItem->sold_price  }} tk</td>
+                                        <td class="col-2 text-center">{{ $orderItem->total_orders }} </td>
+                                        <td class="col-2 text-end">{{ $orderItem->sold_price *  $orderItem->total_orders }} tk</td>
                                     </tr>
                                 @endforeach
                                
@@ -92,7 +92,7 @@
                             <tfoot class="card-footer">
                                 <tr>
                                     <td colspan="3" class="text-end border-bottom-0"><strong>Total:</strong></td>
-                                    <td class="text-end border-bottom-0">{{ $totalPrice }} tk</td>
+                                    <td class="text-end border-bottom-0">{{ $order->amount }} tk</td>
                                 </tr>
                             </tfoot>
                         </table>

@@ -21,8 +21,8 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
-            <a href="index.html">
-                <img src="{{ asset('frontend/logo.png') }}" alt="logo" width="50" />
+            <a href="{{ url('/') }}">
+                <img src="{{ asset('frontend/logo.png') }}" target="__blank" alt="logo" width="50" />
             </a>
         </div>
         <nav class="sidebar-nav">

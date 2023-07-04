@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\OrderItem;
+use App\Mail\InvoiceEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Library\SslCommerz\SslCommerzNotification;
 
 class SslCommerzPaymentController extends Controller
@@ -44,6 +47,7 @@ class SslCommerzPaymentController extends Controller
         return view('exampleHosted');
     }
 
+    //* CART CONFIRM DETAILS PAGE
     public function index(Request $request)
     {
         # Here you have to receive all the order data to initate the payment.
@@ -111,6 +115,7 @@ class SslCommerzPaymentController extends Controller
         }
     }
 
+    //* PROCESS PAYMENT WITH AJAX REQUEST
     public function payViaAjax(Request $request)
     {
 
@@ -187,9 +192,10 @@ class SslCommerzPaymentController extends Controller
         }
     }
 
+    //* SUCCESSFULLY REDIRECT IF PAYMENT CONFIRMED
     public function success(Request $request)
     {
-        echo "Transaction is Successful";
+        
 
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
@@ -200,7 +206,7 @@ class SslCommerzPaymentController extends Controller
         #Check order status in order tabel against the transaction id or order id.
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
-            ->select('id', 'customer_id', 'transaction_id', 'status', 'currency', 'amount')->first();
+            ->select('id', 'customer_id', 'email', 'transaction_id', 'status', 'currency', 'amount')->first();
 
         if ($order_details->status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
@@ -222,16 +228,24 @@ class SslCommerzPaymentController extends Controller
                     $order_item = new OrderItem();
                     $order_item->order_id = $order_details->id;
                     $order_item->book_id = $cart->book_id;
+                    $order_item->sold_price = $cart->price;
+                    $order_item->total_orders = $cart->amount;
                     $order_item->save();
                     $cart->delete();
                 }
 
-                echo "<br >Transaction is successfully Completed ";
+
+                // echo "<br >Transaction is successfully Completed ";
+                $order = Order::with('orderItems')->find($order_details->id);
+                $customerOrderId = $order->id;
+                Mail::to($order_details->email)->send(new InvoiceEmail($order));
+                return view('frontend.paymentSuccess', compact('customerOrderId'));
             }
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
+            return view('frontend.paymentSuccess', ['customerOrderId'=> $order_details->id]);
             echo "Transaction is successfully Completed";
         } else {
             #That means something wrong happened. You can redirect customer to your product page.

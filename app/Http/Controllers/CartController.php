@@ -50,7 +50,7 @@ class CartController extends Controller
         if ($isAdded) {
             
             if($book->is_ebook == 0){
-                Cart::where('book_id', $book->id)->where('customer_id', auth()->guard('user')->user()->id)->update(['amount' => $req->amount]);
+                Cart::where('book_id', $book->id)->where('customer_id', auth()->guard('user')->user()->id)->update(['amount' => abs($req->amount)]);
             }
 
         } else {
@@ -59,7 +59,7 @@ class CartController extends Controller
                 'customer_id' => auth()->guard('user')->user()->id,
                 'book_id' => $book->id,
                 'price' => $bookPrice,
-                'amount' => $req->amount
+                'amount' => abs($req->amount)
             ]);
         }
         // $cart = Cart::updateOrCreate([

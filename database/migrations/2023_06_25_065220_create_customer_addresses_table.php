@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('phone');
             $table->string('address')->nullable();
+            $table->string('post_code')->nullable();
+
             $table->timestamps();
         });
     }

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('book_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('sold_price')->default(1);
+            $table->integer('total_orders')->default(1);
             $table->timestamps();
         });
     }

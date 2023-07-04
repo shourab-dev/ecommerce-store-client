@@ -19,15 +19,15 @@
                         @error('email')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <input type="text" class="form-control my-2" name="phone" placeholder="Phone">
+                        <input type="text" value="{{ auth()->guard('user')->user()->details->phone  ?? '' }}" class="form-control my-2" name="phone" placeholder="Phone">
                         @error('phone')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <input type="number" class="form-control my-2" name="postCode" placeholder="Post Code">
+                        <input type="number" value="{{ auth()->guard('user')->user()->details->post_code ?? '' }}" class="form-control my-2" name="postCode" placeholder="Post Code">
                         @error('postCode')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <textarea name="address" class="form-control my-2" placeholder="Your Address"></textarea>
+                        <textarea name="address" class="form-control my-2" placeholder="Your Address">{{ auth()->guard('user')->user()->details->address ?? '' }}</textarea>
                         @error('address')
                             <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror

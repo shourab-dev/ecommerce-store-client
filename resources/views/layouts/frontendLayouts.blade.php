@@ -22,6 +22,7 @@
         href="{{ asset('frontend/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/theme.css') }}">
+    @stack('customCss')
 </head>
 
 <body>
@@ -184,7 +185,7 @@
 
                                 <div class="search_result">
                                     <ul>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
