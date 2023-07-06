@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\UserAuthController;
+use App\Http\Controllers\Customer\CustomerInvoiceController;
 use App\Http\Controllers\Customer\CustomerOrderController;
 use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Auth;
@@ -28,5 +29,11 @@ Route::middleware(['isUser'])->prefix('/dashboard')->name('user.')->group(functi
         Route::get('/', 'getMyBooks')->name('physical');
         Route::get('/my-book/{id}', 'viewMyBook')->name('book.view')->middleware('confirmOrder');
         Route::get('/get-book-pdf/{id}', 'getBookPdf')->name('book.pdf')->middleware('confirmOrder');
+    });
+
+
+    //* CUSTOMER PROFILE INVOICES
+    Route::prefix('my-invoices')->name('myinvoice.')->controller(CustomerInvoiceController::class)->group(function(){
+        Route::get('/', 'getAllInvoices')->name('all');
     });
 });
