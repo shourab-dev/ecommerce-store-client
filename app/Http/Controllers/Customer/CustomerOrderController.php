@@ -29,7 +29,7 @@ class CustomerOrderController extends Controller
         $orderItemsIds = $user->orderedBooks->pluck('book_id');
         $query = Book::query();
         if (request()->routeIs('user.myorder.ebook')) {
-            $query->whereIn('id', $orderItemsIds);
+            $query->whereIn('id', $orderItemsIds)->where('is_ebook', true);
         } else {
             $query->whereIn('id', $orderItemsIds)->where('is_ebook', false);
         }
@@ -70,11 +70,8 @@ class CustomerOrderController extends Controller
     {
         $order = Order::with('orderItems')->find($orderId);
         $data = ["order" => $order];
-        // return view('emails.test',compact('order'));
+
         $pdf = Pdf::loadView('emails.downloadInvoice', $data);
-        return $pdf->download('HELLOW.pdf');
-        dd($pdf);
-        // Mail::to("test@gmail.com")->send(new InvoiceEmail($order));
-        // return view('frontend.paymentSuccess', ['customerOrderId' => $orderId]);
+        return $pdf->download('Order-Invoice-' . today()->format("d-m-y") . '.pdf');
     }
 }
