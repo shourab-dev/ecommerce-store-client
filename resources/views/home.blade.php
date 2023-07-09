@@ -4,7 +4,7 @@
 <!-- ========== section start ========== -->
 <section class="section">
 
-    <div class="container-fluid">
+    <div class="container-fluid mb-5">
         <!-- ========== title-wrapper start ========== -->
         <div class="title-wrapper pt-30">
             <div class="row align-items-center">
@@ -13,28 +13,39 @@
                         <h2>Dashboard </h2>
                     </div>
                 </div>
-                <!-- end col -->
-                <div class="col-md-6">
-                    <div class="breadcrumb-wrapper mb-30">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="#0">Dashboard</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Page
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-                <!-- end col -->
+           
             </div>
             <!-- end row -->
         </div>
         <!-- ========== title-wrapper end ========== -->
     </div>
     <!-- end container -->
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysOrder }}</h2>
+                    <h6 class="mt-2 ">Todays Order</h6>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $monthlyOrder }}</h2>
+                    <h6 class="mt-2 ">This Month Order</h6>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $orders }}</h2>
+                    <h6 class="mt-2 ">All Orders</h6>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
 
 </section>
 <!-- ========== section end ========== -->
