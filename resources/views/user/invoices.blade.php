@@ -25,8 +25,7 @@
             <div class="rounded shadow py-3 px-4 bg-light my-3  bgImage">
                 <div class="row justify-between pt-3 align-items-center">
 
-                    <h4 class="col-sm-6">Order No: #{{ $order->ordersId ??
-                        Carbon\Carbon::parse($order->created_at)->format("Y").$order->id }}</h4>
+                    <h4 class="col-sm-6">Order No: #{{ $order->id }}</h4>
                     <p class="text-sm-end col-sm-6">Transaction ID: {{ $order->transaction_id }}</p>
                 </div>
                 <hr>
@@ -49,7 +48,7 @@
     <h3>No Invoices found!</h3>
     @endforelse
     @if (count($orders)> 0)
-        
+
     <div class="container">
         {{ $orders->links() }}
     </div>

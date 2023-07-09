@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\ClassRoomController;
+use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\Backend\QuestionPaperController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -75,4 +76,13 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/', 'addBook')->name('create');
         Route::post('/', 'storeBook')->name('store');
     });
+
+
+
+    //* ORDERS ROUTES
+    Route::controller(OrderController::class)->prefix('admin/orders/')->name('admin.orders.')->group(function(){
+        Route::get('/', 'getOrders')->name('all');
+        Route::get('/view/{orderId}', 'viewOrders')->name('view');
+    });
+
 });

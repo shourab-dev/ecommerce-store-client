@@ -14,6 +14,26 @@
 
         </li>
         {{-- * DASHBAORD END--}}
+        {{-- * ORDERS --}}
+       <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.order.*') ? 'active' : '' }}">
+        <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#orderMenu" aria-controls="ddmenu_2"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon">
+                <i class="lni lni-inbox"></i>
+            </span>
+            <span class="text"> Orders </span>
+        </a>
+        <ul id="orderMenu" class="collapse ">
+        
+            <li>
+                <a href="{{ route('admin.orders.all') }}">
+                   All Orders
+                </a>
+            </li>
+    
+        </ul>
+    </li>
+        {{-- * ORDERS END--}}
 
         {{-- * MANAGE USERS --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('role.*') ? 'active' : '' }}">
