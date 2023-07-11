@@ -9,7 +9,8 @@
     .bgGradient {
         background: linear-gradient(to right, #86fde719, #ace5c913);
     }
-    .orderId:hover{
+
+    .orderId:hover {
         color: white;
     }
 </style>
@@ -19,11 +20,12 @@
     <div class="col-lg-5 mx-auto text-center shadow-sm rounded-lg py-5  bgGradient">
         <img src="{{ asset('frontend/successIcon.png') }}" alt="" style="width: 80px">
         <h3 class="my-2">Payment Successfully Done</h3>
-        <h5 class="my-2 btn btn-outline-success orderId"><b>Order ID: {{ today()->format('Y').$customerOrderId }}</b></h5>
+        <h5 class="my-2 btn btn-outline-success orderId"><b>Order ID: {{ $customerOrderId }}</b></h5>
         <p>We are processing your order and you will be notified via email. If you have any questions please contact us.
         </p>
 
-        <a  href="{{ route('send.invoice', $customerOrderId) }}" class="btn btn-dark text-light">Download Invoice <span class="ml-2 d-inline-block"><i class="fas fa-angle-double-down"></i></span></a>
+        <a href="{{ route('send.invoice', $customerOrderId) }}" class="btn btn-dark text-light">Download Invoice <span
+                class="ml-2 d-inline-block"><i class="fas fa-angle-double-down"></i></span></a>
 
     </div>
 </div>

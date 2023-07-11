@@ -173,7 +173,11 @@
         @yield('content')
         <!-- ========== MAIN CONTENT ENDS HERE ========== -->
 
+<<<<<<< HEAD
        
+=======
+        
+>>>>>>> 32885c5a8a3d1ecbeca9f813969a6f2b1aa55ec4
     </main>
     <!-- ======== main-wrapper end =========== -->
 

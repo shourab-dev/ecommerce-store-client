@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Order Invoice {{ env('APP_NAME') }}</title>
     <style>
-        .orderItems >tr>th,
-        .orderItems >tr>td{
+        .orderItems>tr>th,
+        .orderItems>tr>td {
             border: 1px solid #eee;
         }
     </style>
@@ -23,7 +23,7 @@
                 <table width="100%" style="margin: 15px 0">
                     <tr>
                         <td width="50%">
-                            <a href="{{ url('/') }}"><img width="80px" src="{{ public_path("frontend/logo.png") }}"
+                            <a href="{{ url('/') }}"><img width="80px" src="{{ public_path(" frontend/logo.png") }}"
                                     alt=""></a>
                         </td>
                         <td width="50%" align="right" style="font-family: Arial, Helvetica, sans-serif">
@@ -43,8 +43,7 @@
                                 today()->format('d-m-y') }}</p>
                         </td>
                         <td width="50%" align="right" style="font-family: Arial, Helvetica, sans-serif">
-                            <p>Invoice No: {{ $order->ordersId ??
-                                Carbon\Carbon::parse($order->created_at)->format("Y").$order->id }}</p>
+                            <p>Invoice No: {{ $order->id }}</p>
                         </td>
                     </tr>
                 </table>

@@ -11,9 +11,9 @@
 
     <!-- Web Fonts
 ======================= -->
-    {{--
+
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900'
-        type='text/css'> --}}
+        type='text/css'>
 
     <!-- Stylesheet
 ======================= -->
@@ -83,7 +83,11 @@
 
                                 @foreach ($order->orderItems as $orderItem)
                                 <tr>
-                                    <td class="col-3">{{ $orderItem['book']['title'] }}</td>
+                                    <td class="col-3">{{ $orderItem['book']['title'] }} 
+                                    @if ($orderItem['book']['is_ebook'] == 1)
+                                        ( Ebook )
+                                    @endif
+                                </td>
                                     <td class="col-4 text-center">{{ $orderItem->sold_price }} tk</td>
                                     <td class="col-2 text-center">{{ $orderItem->total_orders }} </td>
                                     <td class="col-2 text-end">{{ $orderItem->sold_price * $orderItem->total_orders }}
@@ -108,9 +112,7 @@
         <footer class="text-center mt-4">
             <p class="text-1"><strong>NOTE :</strong> If you have any question please contact with us. Thank you.</p>
             <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()"
-                    class="btn btn-light border text-black-50 shadow-none">Print</a> <a href=""
-                    class="btn btn-light border text-black-50 shadow-none">
-                    Download</a> </div>
+                    class="btn btn-light border text-black-50 shadow-none">Print</a>
         </footer>
     </div>
 </body>
