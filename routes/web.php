@@ -28,6 +28,12 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/edit/{id}', 'editRole')->name('edit');
         Route::post('/update/{id}', 'updateRole')->name('update');
         Route::get('/authors', 'getAuthors')->name('authors');
+
+
+        //* USER MANAGEMENT
+        Route::prefix('/users')->name('user.')->group(function(){
+            Route::GET('/', 'getAllUsers')->name('all');
+        });
     });
 
 

@@ -17,7 +17,7 @@
 
         {{-- * MANAGE USERS --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('role.*') ? 'active' : '' }}">
-            <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
+            <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon">
                     <i class="lni lni-users"></i>
@@ -26,7 +26,7 @@
             </a>
             <ul id="ddmenu_2" class="collapse ">
                 <li>
-                    <a href="">
+                    <a href="{{ route('role.user.all') }}">
                         Users List
                     </a>
                 </li>
@@ -40,8 +40,8 @@
         </li>
         {{-- * MANAGE USERS END--}}
 
-        {{-- * MANAGE COUTRY --}}
-        <li class="nav-item  {{ request()->routeIs('admin.country.*') ? 'active' : '' }}">
+        {{-- ! MANAGE COUTRY [UNDER GOING DEVELOPMENT]--}}
+        {{-- <li class="nav-item  {{ request()->routeIs('admin.country.*') ? 'active' : '' }}">
             <a href="{{ route('admin.country.add') }}">
                 <span class="icon">
                     <i class="lni lni-money-location"></i>
@@ -49,8 +49,8 @@
                 <span class="text">Countries</span>
             </a>
 
-        </li>
-        {{-- * MANAGE COUTRY END--}}
+        </li> --}}
+        {{-- ! MANAGE COUTRY END--}}
 
         {{-- * MANAGE CLASS --}}
         <li class="nav-item  {{ request()->routeIs('admin.class.*') ? 'active' : '' }}">
@@ -81,7 +81,7 @@
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#boards" aria-controls="ddmenu_2"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon">
-                  <i class="lni lni-flag"></i>
+                    <i class="lni lni-flag"></i>
                 </span>
                 <span class="text">Boards Manage </span>
             </a>

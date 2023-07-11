@@ -17,12 +17,20 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+
+            'Earning' => [
+                'names' => [
+                    'manage earning',
+                ],
+                'description' => 'Manage Role',
+            ],
             'role' => [
                 'names' => [
                     'manage role',
                     'create role',
                     'edit role',
                     'delete role',
+                    "manage setting"
                 ],
                 'description' => 'Manage Role',
             ],
@@ -35,15 +43,24 @@ class PermissionSeeder extends Seeder
                 ],
                 'description' => 'Manage employee',
             ],
+            'Class & Subject' => [
+                'names' => [
+                    'manage class',
+                    'create subject',
+                ],
+                'description' => 'Manage Class & Subject',
+            ],
             'author' => [
                 'names' => [
                     'manage books',
                     'create book',
                     'edit book',
                     'delete book',
+                    "manage question"
                 ],
                 'description' => 'Manage Books',
             ],
+
 
         ];
 

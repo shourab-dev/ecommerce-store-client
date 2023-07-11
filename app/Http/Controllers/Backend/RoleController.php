@@ -69,4 +69,20 @@ class RoleController extends Controller
         return response()->json($authors);
         
     }
+
+
+
+    /**
+     * * GET ALL USERS
+     */
+
+     public function getAllUsers()
+     {
+        $roles = Role::where('name', "!=", "admin")->get();
+        $users = User::whereHas('roles', function($q){
+            $q->where('name',"!=",'admin');
+        })->latest()->paginate(10);
+        
+        return view('backend.roles.addUser',compact('roles','users'));
+     }
 }
