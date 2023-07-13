@@ -73,6 +73,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/create', 'createQuestions')->name('create');
         Route::post('/create', 'storeQuestions')->name('store');
         Route::get('/show/{id}', 'getQuestion')->name('show');
+        Route::get('/remove-pdf/{id}/{questionId}', 'removePdf')->name('remove.pdf');
     });
 
 

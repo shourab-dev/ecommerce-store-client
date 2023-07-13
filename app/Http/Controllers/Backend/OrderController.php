@@ -34,15 +34,15 @@ class OrderController extends Controller
 
 
         if ($request->from) {
-            $query->whereBetween('created_at', [$request->from, Carbon::today()]);
+            $query->whereDate('created_at', ">=", $request->from)->whereDate("created_at", "<=", today());
         }
 
         if ($request->to != null && $request->form == null) {
-            $query->where('created_at', '<=', $request->to);
+            $query->whereDate('created_at', '<=', $request->to);
         }
 
         if ($request->from != null && $request->to != null) {
-            $query->whereBetween('created_at', [$request->from, $request->to]);
+            $query->whereDate('created_at', ">=", $request->from)->whereDate("created_at", "<=", $request->to);
         }
 
 
@@ -56,13 +56,13 @@ class OrderController extends Controller
             exit();
         }
 
-        $orders = $query->withCount("orderItems as totalItems")->paginate(20);
+        $orders = $query->withCount("orderItems as totalItems")->latest()->paginate(20);
         return view('backend.orders.order', compact('orders'));
     }
 
     function viewOrders($orderId)
     {
-        $order = Order::with('orderItems')->find($orderId);
+        $order = Order::with('orderItems')->latest()->find($orderId);
 
         return view('backend.orders.viewOrder', compact('order'));
     }

@@ -96,8 +96,8 @@
         </li>
         {{-- * MANAGE SUBJECT END--}}
 
-        {{-- * MANAGE BOARD --}}
-        <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
+        {{-- ! MANAGE BOARD --}}
+        {{-- <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#boards" aria-controls="ddmenu_2"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon">
@@ -118,8 +118,8 @@
                 </li>
 
             </ul>
-        </li>
-        {{-- * MANAGE BOARD END--}}
+        </li> --}}
+        {{-- ! MANAGE BOARD END--}}
         {{-- * MANAGE QUESTION --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#questions"

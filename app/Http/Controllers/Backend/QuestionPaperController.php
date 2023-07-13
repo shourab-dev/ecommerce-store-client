@@ -133,7 +133,10 @@ class QuestionPaperController extends Controller
 
     public function getQuestion($id)
     {
-        $question = Question::find($id);
+        $question = Question::with('pdfs')->find($id);
+        $countries = Country::get();
+        $types = QuestionType::get();
+        return view('backend.questions.viewQuestion', compact('question','countries','types'));
         
     }
 
@@ -149,5 +152,10 @@ class QuestionPaperController extends Controller
             array_push($pdfFileNames, $pdf_path);
         }
         return $pdfFileNames;
+    }
+
+    public function removePdf($id,$questionId) {
+        $pdf = PdfQuestion::where('question_id',$questionId)->where('id', $id)->delete();
+        return redirect()->route('admin.questions.show', $questionId);
     }
 }

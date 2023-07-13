@@ -23,7 +23,7 @@
                 <table width="100%" style="margin: 15px 0">
                     <tr>
                         <td width="50%">
-                            <a href="{{ url('/') }}"><img width="80px" src="{{ public_path(" frontend/logo.png") }}"
+                            <a href="{{ url('/') }}"><img width="80px" src="{{ public_path("frontend/logo.png") }}"
                                     alt=""></a>
                         </td>
                         <td width="50%" align="right" style="font-family: Arial, Helvetica, sans-serif">
