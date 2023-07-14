@@ -16,8 +16,9 @@
 @endpush
 
 <div class="container px-2 py-3">
-    <form enctype="multipart/form-data" action="{{ route('admin.questions.store') }}" method="POST">
+    <form enctype="multipart/form-data" action="{{ route("admin.questions.update",$question->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="row justify-content-around">
             <div class="card border-0 shadow p-3 bg-light col-lg-7">
                 <div class="form-group my-2">
@@ -38,7 +39,7 @@
                 </div>
 
 
-                <button class="my-2  ms-auto btn btn-primary">Upload Question</button>
+                <button class="my-2  ms-auto btn btn-primary">Update Question</button>
             </div>
 
             <div class="card border-0 shadow p-3 bg-light col-lg-4 align-self-start">
@@ -74,7 +75,7 @@
                         <label for="class">Class <span class="text-danger">*</span></label>
                         <select name="classRoom" id="class" class="form-control">
 
-                            <option disabled selected>No Class Found</option>
+                            <option value="{{ $question->classRoom->id }}">{{ $question->classRoom->name }}</option>
                         </select>
                         @error('classRoom')
                         <span class="text-danger">{{ $message }}</span>
@@ -84,7 +85,7 @@
                         <label for="subject">Subject <span class="text-danger">*</span></label>
                         <select name="subject" id="subject" class="form-control">
 
-                            <option disabled selected>No Subject Found</option>
+                            <option value="{{ $question->subject->id }}">{{ $question->subject->name }}</option>
                         </select>
                         @error('subject')
                         <span class="text-danger">{{ $message }}</span>
@@ -98,7 +99,8 @@
 
 
                             @foreach ($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->type }}</option>
+                            
+                            <option {{ array_search($type->id, $selectedTypes) !== false ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->type }}</option>
 
                             @endforeach
                         </select>
@@ -108,7 +110,7 @@
                     </div>
                     <div class="form-group my-2 ">
                         <label for="date">Question Date</label>
-                        <input type="date" name="date" id="date" class="form-control">
+                        <input type="date" name="date" id="date" class="form-control" value="{{ $question->date }}">
                     </div>
 
 

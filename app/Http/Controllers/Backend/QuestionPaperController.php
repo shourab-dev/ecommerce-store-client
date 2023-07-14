@@ -11,9 +11,12 @@ use App\Models\PdfQuestion;
 use App\Models\QuestionType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SlugGenerator;
+use Illuminate\Support\Facades\Storage;
 
 class QuestionPaperController extends Controller
 {
+    use SlugGenerator;
 
     private $validateOptions = [
         'country' => 'required',
@@ -97,7 +100,7 @@ class QuestionPaperController extends Controller
     public function storeQuestions(Request $req)
     {
         //* REQ VALIDATION
-        // $req->validate($this->validateOptions);
+        $req->validate($this->validateOptions);
 
 
         //* PDF FILE UPLOADs
@@ -106,7 +109,7 @@ class QuestionPaperController extends Controller
         //* REQ STORE
         $question = new Question();
         $question->question_name = $req->name;
-        $question->slug = str()->slug($req->name);
+        $question->slug = $this->getSlug($req, Question::class);
 
         $question->question = $req->question;
         $question->class_room_id = $req->classRoom;
@@ -127,18 +130,61 @@ class QuestionPaperController extends Controller
     }
 
 
+
+    /**
+     * * @ UPDATE A QUESTION
+     */
+    public function updateQuestion(Request $req, $id)
+    {
+        //* REQ VALIDATION
+        $req->validate($this->validateOptions);
+
+        //* PDF FILE UPLOADs
+        if ($req->pdfs) {
+
+            $pdfFiles = $this->uploadsPdf($req);
+        }
+        //* REQ STORE
+        $question = Question::find($id);
+        $question->question_name = $req->name;
+        $question->slug = $this->getSlug($req, Question::class);
+        $question->question = $req->question;
+        $question->class_room_id = $req->classRoom;
+        $question->subject_id = $req->subject;
+        $question->date = $req->date ?? Carbon::today();
+        $question->save();
+
+        //* ATTACH TYPES
+        $question->types()->sync($req->type);
+
+        //* STORE PDF 
+        if ($req->pdfs) {
+            foreach ($pdfFiles as $pdf) {
+                $pdfQuestion = new PdfQuestion();
+                $pdfQuestion->question_id = $question->id;
+                $pdfQuestion->pdf = $pdf;
+                $pdfQuestion->save();
+            }
+        }
+        return redirect()->route('admin.questions.show',$id);
+    }
+
+
+
     /**
      * * @ SHOW A QUESTION
      */
 
     public function getQuestion($id)
     {
-        $question = Question::with('pdfs')->find($id);
+        $question = Question::with('pdfs', 'types:id')->classRoomName()->subjectName()->find($id);
         $countries = Country::get();
         $types = QuestionType::get();
-        return view('backend.questions.viewQuestion', compact('question','countries','types'));
-        
+        $selectedTypes = $question->types->pluck('id')->toArray();
+
+        return view('backend.questions.viewQuestion', compact('question', 'countries', 'types', 'selectedTypes'));
     }
+
 
 
 
@@ -154,8 +200,31 @@ class QuestionPaperController extends Controller
         return $pdfFileNames;
     }
 
-    public function removePdf($id,$questionId) {
-        $pdf = PdfQuestion::where('question_id',$questionId)->where('id', $id)->delete();
+    public function removePdf($id, $questionId)
+    {
+        $pdf = PdfQuestion::where('question_id', $questionId)->where('id', $id)->first();
+        if (Storage::disk('public')->exists($pdf->pdf)) {
+            Storage::disk('public')->delete($pdf->pdf);
+        }
+        $pdf->delete();
         return redirect()->route('admin.questions.show', $questionId);
     }
+
+
+    public function deleteQuestion($id)
+    {
+        $question  = Question::with('pdfs')->find($id);
+        foreach($question->pdfs as $pdf){
+            if(Storage::disk('public')->exists($pdf->pdf)){
+                Storage::disk('public')->delete($pdf->pdf);
+            }
+        }
+
+
+        $question->delete();
+        return back()->with('success', "Successfully Deleted");
+
+    }
+
+
 }

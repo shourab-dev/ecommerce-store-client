@@ -99,8 +99,11 @@
                     @endforelse
                 </td>
                 <td width="25%">
-                    <a href="{{ route('admin.questions.show', $question->id) }}">
+                    <a title="Edit Question" href="{{ route('admin.questions.show', $question->id) }}">
                         <i class="lni lni-eye"></i>
+                    </a>
+                    <a class="text-danger mx-2" title="Delete Question" href="{{ route('admin.questions.delete',$question->id) }}">
+                        <i class="lni lni-trash-can"></i>
                     </a>
                 </td>
             </tr>

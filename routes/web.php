@@ -32,7 +32,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
 
 
         //* USER MANAGEMENT
-        Route::prefix('/users')->name('user.')->group(function(){
+        Route::prefix('/users')->name('user.')->group(function () {
             Route::GET('/', 'getAllUsers')->name('all');
         });
     });
@@ -74,6 +74,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/create', 'storeQuestions')->name('store');
         Route::get('/show/{id}', 'getQuestion')->name('show');
         Route::get('/remove-pdf/{id}/{questionId}', 'removePdf')->name('remove.pdf');
+        Route::put('/update/{id}', 'updateQuestion')->name('update');
+        Route::get('/delete/{id}', 'deleteQuestion')->name('delete');
     });
 
 
@@ -87,9 +89,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
 
 
     //* ORDERS ROUTES
-    Route::controller(OrderController::class)->prefix('admin/orders/')->name('admin.orders.')->group(function(){
+    Route::controller(OrderController::class)->prefix('admin/orders/')->name('admin.orders.')->group(function () {
         Route::get('/', 'getOrders')->name('all');
         Route::get('/view/{orderId}', 'viewOrders')->name('view');
     });
-
 });
