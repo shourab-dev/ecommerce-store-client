@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/fullcalendar.css') }}" />
     @stack('customCss')
+    @notifyCss
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
 </head>
 
@@ -22,8 +23,8 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="{{ route('frontend.home') }}">
-                <img src="{{ asset('frontend/logo.png') }}" alt="logo" / height="60">
-                <h2>Talley</h2>
+                <img src="{{ asset('frontend/logo.png') }}" alt="logo" style="height: 50px !important;margin:auto;">
+                <h2 style="font-size:1.2rem">{{ env('APP_NAME') }}</h2>
             </a>
         </div>
         @include('layouts.common.backendSidebar')
@@ -168,7 +169,7 @@
             </div>
         </header>
         <!-- ========== header end ========== -->
-
+        <x-notify::notify />
         <!-- ========== MAIN CONTENT STARTS HERE ========== -->
         @yield('content')
         <!-- ========== MAIN CONTENT ENDS HERE ========== -->
@@ -187,6 +188,7 @@
     <script src="{{ asset('backend/assets/js/world-merc.js') }}"></script>
     <script src="{{ asset('backend/assets/js/polyfill.js') }}"></script>
     <script src="{{ asset('backend/assets/js/main.js') }}"></script>
+    @notifyJs
     @stack('customJs')
 </body>
 

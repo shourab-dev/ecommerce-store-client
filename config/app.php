@@ -197,7 +197,7 @@ return [
         App\Providers\ShopServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
     ],
 
     /*

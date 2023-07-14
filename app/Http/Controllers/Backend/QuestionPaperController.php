@@ -30,7 +30,7 @@ class QuestionPaperController extends Controller
     public function getAllQuestions($questions =  null)
     {
         if ($questions == null) {
-            $questions = Question::select('id', 'class_room_id', 'question_name', 'date')->withCount('pdfs as hasPdf')->with('types')->oldest()->paginate(10);
+            $questions = Question::select('id', 'class_room_id', 'question_name', 'date')->withCount('pdfs as hasPdf')->with('types')->latest()->paginate(10);
         }
 
         $countries = Country::get();
@@ -104,7 +104,9 @@ class QuestionPaperController extends Controller
 
 
         //* PDF FILE UPLOADs
-        $pdfFiles = $this->uploadsPdf($req);
+        if ($req->pdfs) {
+            $pdfFiles = $this->uploadsPdf($req);
+        }
 
         //* REQ STORE
         $question = new Question();
@@ -121,12 +123,17 @@ class QuestionPaperController extends Controller
         $question->types()->attach($req->type);
 
         //* STORE PDF 
-        foreach ($pdfFiles as $pdf) {
-            $pdfQuestion = new PdfQuestion();
-            $pdfQuestion->question_id = $question->id;
-            $pdfQuestion->pdf = $pdf;
-            $pdfQuestion->save();
+        if ($req->pdfs) {
+
+            foreach ($pdfFiles as $pdf) {
+                $pdfQuestion = new PdfQuestion();
+                $pdfQuestion->question_id = $question->id;
+                $pdfQuestion->pdf = $pdf;
+                $pdfQuestion->save();
+            }
         }
+        notify()->success('Question Added Successfully');
+        return back();
     }
 
 
@@ -166,7 +173,9 @@ class QuestionPaperController extends Controller
                 $pdfQuestion->save();
             }
         }
-        return redirect()->route('admin.questions.show',$id);
+        notify()->success('Question Successfully updated');
+
+        return redirect()->route('admin.questions.show', $id);
     }
 
 
@@ -214,17 +223,15 @@ class QuestionPaperController extends Controller
     public function deleteQuestion($id)
     {
         $question  = Question::with('pdfs')->find($id);
-        foreach($question->pdfs as $pdf){
-            if(Storage::disk('public')->exists($pdf->pdf)){
+        foreach ($question->pdfs as $pdf) {
+            if (Storage::disk('public')->exists($pdf->pdf)) {
                 Storage::disk('public')->delete($pdf->pdf);
             }
         }
 
 
         $question->delete();
-        return back()->with('success', "Successfully Deleted");
-
+        notify()->success('Question Successfully deleted');
+        return back();
     }
-
-
 }
