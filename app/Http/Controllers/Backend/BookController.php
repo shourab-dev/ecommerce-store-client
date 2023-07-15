@@ -79,7 +79,11 @@ class BookController extends Controller
         $book->total_pages = $request->totalPages;
         $book->is_featured = $request->isFeatured ?? false;
         $book->save();
+        notify()->success('Book Successfully inserted');
+        return back();
+    }
 
-        dd($book);
+    function getAllBook() {
+        return view('backend.books.allBook');
     }
 }

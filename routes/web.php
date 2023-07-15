@@ -84,6 +84,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     Route::controller(BookController::class)->prefix('admin/books/')->name('admin.books.')->group(function () {
         Route::get('/', 'addBook')->name('create');
         Route::post('/', 'storeBook')->name('store');
+        Route::get('/all-books', 'getAllBook')->name('all');
     });
 
 
