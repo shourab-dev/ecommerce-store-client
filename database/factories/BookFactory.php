@@ -22,7 +22,6 @@ class BookFactory extends Factory
             'user_id' => 3,
             'country_id' => 1,
             'class_room_id' => $this->faker->numberBetween(1, ClassRoom::count()),
-            'subject_id' => $this->faker->numberBetween(1, Subject::count()),
             'title' => $this->faker->name(),
             'slug' => str($this->faker->name())->slug(),
             'detail' => $this->faker->paragraph(2),

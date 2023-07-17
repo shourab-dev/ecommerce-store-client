@@ -60,6 +60,7 @@
 
                             <div class="cart d-md-flex align-items-center" method="post" enctype="multipart/form-data">
                                 @auth('user')
+                                @if($book->isPaid == 1)
                                 @if (!$book->is_ebook)
                                 <div class="col-lg-4 col-5  d-flex mb-3 mb-lg-0 cartAmountBtns">
                                     <button type="button" data-type="increment"
@@ -74,6 +75,7 @@
                                 <a href="{{ route('cart.add',$book->id) }}" name="add-to-cart"
                                     class="btn btn-dark border-0 addToCart rounded-0 p-3 min-width-250 ml-md-4 single_add_to_cart_button button alt">Add
                                     to cart</a>
+                                @endif
                                 @endauth
                                 @guest('user')
                                 <a href="{{ route('user.login') }}"
@@ -217,7 +219,7 @@
                                         <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
                                                 href="single-product-v3.html">{{ $relatedBook->class->name }}</a>
 
-                                            <a href="single-product-v3.html">{{ $relatedBook->subject->name }}</a>
+
                                         </div>
                                         <h2
                                             class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
@@ -255,6 +257,7 @@
                                     <div class="product__hover d-flex align-items-center">
                                         @auth('user')
 
+                                        @if($relatedBook->isPaid == 1)
 
                                         <a href="{{ route('cart.add',$relatedBook->id) }}"
                                             class="text-uppercase text-dark h-dark font-weight-medium mr-auto addToCart">
@@ -262,6 +265,7 @@
                                             <span class="product__add-to-cart-icon font-size-4"><i
                                                     class="flaticon-icon-126515"></i></span>
                                         </a>
+                                        @endif
                                         @endauth
                                         @guest('user')
                                         <a href="{{ route('user.login') }}"

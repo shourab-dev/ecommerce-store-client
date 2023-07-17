@@ -55,13 +55,13 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/update/{classRoom}', 'updateClassRoom')->name('update');
     });
 
-    //* Subject ROUTES
-    Route::controller(SubjectController::class)->prefix('admin/subjects')->name('admin.subject.')->group(function () {
-        Route::get('/add', 'addSubject')->name('add');
-        Route::post('/store', 'storeSubject')->name('store');
-        Route::get('/edit/{editedSubject}', 'editSubject')->name('edit');
-        Route::post('/update/{subject}', 'updateSubject')->name('update');
-    });
+    //! [DEDUCTED FROM PRODUCTION VERSION] Subject ROUTES
+    // Route::controller(SubjectController::class)->prefix('admin/subjects')->name('admin.subject.')->group(function () {
+    //     Route::get('/add', 'addSubject')->name('add');
+    //     Route::post('/store', 'storeSubject')->name('store');
+    //     Route::get('/edit/{editedSubject}', 'editSubject')->name('edit');
+    //     Route::post('/update/{subject}', 'updateSubject')->name('update');
+    // });
 
 
     //* QUESTION PAPER ROUTES
@@ -85,6 +85,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/', 'addBook')->name('create');
         Route::post('/', 'storeBook')->name('store');
         Route::get('/all-books', 'getAllBook')->name('all');
+        Route::get('/edit/{id}', 'editBook')->name('edit');
+        Route::get('/update/{id}', 'editBook')->name('update');
     });
 
 

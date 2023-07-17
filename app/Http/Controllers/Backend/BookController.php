@@ -22,7 +22,6 @@ class BookController extends Controller
         'price' => 'required_if:type,==,1',
         'country' => 'required',
         'classRoom' => 'required',
-        'subject' => 'required',
         'thumbnail' => 'required|mimes:jpg,png,webp,jpeg',
         'book' => 'mimes:jpg,png,webp,jpeg,pdf',
 
@@ -39,13 +38,16 @@ class BookController extends Controller
 
         return view('backend.books.addBooks', compact('countries'));
     }
-
+    /**
+     * * STORE A BOOK
+     */
     public function storeBook(Request $request)
     {
 
-        
+
         //* validation
         $request->validate($this->rules, $this->msg);
+
         //* STORING FILES ON SERVER
         $thumbnail = $this->uploadSingleMedia($request->thumbnail, 'thumbnails', str($request->name)->slug());
 
@@ -53,14 +55,15 @@ class BookController extends Controller
 
             $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos', null, 'public');
         }
-        $bookFile = $this->uploadSingleMedia($request->book, 'books', null, 'local');
+        if ($request->hasFile('book')) {
+            $bookFile = $this->uploadSingleMedia($request->book, 'books', null, 'local');
+        }
 
         //* BOOK STORE
         $book = new Book();
         $book->user_id = $request->author;
         $book->country_id = $request->country;
         $book->class_room_id = $request->classRoom;
-        $book->subject_id = $request->subject;
         $book->title = $request->name;
         $book->slug =  $this->getSlug($request, Book::class);
         $book->detail = $request->detail;
@@ -71,7 +74,9 @@ class BookController extends Controller
         $book->thumbnail = $thumbnail['url'];
         $book->thumbnail_path = $thumbnail['name'];
         $book->dummy_pdf = $request->hasFile('dummyPdf') ?  $dummyFile : null;
-        $book->book_pdf = $bookFile;
+        if ($request->hasFile('book')) {
+            $book->book_pdf = $bookFile;
+        }
         $book->is_ebook = $request->isEbook;
         $book->format = $request->format;
         $book->dimension = $request->dimension;
@@ -82,8 +87,27 @@ class BookController extends Controller
         notify()->success('Book Successfully inserted');
         return back();
     }
+    /**
+     * * GET ALL BOOKS
+     */
+    function getAllBook()
+    {
+        $query= Book::query();
 
-    function getAllBook() {
-        return view('backend.books.allBook');
+
+
+        $books = $query->select('id','class_room_id', 'title','slug', 'price','selling_price', 'is_ebook', 'thumbnail')->classRoomName()->paginate(20);
+        return view('backend.books.allBook',compact('books'));
+    }
+
+    /**
+     * * EDIT BOOK
+     */
+    public function editBook($id)
+    {   
+        $countries = Country::latest()->get();
+        $classes = ClassRoom::latest()->get();
+        $book = Book::find($id);
+        return view('backend.books.editBooks',compact('book','countries','classes'));
     }
 }

@@ -20,18 +20,18 @@ class ClassRoomSeeder extends Seeder
         $classRooms = [
             [
                 'country_id' => 1,
-                'name' => "Class 1",
-                'slug' => "Class-1",
+                'name' => "Romance",
+                'slug' => "romance",
             ],
             [
                 'country_id' => 1,
-                'name' => "Class 2",
-                'slug' => "Class-2",
+                'name' => "Horror",
+                'slug' => "horror",
             ],
             [
                 'country_id' => 1,
-                'name' => "Class 3",
-                'slug' => "Class-3",
+                'name' => "Novel",
+                'slug' => "novel",
             ],
         ];
 

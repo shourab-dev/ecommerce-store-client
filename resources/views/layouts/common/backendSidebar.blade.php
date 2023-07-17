@@ -84,8 +84,8 @@
         </li>
         {{-- * MANAGE CLASS END--}}
 
-        {{-- * MANAGE SUBJECT--}}
-        <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
+        {{-- ! [DEDUCTED FROM PRODUCTTION] MANAGE SUBJECT--}}
+        {{-- <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
             <a href="{{ route('admin.subject.add') }}">
                 <span class="icon">
                     <i class="lni lni-write"></i>
@@ -93,8 +93,8 @@
                 <span class="text">Manage Sub-Categories</span>
             </a>
 
-        </li>
-        {{-- * MANAGE SUBJECT END--}}
+        </li> --}}
+        {{-- ! [DEDUCTED FROM PRODUCTTION] MANAGE SUBJECT END--}}
 
        
         {{-- * MANAGE QUESTION --}}
@@ -138,7 +138,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.questions.all') }}">
+                    <a href="{{ route('admin.books.all') }}">
                         Books List
                     </a>
                 </li>

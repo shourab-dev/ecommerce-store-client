@@ -52,8 +52,7 @@
                                             <div class="text-uppercase font-size-1 mb-1 text-truncate">
                                                 <a href="{{ route('frontend.product.class', $book->class->slug) }}">{{
                                                     $book->class->name }}</a>
-                                                <a href="{{ route('frontend.product.subject', $book->subject->slug) }}">{{
-                                                    $book->subject->name }}</a>
+                                              
                                             </div>
                                             <h2
                                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
@@ -161,7 +160,8 @@
                                
                             </div>
                         </div>
-                        <div id="woocommerce_product_categories-2"
+                        {{-- ! SUBJECT IS DEDECTED IN PRODUCTION --}}
+                        {{-- <div id="woocommerce_product_categories-2"
                             class="widget p-4d875 border woocommerce widget_product_categories">
                             <div id="subject" class="widget-head">
                                 <a class="d-flex align-items-center justify-content-between text-dark" href="v1.html#"
@@ -191,7 +191,8 @@
                                 @endforeach
                             </div>
                             </div>
-                        </div>
+                        </div> --}}
+                        {{-- ! SUBJECT IS DEDECTED IN PRODUCTION --}}
                         <div id="Authors" class="widget widget_search widget_author p-4d875 border">
                             <div id="widgetHeading21" class="widget-head">
                                 <a class="d-flex align-items-center justify-content-between text-dark" href="v1.html#"

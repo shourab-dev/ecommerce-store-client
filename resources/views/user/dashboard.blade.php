@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="mb-3">{{ $newBook->title}}</h4>
-                        <span class="mb-3">Class 1</span> <span>ICT</span>
+                        <span class="mb-3">{{ $newBook->class->name }}</span> 
                         
                         <a target="_blank" href="{{ route('frontend.product.show', $newBook->slug) }}" class="btn btn-outline-primary rounded-0 w-100">View
                             Book</a>

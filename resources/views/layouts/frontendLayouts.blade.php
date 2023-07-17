@@ -973,7 +973,7 @@
                                             <h4>${book.title}</h4>
                                         </a>
                                         <span>${book.class.name}</span>
-                                        <span>${book.subject.name}</span>
+                                        
                                     </div>
                                 </div>
                             </li>`;

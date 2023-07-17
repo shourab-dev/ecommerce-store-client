@@ -57,7 +57,7 @@ class UserAuthController extends Controller
             $query->whereIn('class_room_id', $booksCategories);
         }
 
-        $newBooks = $query->select('id', 'title', 'slug',  'thumbnail')->latest()->take(10)->get();
+        $newBooks = $query->select('id', 'title', 'slug', 'class_room_id', 'thumbnail')->classroomName()->latest()->take(10)->get();
 
 
         return view('user.dashboard', compact('newBooks'));

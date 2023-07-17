@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('class_room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('subject_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('subject_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('detail')->nullable();

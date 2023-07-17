@@ -47,11 +47,12 @@
             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium {{ request()->routeIs('frontend.product.*') ? 'active border-bottom' : '' }} border-primary border-width-2">Shop</a>
     </li>
 
-
-    <li class="nav-item"><a href="{{ route('frontend.questions.all') }}"
+    {{-- ! QUESTION PAPER IS DEDUCTED --}}
+    {{-- <li class="nav-item"><a href="{{ route('frontend.questions.all') }}"
             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium  ">Questions
             Paper</a>
-    </li>
+    </li> --}}
+    {{-- ! QUESTION PAPER IS DEDUCTED --}}
 
 
 </ul>

@@ -16,7 +16,7 @@
 </style>
 @endpush
 <div class="container  py-3">
-    <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.books.update',$book->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
 
@@ -25,14 +25,14 @@
             <div class="col-lg-8">
                 <div class="form-group my-2">
                     <label for="name">Book Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $book->name }}">
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group my-2">
                     <label for="detail">Book Details</label>
-                    <textarea name="detail" id="detail" style="min-height: 250px" class="form-control">{{ old('detail') }}</textarea>
+                    <textarea name="detail" id="detail" style="min-height: 250px" class="form-control">{{ $book->detail }}</textarea>
                     @error('detail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -42,8 +42,8 @@
                     <div class="form-group my-2 col-lg-3">
                         <label for="isEbook">Book Type <span class="text-danger">*</span></label>
                         <select name="isEbook" id="isEbook" class="form-control">
-                            <option value="{{ true }}">Ebook</option>
-                            <option value="{{ 0 }}">Physical</option>
+                            <option {{ $book->is_ebook == 1 ? "selected" : '' }} value="{{ true }}">Ebook</option>
+                            <option {{ $book->is_ebook == 0 ? "selected" : '' }} value="{{ 0 }}">Physical</option>
                         </select>
                         @error('type')
                         <span class="text-danger">{{ $message }}</span>
@@ -52,8 +52,8 @@
                     <div class="form-group my-2 col-lg-3">
                         <label for="type">Book Value <span class="text-danger">*</span></label>
                         <select name="type" id="type" class="form-control">
-                            <option value="{{ true }}">Paid</option>
-                            <option value="{{ false }}">Free</option>
+                            <option {{ $book->isPaid == 1 ? "selected" : '' }} value="{{ true }}">Paid</option>
+                            <option {{ $book->isPaid == 0 ? "selected" : '' }} value="{{ false }}">Free</option>
                         </select>
                         @error('type')
                         <span class="text-danger">{{ $message }}</span>
@@ -61,14 +61,14 @@
                     </div>
                     <div class="form-group my-2 col-lg-3">
                         <label for="price">Book Price</label>
-                        <input type="number" id="price" name="price" class="form-control" placeholder="Example: 240 tk">
+                        <input type="number" id="price" name="price" class="form-control" placeholder="Example: 240 tk" value="{{ $book->price }}">
                         @error('price')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group my-2 col-lg-3">
                         <label for="sellPrice">Sell Price Book Price</label>
-                        <input type="number" id="sellPrice" name="sellPrice" class="form-control"
+                        <input type="number" id="sellPrice" name="sellPrice" class="form-control" value="{{ $book->selling_price }}"
                             placeholder="Example: 90 tk">
                         @error('sellPrice')
                         <span class="text-danger">{{ $message }}</span>
@@ -83,7 +83,7 @@
                 <div class="form-group my-2">
                     <label for="author">Author </label>
                     <select name="author" style="width: 100%" id="author">
-
+                        
                     </select>
                     @error('author')
                     <span class="text-danger">{{ $message }}</span>
@@ -93,9 +93,9 @@
                 <div class="form-group my-2">
                     <label for="country">Country <span class="text-danger">*</span></label>
                     <select name="country" id="country" class="form-control">
-                        <option selected disabled>Select a Country</option>
+                        
                         @foreach ($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        <option {{ $country->id == $book->country_id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
                         @endforeach
                     </select>
                     @error('country')
@@ -105,7 +105,10 @@
                 <div class="form-group my-2">
                     <label for="classRoom">Category <span class="text-danger">*</span></label>
                     <select name="classRoom" id="classRoom" class="form-control">
-                        <option disabled selected>Select Class</option>
+                        @foreach ($classes as $class)
+                        <option {{ $class->id == $book->class_room_id ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
+                            
+                        @endforeach
                     </select>
                     @error('classRoom')
                     <span class="text-danger">{{ $message }}</span>
