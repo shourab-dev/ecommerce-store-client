@@ -56,7 +56,8 @@ class OrderController extends Controller
             exit();
         }
 
-        $orders = $query->withCount("orderItems as totalItems")->latest()->paginate(20);
+        $orders = $query->withSum('orderItems as totalItems', 'total_orders')->latest()->paginate(20);
+        
         return view('backend.orders.order', compact('orders'));
     }
 

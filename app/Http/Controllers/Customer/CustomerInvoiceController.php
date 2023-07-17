@@ -10,7 +10,8 @@ class CustomerInvoiceController extends Controller
 {
     public function getAllInvoices()
     {
-        $orders = Order::withCount('orderItems as totalItems')->where('customer_id',auth()->guard('user')->user()->id)->where('status', "Complete")->latest()->paginate(20);
+        
+        $orders = Order::withSum('orderItems as totalItems', 'total_orders')->where('customer_id',auth()->guard('user')->user()->id)->where('status', "Complete")->latest()->paginate(20);
         
         return view('user.invoices',compact('orders'));
     }

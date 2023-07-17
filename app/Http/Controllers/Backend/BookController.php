@@ -43,7 +43,7 @@ class BookController extends Controller
     public function storeBook(Request $request)
     {
 
-
+        
         //* validation
         $request->validate($this->rules, $this->msg);
         //* STORING FILES ON SERVER

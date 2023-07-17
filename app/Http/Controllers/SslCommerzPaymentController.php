@@ -180,7 +180,7 @@ class SslCommerzPaymentController extends Controller
                 'status' => 'Pending',
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
-                'created_at'=> now(),
+                'created_at' => now(),
             ]);
 
         $sslc = new SslCommerzNotification();
@@ -196,7 +196,7 @@ class SslCommerzPaymentController extends Controller
     //* SUCCESSFULLY REDIRECT IF PAYMENT CONFIRMED
     public function success(Request $request)
     {
-        
+
 
         $tran_id = $request->input('tran_id');
         $amount = $request->input('amount');
@@ -208,7 +208,7 @@ class SslCommerzPaymentController extends Controller
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('id', 'customer_id', 'email', 'transaction_id', 'status', 'currency', 'amount')->first();
-
+        
         if ($order_details->status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
@@ -246,7 +246,7 @@ class SslCommerzPaymentController extends Controller
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
-            return view('frontend.paymentSuccess', ['customerOrderId'=> $order_details->id]);
+            return view('frontend.paymentSuccess', ['customerOrderId' => $order_details->id]);
             echo "Transaction is successfully Completed";
         } else {
             #That means something wrong happened. You can redirect customer to your product page.

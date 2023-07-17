@@ -43,7 +43,7 @@
                         <label for="isEbook">Book Type <span class="text-danger">*</span></label>
                         <select name="isEbook" id="isEbook" class="form-control">
                             <option value="{{ true }}">Ebook</option>
-                            <option value="{{ false }}">Physical</option>
+                            <option value="{{ 0 }}">Physical</option>
                         </select>
                         @error('type')
                         <span class="text-danger">{{ $message }}</span>
