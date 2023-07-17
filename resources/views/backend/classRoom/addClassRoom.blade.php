@@ -6,7 +6,7 @@
         <div class="col-lg-8">
             <div class="card-style">
                 <div class="card-header">
-                    <h3 class="mb-2">All Classes</h3>
+                    <h3 class="mb-2">All Categories</h3>
                 </div>
 
                 <div class="table-wrapper table-responsive">
@@ -18,7 +18,7 @@
                                     <h6>#</h6>
                                 </th>
                                 <th>
-                                    <h6>Class Name</h6>
+                                    <h6>Category Name</h6>
                                 </th>
 
 
@@ -45,9 +45,7 @@
                                         <a href="{{ route('admin.class.edit', $classRoom) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <a href="#" class="text-danger">
-                                            <i class="lni lni-trash-can"></i>
-                                        </a>
+                                      
                                     </div>
                                 </td>
                             </tr>
@@ -65,14 +63,14 @@
 
         <div class="card-style col-lg-4 align-self-start">
             <div class="card-header">
-                <h3 class="mb-2">{{ isset($editedClassRoom) ? 'Edit' : 'Add' }} Class</h3>
+                <h3 class="mb-2">{{ isset($editedClassRoom) ? 'Edit' : 'Add' }} Category</h3>
             </div>
             <div class="card-body">
                 <form method="post"
                     action="{{ isset($editedClassRoom) ? route('admin.class.update', $editedClassRoom) :  route('admin.class.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Class Name</label>
+                        <label for="name">Category Name</label>
                         <input type="text" class="form-control" id="name" name="name"
                             value="{{ isset($editedClassRoom) ? $editedClassRoom->name : old('name') }}"
                             placeholder="Example: Class 1 | Class 2">
@@ -81,7 +79,7 @@
                         @enderror
                     </div>
                     <div class="form-group my-2">
-                        <label for="country">Class Name</label>
+                        <label for="country">Country Name</label>
                         <select name="country_id" id="country" class="form-control">
 
                             @foreach ($countries as $country)
@@ -98,7 +96,7 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="mt-2 btn btn-primary w-100">{{ isset($editedClassRoom) ? 'Update
+                    <button type="submit" class="mt-2 btn btn-outline-primary w-100">{{ isset($editedClassRoom) ? 'Update
                         Country'
                         : 'Submit' }}</button>
                 </form>

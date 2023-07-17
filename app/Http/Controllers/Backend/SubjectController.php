@@ -7,13 +7,44 @@ use App\Models\Subject;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\SlugGenerator;
+use Mockery\Matcher\Subset;
 
 class SubjectController extends Controller
 {
+    use SlugGenerator;
+    public $validation = [
+        'name' => 'required',
+        'class_id' => "required"
+    ];
     public function addSubject()
     {
-        $countries = Country::latest()->get();
+        $categories = ClassRoom::latest()->get();
         $subjects = Subject::latest()->get();
-        return view('backend.subject.addSubject', compact('countries', 'subjects'));
+        return view('backend.subject.addSubject', compact('categories', 'subjects'));
+    }
+
+    function storeSubject(Request $req) {
+        $data = $req->validate($this->validation);
+        $slug = $this->getSlug($req, Subject::class);
+        $data['slug'] = $slug;
+        Subject::create($data);
+        return back();
+    }
+
+    function editSubject(Subject $editedSubject) {
+        $categories = ClassRoom::latest()->get();
+        $subjects = Subject::latest()->get();
+        
+        return view('backend.subject.addSubject', compact('categories','subjects', 'editedSubject'));
+    }
+
+
+    function updateSubject(Request $req, Subject $subject) {
+        $data  = $req->validate($this->validation);
+        
+        $data['slug'] = $this->getSlug($req, Subject::class);
+        $subject->update($data);
+        return back();
     }
 }

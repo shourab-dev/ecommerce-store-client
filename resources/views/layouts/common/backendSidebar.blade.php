@@ -78,7 +78,7 @@
                 <span class="icon">
                     <i class="lni lni-enter"></i>
                 </span>
-                <span class="text">Manage Class</span>
+                <span class="text">Manage Categories</span>
             </a>
 
         </li>
@@ -90,36 +90,13 @@
                 <span class="icon">
                     <i class="lni lni-write"></i>
                 </span>
-                <span class="text">Manage Subjects</span>
+                <span class="text">Manage Sub-Categories</span>
             </a>
 
         </li>
         {{-- * MANAGE SUBJECT END--}}
 
-        {{-- ! MANAGE BOARD --}}
-        {{-- <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
-            <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#boards" aria-controls="ddmenu_2"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icon">
-                    <i class="lni lni-flag"></i>
-                </span>
-                <span class="text">Boards Manage </span>
-            </a>
-            <ul id="boards" class="collapse ">
-                <li>
-                    <a href="{{ route('admin.questions.create') }}">
-                        Add Board
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.questions.all') }}">
-                        Boards List
-                    </a>
-                </li>
-
-            </ul>
-        </li> --}}
-        {{-- ! MANAGE BOARD END--}}
+       
         {{-- * MANAGE QUESTION --}}
         <li class="nav-item nav-item-has-children {{ request()->routeIs('admin.questions.*') ? 'active' : '' }}">
             <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#questions"

@@ -6,7 +6,7 @@
         <div class="col-lg-8">
             <div class="card-style">
                 <div class="card-header">
-                    <h3 class="mb-2">All Classes</h3>
+                    <h3 class="mb-2">All Subcategories</h3>
                 </div>
 
                 <div class="table-wrapper table-responsive">
@@ -18,7 +18,7 @@
                                     <h6>#</h6>
                                 </th>
                                 <th>
-                                    <h6>Class Name</h6>
+                                    <h6>Sub-Category Name</h6>
                                 </th>
 
 
@@ -42,7 +42,7 @@
 
                                 <td>
                                     <div class="action justify-content-center">
-                                        <a href="{{ route('admin.class.edit', $subject) }}" class="text-primary me-2">
+                                        <a href="{{ route('admin.subject.edit',$subject) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
                                         <a href="#" class="text-danger">
@@ -65,14 +65,14 @@
 
         <div class="card-style col-lg-4 align-self-start">
             <div class="card-header">
-                <h3 class="mb-2">{{ isset($editedSubject) ? 'Edit' : 'Add' }} Class</h3>
+                <h3 class="mb-2">{{ isset($editedSubject) ? 'Edit' : 'Add' }} SubCategory</h3>
             </div>
             <div class="card-body">
                 <form method="post"
                     action="{{ isset($editedSubject) ? route('admin.subject.update', $editedSubject) :  route('admin.subject.store') }}">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Subject Name</label>
+                        <label for="name">SubCategory Name</label>
                         <input type="text" class="form-control" id="name" name="name"
                             value="{{ isset($editedSubject) ? $editedSubject->name : old('name') }}"
                             placeholder="Example: Class 1 | Class 2">
@@ -81,24 +81,20 @@
                         @enderror
                     </div>
                     <div class="form-group my-2">
-                        <label for="country">Class Name</label>
-                        <select name="country_id" id="country" class="form-control">
+                        <label for="country">Category Name</label>
+                        <select name="class_id" id="country" class="form-control">
 
-                            @foreach ($countries as $country)
-                            @if (isset($editedSubject))
-                            <option @selected($editedSubject->country_id == $country->id) value="{{ $country->id
-                                }}">{{ $country->name }}</option>
-                            @else
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
-                            @endif
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
+                          
                         </select>
                         @error('country_id')
                         <div class="text-danger my-2">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <button type="submit" class="mt-2 btn btn-primary w-100">{{ isset($editedSubject) ? 'Update
+                    <button type="submit" class="mt-2 btn btn-outline-primary w-100">{{ isset($editedSubject) ? 'Update
                         Country'
                         : 'Submit' }}</button>
                 </form>
