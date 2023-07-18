@@ -21,8 +21,8 @@
                         <div class="space-top-2 px-4 px-xl-7 border-bottom pb-5">
                             <h1 class="product_title entry-title font-size-7 mb-3">{{ $book->title }}</h1>
                             <div class="font-size-2 mb-4">
-                                <span class="ml-3 font-weight-medium">By (author)</span>
-                                <span class="ml-2 text-gray-600">{{ str($book->author->name)->headline() }}</span>
+                                <span class="font-size-3 font-weight-medium">By {{ str($book->author->name)->headline() }}</span>
+                                <span class="ml-2 text-gray-600">{{ $book->class->name }}</span>
                             </div>
                             <p class="price font-size-22 font-weight-medium mb-3">
                                 @if ($book->price !=null)
@@ -48,7 +48,7 @@
                             </p>
                             <div class="mb-2 font-size-2">
                                 <span class="font-weight-medium">Book Format:</span>
-                                <span class="ml-2 text-gray-600">Choose an option</span>
+                                
                             </div>
 
 
@@ -137,15 +137,15 @@
                                                 <tbody>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Format: </th>
-                                                        <td class>Paperback | 384 pages</td>
+                                                        <td class>{{ $book->format }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Dimensions</th>
-                                                        <td>9126 x 194 x 28mm | 301g</td>
+                                                        <td>{{ $book->dimension }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication date: </th>
-                                                        <td>20 Dec 2020</td>
+                                                        <td>{{ Carbon\Carbon::parse($book->publication_date)->format("d M, Y") }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publisher:</th>

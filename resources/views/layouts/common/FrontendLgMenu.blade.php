@@ -8,7 +8,7 @@
             aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#classes"
             data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50"
             data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-            Classes
+            Category
 
         </a>
         <ul id="classes" class="dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900"
@@ -21,7 +21,8 @@
 
         </ul>
     </li>
-    <li class="nav-item dropdown">
+    {{-- ! SUBJECT IS DEDUCTED FROM PRODUCTION --}}
+    {{-- <li class="nav-item dropdown">
         <a id="homeDropdownInvoker" href="#"
             class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
             aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#subjects"
@@ -39,7 +40,9 @@
             @endforeach
 
         </ul>
-    </li>
+    </li> --}}
+    {{-- ! SUBJECT IS DEDUCTED FROM PRODUCTION --}}
+
 
 
     <li class="nav-item">

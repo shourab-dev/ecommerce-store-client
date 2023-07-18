@@ -18,12 +18,12 @@ class HomeController extends Controller
     {
 
 
-        $mostSellingBooks = $this->getBestSellingBooks(6)->classroomName()->with('author:id,name')->get();
+        $mostSellingBooks = $this->getBestSellingBooks(6)->where('status', 1)->classroomName()->with('author:id,name')->get();
 
 
-        $featuredBooks = Book::where('is_featured', 1)->latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
+        $featuredBooks = Book::where('is_featured', 1)->where('status', 1)->latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->classroomName()->take(12)->get();
-        $newBooks = Book::latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
+        $newBooks = Book::where('status', 1)->latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->classroomName()->take(8)->get();
 
         $authors = User::has('books')->select('id', 'name')->withCount('books as numOfBooks')->get();
@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function onSaleProducts($limit = null)
     {
-        $discountProducts = Book::where('selling_price', '!=', null)->latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
+        $discountProducts = Book::where('selling_price', '!=', null)->where('status', 1)->latest()->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price')
             ->getAuthorName()->classroomName()->limit($limit ?? 12)->get();
         return response(json_encode($discountProducts), 200);
     }

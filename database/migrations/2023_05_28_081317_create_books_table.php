@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('dimension')->nullable();
             $table->string('publication_date')->nullable();
             $table->string('total_pages')->nullable();
-
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

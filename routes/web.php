@@ -86,7 +86,9 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/', 'storeBook')->name('store');
         Route::get('/all-books', 'getAllBook')->name('all');
         Route::get('/edit/{id}', 'editBook')->name('edit');
-        Route::get('/update/{id}', 'editBook')->name('update');
+        Route::post('/update/{id}', 'updateBook')->name('update');
+        Route::get('/status/{id}', 'changeStatus')->name('status');
+        Route::get('/featured/{id}', 'changeFeatured')->name('featured');
     });
 
 

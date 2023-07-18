@@ -25,7 +25,7 @@
             <div class="col-lg-8">
                 <div class="form-group my-2">
                     <label for="name">Book Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ $book->name }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $book->title }}">
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -76,12 +76,12 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary w-100 rounded-0 mt-3">Add Book</button>
+                <button class="btn btn-primary w-100 rounded-0 mt-3">Update Book</button>
             </div>
             <div class="col-lg-4">
 
                 <div class="form-group my-2">
-                    <label for="author">Author </label>
+                    <label for="author">Author ( {{ str()->headline($book->author->name) }} ) </label>
                     <select name="author" style="width: 100%" id="author">
                         
                     </select>
@@ -144,25 +144,25 @@
 
                 <div class="form-group my-2 ">
                     <label for="lang">Book Language</label>
-                    <input type="text" id="lang" name="lang" class="form-control" placeholder="Bangla | English">
+                    <input type="text" id="lang" name="lang" class="form-control" placeholder="Bangla | English" value="{{ $book->lang }}">
                 </div>
 
                 <div class="form-group my-2 ">
                     <label for="format">Book Format</label>
-                    <input type="text" id="format" name="format" class="form-control" placeholder="Paperback">
+                    <input type="text" id="format" name="format" class="form-control" placeholder="Paperback" value="{{ $book->format }}">
                 </div>
                 <div class="form-group my-2 ">
                     <label for="totalPages">Book Total Page</label>
-                    <input type="text" id="totalPages" name="totalPages" class="form-control" placeholder="68 | 250">
+                    <input type="text" id="totalPages" name="totalPages" class="form-control" placeholder="68 | 250" value="{{ $book->total_pages }}">
                 </div>
                 <div class="form-group my-2 ">
                     <label for="dimension">Book Dimension & Weight</label>
                     <input type="text" id="dimension" name="dimension" class="form-control"
-                        placeholder="9126 x 194 x 28mm | 301g">
+                        placeholder="9126 x 194 x 28mm | 301g" value="{{ $book->dimension }}">
                 </div>
                 <div class="form-group my-2 ">
                     <label for="publication_date">Book Publication Date</label>
-                    <input type="date" id="publication_date" name="publication_date" class="form-control">
+                    <input type="date" id="publication_date" name="publication_date" class="form-control" value="{{ $book->publication_date }}">
                 </div>
 
 
