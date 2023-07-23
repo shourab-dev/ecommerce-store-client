@@ -146,6 +146,26 @@
             </ul>
         </li>
         {{-- * MANAGE BOOKS ENDS --}}
+        {{-- * MANAGE WEB SETTING --}}
+        <li class="nav-item  {{ request()->routeIs('admin.setting*') ? 'active' : '' }}">
+            <a href="{{ route('admin.setting') }}">
+                <span class="icon">
+                    <i class="lni lni-cog"></i>
+                </span>
+                <span class="text">Web Setting</span>
+            </a>
+        
+        </li>
+        <li class="nav-item  {{ request()->routeIs('admin.setting.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.setting.social') }}">
+                <span class="icon">
+                   <i class="lni lni-facebook-messenger"></i>
+                </span>
+                <span class="text">Social Media</span>
+            </a>
+        
+        </li>
+        {{-- * MANAGE WEB SETTING ENDS --}}
 
     </ul>
 </nav>

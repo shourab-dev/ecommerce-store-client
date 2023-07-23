@@ -13,9 +13,11 @@
         </a>
         <ul id="classes" class="dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900"
             aria-labelledby="homeDropdownInvoker">
+
             @foreach ($classRooms as $classRoom)
 
-            <li><a href="{{ route('frontend.product.class',$classRoom->slug) }}" class="dropdown-item link-black-100">{{ $classRoom->name
+            <li><a href="{{ route('frontend.product.class',$classRoom->slug) }}" class="dropdown-item link-black-100">{{
+                    $classRoom->name
                     }}</a></li>
             @endforeach
 
@@ -35,7 +37,8 @@
             aria-labelledby="homeDropdownInvoker">
             @foreach ($subjects as $subject)
 
-            <li><a href="{{ route('frontend.product.subject',$subject->slug) }}" class="dropdown-item link-black-100">{{ $subject->name
+            <li><a href="{{ route('frontend.product.subject',$subject->slug) }}" class="dropdown-item link-black-100">{{
+                    $subject->name
                     }}</a></li>
             @endforeach
 
@@ -51,10 +54,13 @@
     </li>
 
     {{-- ! QUESTION PAPER IS DEDUCTED --}}
-    {{-- <li class="nav-item"><a href="{{ route('frontend.questions.all') }}"
+    @if (isset($headerSetting) && $headerSetting->is_question == true)
+
+    <li class="nav-item"><a href="{{ route('frontend.questions.all') }}"
             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium  ">Questions
             Paper</a>
-    </li> --}}
+    </li>
+    @endif
     {{-- ! QUESTION PAPER IS DEDUCTED --}}
 
 

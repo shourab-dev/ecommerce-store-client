@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             QuestionTypeSeeder::class,
             QuestionPaperSeeder::class,
             BookSeeder::class,
+            HeaderSeetingSeeder::class,
+            SocialLinkSeeder::class,
         ]);
     }
 }

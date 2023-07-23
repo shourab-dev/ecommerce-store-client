@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\HeaderServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -198,6 +199,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        HeaderServiceProvider::class,
     ],
 
     /*

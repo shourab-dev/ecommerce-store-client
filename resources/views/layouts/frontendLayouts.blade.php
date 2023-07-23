@@ -3,12 +3,15 @@
 
 <head>
 
-    <title>Tally</title>
+    <title>@yield('title', $headerSetting->title)</title>
+    <meta name="description" content="@yield('detail', $headerSetting->detail)">
+    <meta name="title" content="@yield('title', $headerSetting->title)">
+    <link rel="canonical" href="@yield('canonical', $headerSetting->canonical)" />
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="shortcut icon" href="{{ asset('frontend/logo.png') }}">
+    <link rel="shortcut icon" href="{{ $headerSetting->favicon }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -34,8 +37,23 @@
                     <ul class="topbar__nav--left nav ml-md-n3">
                         <li class="nav-item"><a href="index.html#" class="nav-link link-black-100"><i
                                     class="glph-icon flaticon-question mr-2"></i>Can we help you?</a></li>
-                        <li class="nav-item"><a href="tel:+1246-345-0695" class="nav-link link-black-100"><i
-                                    class="glph-icon flaticon-phone mr-2"></i>+1 246-345-0695</a></li>
+                        @if (isset($headerSetting->phone))
+                        @foreach (json_decode($headerSetting->phone) as $phone)
+
+                        <li class="nav-item"><a href="tel:{{ $phone }}" class="nav-link link-black-100"><i
+                                    class="glph-icon flaticon-phone mr-2"></i>{{
+                                $phone }}</a></li>
+                        @endforeach
+                        @endif
+                        @if (isset($headerSetting->email) && $headerSetting->email != null)
+                        
+                        @foreach (json_decode($headerSetting->email) as $email)
+                        <li class="nav-item"><a href="mailto:{{ $email }}" class="nav-link link-black-100">
+                                <i class="fa fa-envelope mr-2"></i>{{
+                                $email }}</a></li>
+                        @endforeach
+                        @endif
+
                     </ul>
                     <ul class="topbar__nav--right nav mr-md-n3">
                         {{-- * SELECT COUNTRY OPTION FOR USER --}}
@@ -122,7 +140,7 @@
                     </div>
                     <div class="site-branding pr-md-4">
                         <a href="{{ url('/') }}" class="d-flex align-items-center mb-1">
-                            <img src="{{ asset('frontend/logo.png') }}" alt="" height="60">
+                            <img src="{{ $headerSetting->logo }}" alt="" height="60">
                             <h2 class="ml-2 text-dark">Tally</h2>
                         </a>
                     </div>
@@ -515,26 +533,18 @@
                                 </select>
 
                                 <ul class="list-inline mb-0">
+
+                                    @if (isset($socials))
+                                    @foreach ($socials as $social)
                                     <li class="list-inline-item">
-                                        <a class="h-primary pr-2 font-size-2" href="index.html#">
-                                            <span class="fab fa-facebook-f btn-icon__inner"></span>
+                                        <a target="_blank" class="h-primary pr-2 font-size-2" href="{{ $social->link }}"
+                                            title="{{ str()->headline($social->name) }}">
+                                            <span class="{{ $social->icon }} mr-2"></span>
                                         </a>
                                     </li>
-                                    <li class="list-inline-item">
-                                        <a class="h-primary pr-2 font-size-2" href="index.html#">
-                                            <span class="fab fa-google btn-icon__inner"></span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="h-primary pr-2 font-size-2" href="index.html#">
-                                            <span class="fab fa-twitter btn-icon__inner"></span>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="h-primary pr-2 font-size-2" href="index.html#">
-                                            <span class="fab fa-github btn-icon__inner"></span>
-                                        </a>
-                                    </li>
+                                    @endforeach
+                                    @endif
+
                                 </ul>
 
                             </div>
@@ -589,45 +599,48 @@
                         <div class="col-lg-4 mb-6 mb-lg-0">
                             <div class="pb-6">
                                 <a href="index.html" class="d-inline-block mb-5">
-                                    <img src="{{ asset('frontend/logo.png') }}" alt="" height="60">
+
+                                    <img src="{{ $headerSetting->footer_logo ?? $headerSetting->logo }}" alt=""
+                                        height="60">
+
                                 </a>
                                 <address class="font-size-2 mb-5">
                                     <span class="mb-2 font-weight-normal text-dark">
-                                        1418 River Drive, Suite 35 Cottonhall, CA 9622 <br> United States
+                                        {{ $headerSetting->address ?? "-----" }}
                                     </span>
                                 </address>
                                 <div class="mb-4">
-                                    <a href="mailto:sale@bookworm.com"
-                                        class="font-size-2 d-block link-black-100 mb-1">sale@bookworm.com</a>
-                                    <a href="tel:+1246-345-0695" class="font-size-2 d-block link-black-100">+1
-                                        246-345-0695</a>
+
+                                    @if (isset($headerSetting->email))
+                                    @foreach (json_decode($headerSetting->email) as $email)
+                                    <a href="mailto:{{ $email }}" class="font-size-2 d-block link-black-100 mb-1">{{
+                                        $email }}</a>
+                                    @endforeach
+                                    @endif
+
+
+                                    @if (isset($headerSetting->phone))
+                                    @foreach (json_decode($headerSetting->phone) as $phone)
+
+                                    <a href="tel:{{ $phone }}" class="font-size-2 d-block link-black-100">{{ $phone
+                                        }}</a>
+                                    @endforeach
+                                    @endif
+
                                 </div>
                                 <ul class="list-unstyled mb-0 d-flex">
-                                    <li class="btn pl-0">
-                                        <a class="link-black-100" href="index.html#">
-                                            <span class="fab fa-instagram"></span>
+                                    @if (isset($socials))
+                                    @foreach ($socials as $key=>$social)
+                                    <li class="btn {{ $key == 0 ? " pl-0" : '' }}">
+                                        <a target="_blank" class="link-black-100" href="{{ $social->link }}"
+                                            title="{{ str($social->name)->headline() }}">
+                                            <span class="{{ $social->icon }}"></span>
                                         </a>
                                     </li>
-                                    <li class="btn">
-                                        <a class="link-black-100" href="index.html#">
-                                            <span class="fab fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li class="btn">
-                                        <a class="link-black-100" href="index.html#">
-                                            <span class="fab fa-youtube"></span>
-                                        </a>
-                                    </li>
-                                    <li class="btn">
-                                        <a class="link-black-100" href="index.html#">
-                                            <span class="fab fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                    <li class="btn">
-                                        <a class="link-black-100" href="index.html#">
-                                            <span class="fab fa-pinterest"></span>
-                                        </a>
-                                    </li>
+                                    @endforeach
+                                    @endif
+
+
                                 </ul>
                             </div>
                         </div>
@@ -642,46 +655,11 @@
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Sitemap</a>
                                 </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Bookmarks</a>
-                                </li>
-                                <li class="pt-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Sign in/Join</a>
-                                </li>
+                             
                             </ul>
                         </div>
-                        <div class="col-lg-2 mb-6 mb-lg-0">
-                            <h4 class="font-size-3 font-weight-medium mb-2 mb-xl-5 pb-xl-1">Customer Service</h4>
-                            <ul class="list-unstyled mb-0">
-                                <li class="pb-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Help Center</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Returns</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Product Recalls</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Accessibility</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Contact Us</a>
-                                </li>
-                                <li class="pt-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Store Pickup</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 mb-6 mb-lg-0">
+
+                        <div class="col-lg-3 mb-6 mb-lg-0">
                             <h4 class="font-size-3 font-weight-medium mb-2 mb-xl-5 pb-xl-1">Policy</h4>
                             <ul class="list-unstyled mb-0">
                                 <li class="pb-2">
@@ -692,43 +670,25 @@
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Terms Of Use</a>
                                 </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Security</a>
-                                </li>
+                               
                                 <li class="pt-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Privacy</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-lg-2 mb-6 mb-lg-0">
+                        <div class="col-lg-3 mb-6 mb-lg-0">
                             <h4 class="font-size-3 font-weight-medium mb-2 mb-xl-5 pb-xl-1">Categories</h4>
                             <ul class="list-unstyled mb-0">
+                                @foreach ($classRooms as $classRoom)
                                 <li class="pb-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Action</a>
+                                        href="{{ route('frontend.product.class',$classRoom->slug) }}">{{
+                                        str($classRoom->name)->headline()
+                                        }}</a>
                                 </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Comedy</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Drama</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Horror</a>
-                                </li>
-                                <li class="py-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Kids</a>
-                                </li>
-                                <li class="pt-2">
-                                    <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Romantic Comedy</a>
-                                </li>
+                                @endforeach
+
                             </ul>
                         </div>
                     </div>
@@ -738,7 +698,7 @@
                 <div class="container">
                     <div class="d-lg-flex text-center  text-lg-left justify-content-center align-items-center">
 
-                        <p class="mb-3 mb-lg-0 font-size-2">©2020 Book Worm. All rights reserved</p>
+                        <p class="mb-3 mb-lg-0 font-size-2">©{{ Carbon\Carbon::today()->format("Y") }} {{ env('APP_NAME') }}. All rights reserved</p>
 
 
                     </div>

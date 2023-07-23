@@ -37,7 +37,7 @@ Route::name('frontend.author.')->controller(AuthorController::class)->group(func
 
 //*  QUESTION PAPER ROUTES
 
-Route::name('frontend.questions.')->prefix('/questions/')->controller(QuestionPaperController::class)->group(function () {
+Route::name('frontend.questions.')->middleware('isQuestion')->prefix('/questions/')->controller(QuestionPaperController::class)->group(function () {
     Route::get('/', 'getAllQuestions')->name('all');
     Route::get('/view/{slug}', 'getAQuestion')->name('single');
     Route::get('/view-pdf/{id}', 'viewQuestionPDF')->name('pdf');

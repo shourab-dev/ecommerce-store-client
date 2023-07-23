@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubjectController;
 use App\Http\Controllers\Bakend\CountryController;
 
@@ -97,5 +98,13 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     Route::controller(OrderController::class)->prefix('admin/orders/')->name('admin.orders.')->group(function () {
         Route::get('/', 'getOrders')->name('all');
         Route::get('/view/{orderId}', 'viewOrders')->name('view');
+    });
+
+    //* WEB SETTING ROUTES
+    Route::controller(SettingController::class)->prefix('admin/setting')->name('admin.setting')->group(function () {
+        Route::get('/', 'setting');
+        Route::post('/', 'updateSetting');
+        Route::get('/socials', 'getSocialMedia')->name('.social');
+        Route::post('/socials', 'updateSocial')->name('.social.update');
     });
 });

@@ -30,8 +30,9 @@ class BookFactory extends Factory
             'selling_price' => $this->faker->numberBetween(100, 300),
             'lang' => 'english',
             'thumbnail' => "http://127.0.0.1:8000/storage/thumbnails/funEmoji.svg",
+            'thumbnail_path' => "thumbnails/funEmoji.svg",
             'book_pdf' => 'mainBook.pdf',
-            'is_featured' => $this->faker->numberBetween(0, 1)
+            'is_featured' => 0
 
         ];
     }
