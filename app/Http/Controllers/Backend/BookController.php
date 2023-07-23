@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Helpers\MediaUploader;
 use App\Http\Helpers\SlugGenerator;
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -36,8 +37,8 @@ class BookController extends Controller
     public function addBook()
     {
         $countries = Country::select('id', 'name')->get();
-
-        return view('backend.books.addBooks', compact('countries'));
+        $accesories = Subject::select('id', 'name')->get();
+        return view('backend.books.addBooks', compact('countries', 'accesories'));
     }
     /**
      * * STORE A BOOK
@@ -65,6 +66,7 @@ class BookController extends Controller
         $book->user_id = $request->author;
         $book->country_id = $request->country;
         $book->class_room_id = $request->classRoom;
+        $book->subject_id = $request->accesory ?? null;
         $book->title = $request->name;
         $book->slug =  $this->getSlug($request, Book::class);
         $book->detail = $request->detail;
@@ -109,7 +111,7 @@ class BookController extends Controller
         $countries = Country::latest()->get();
         $classes = ClassRoom::latest()->get();
         $book = Book::getAuthorName()->findOrFail($id);
-        
+
         return view('backend.books.editBooks', compact('book', 'countries', 'classes'));
     }
 
@@ -138,7 +140,7 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
         //* validation
-        
+
 
         if ($request->thumbnail) {
             //* REMOVE PREVIOUS THUMBNAIL IMAGE
@@ -167,7 +169,7 @@ class BookController extends Controller
         }
 
         //* BOOK STORE
-     
+
         $book->country_id = $request->country;
         $book->class_room_id = $request->classRoom;
         $book->title = $request->name;
@@ -217,5 +219,4 @@ class BookController extends Controller
         notify()->success("Featued Book Added ⭐");
         return back();
     }
-
 }

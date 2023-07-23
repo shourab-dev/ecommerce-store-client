@@ -57,12 +57,12 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     });
 
     //! [DEDUCTED FROM PRODUCTION VERSION] Subject ROUTES
-    // Route::controller(SubjectController::class)->prefix('admin/subjects')->name('admin.subject.')->group(function () {
-    //     Route::get('/add', 'addSubject')->name('add');
-    //     Route::post('/store', 'storeSubject')->name('store');
-    //     Route::get('/edit/{editedSubject}', 'editSubject')->name('edit');
-    //     Route::post('/update/{subject}', 'updateSubject')->name('update');
-    // });
+    Route::controller(SubjectController::class)->prefix('admin/accossories')->name('admin.subject.')->group(function () {
+        Route::get('/add', 'addSubject')->name('add');
+        Route::post('/store', 'storeSubject')->name('store');
+        Route::get('/edit/{editedSubject}', 'editSubject')->name('edit');
+        Route::post('/update/{subject}', 'updateSubject')->name('update');
+    });
 
 
     //* QUESTION PAPER ROUTES

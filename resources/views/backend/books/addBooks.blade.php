@@ -105,7 +105,19 @@
                 <div class="form-group my-2">
                     <label for="classRoom">Category <span class="text-danger">*</span></label>
                     <select name="classRoom" id="classRoom" class="form-control">
-                        <option disabled selected>Select Class</option>
+                        <option disabled selected>Select Category</option>
+                    </select>
+                    @error('classRoom')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group my-2">
+                    <label for="classRoom">Accesory Category <span class="text-danger">*</span></label>
+                    <select name="accesory" id="accesory" class="form-control">
+                        <option disabled selected>Select Category</option>
+                        @foreach ($accesories as $acc)
+                        <option value="{{ $acc->id }}">{{ $acc->name }}</option>
+                        @endforeach
                     </select>
                     @error('classRoom')
                     <span class="text-danger">{{ $message }}</span>

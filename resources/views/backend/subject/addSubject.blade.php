@@ -6,7 +6,7 @@
         <div class="col-lg-8">
             <div class="card-style">
                 <div class="card-header">
-                    <h3 class="mb-2">All Subcategories</h3>
+                    <h3 class="mb-2">All Accesories Category</h3>
                 </div>
 
                 <div class="table-wrapper table-responsive">
@@ -18,7 +18,7 @@
                                     <h6>#</h6>
                                 </th>
                                 <th>
-                                    <h6>Sub-Category Name</h6>
+                                    <h6> Category Name</h6>
                                 </th>
 
 
@@ -65,7 +65,7 @@
 
         <div class="card-style col-lg-4 align-self-start">
             <div class="card-header">
-                <h3 class="mb-2">{{ isset($editedSubject) ? 'Edit' : 'Add' }} SubCategory</h3>
+                <h3 class="mb-2">{{ isset($editedSubject) ? 'Edit' : 'Add' }} Accesories Category</h3>
             </div>
             <div class="card-body">
                 <form method="post"
@@ -75,24 +75,12 @@
                         <label for="name">SubCategory Name</label>
                         <input type="text" class="form-control" id="name" name="name"
                             value="{{ isset($editedSubject) ? $editedSubject->name : old('name') }}"
-                            placeholder="Example: Class 1 | Class 2">
+                            placeholder="Example: Pen | Color Paint">
                         @error('name')
                         <div class="text-danger my-2">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group my-2">
-                        <label for="country">Category Name</label>
-                        <select name="class_id" id="country" class="form-control">
-
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                          
-                        </select>
-                        @error('country_id')
-                        <div class="text-danger my-2">{{ $message }}</div>
-                        @enderror
-                    </div>
+                   
 
                     <button type="submit" class="mt-2 btn btn-outline-primary w-100">{{ isset($editedSubject) ? 'Update
                         Country'

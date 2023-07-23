@@ -15,7 +15,7 @@ class SubjectController extends Controller
     use SlugGenerator;
     public $validation = [
         'name' => 'required',
-        'class_id' => "required"
+        
     ];
     public function addSubject()
     {

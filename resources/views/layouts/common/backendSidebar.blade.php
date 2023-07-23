@@ -85,15 +85,15 @@
         {{-- * MANAGE CLASS END--}}
 
         {{-- ! [DEDUCTED FROM PRODUCTTION] MANAGE SUBJECT--}}
-        {{-- <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
+        <li class="nav-item  {{ request()->routeIs('admin.subject.*') ? 'active' : '' }}">
             <a href="{{ route('admin.subject.add') }}">
                 <span class="icon">
                     <i class="lni lni-write"></i>
                 </span>
-                <span class="text">Manage Sub-Categories</span>
+                <span class="text">Accesories Category</span>
             </a>
 
-        </li> --}}
+        </li>
         {{-- ! [DEDUCTED FROM PRODUCTTION] MANAGE SUBJECT END--}}
 
        
