@@ -23,7 +23,8 @@ class BookController extends Controller
         'name' => 'required',
         'price' => 'required_if:type,==,1',
         'country' => 'required',
-        'classRoom' => 'required',
+        'classRoom' => 'required_without:accesory',
+        'accesory' => 'required_without:classRoom',
         'thumbnail' => 'required|mimes:jpg,png,webp,jpeg',
         'book' => 'mimes:jpg,png,webp,jpeg,pdf',
 

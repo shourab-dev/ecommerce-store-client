@@ -114,12 +114,12 @@
                 <div class="form-group my-2">
                     <label for="classRoom">Accesory Category <span class="text-danger">*</span></label>
                     <select name="accesory" id="accesory" class="form-control">
-                        <option disabled selected>Select Category</option>
+                        <option disabled selected>Select Accesory</option>
                         @foreach ($accesories as $acc)
                         <option value="{{ $acc->id }}">{{ $acc->name }}</option>
                         @endforeach
                     </select>
-                    @error('classRoom')
+                    @error('accesory')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
