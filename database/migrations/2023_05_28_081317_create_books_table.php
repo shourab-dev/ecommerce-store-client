@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('country_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('class_room_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('class_room_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('subject_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
@@ -25,12 +25,13 @@ return new class extends Migration
             $table->boolean('isPaid');
             $table->integer('price')->nullable();
             $table->integer('selling_price')->nullable();
-            $table->string('lang');
+            $table->string('lang')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('thumbnail_path')->nullable();
             $table->string('dummy_pdf')->nullable();
             $table->string('book_pdf')->nullable();
-            $table->boolean('is_ebook')->default(true);
+            $table->integer('type')->default(0);
+            $table->boolean('is_ebook')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->string('format')->nullable();
             $table->string('dimension')->nullable();

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Helpers\MediaUploader;
 use App\Http\Helpers\SlugGenerator;
 use App\Http\Controllers\Controller;
+use App\Models\GalleryImage;
 use App\Models\Subject;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,10 +28,15 @@ class BookController extends Controller
         'accesory' => 'required_without:classRoom',
         'thumbnail' => 'required|mimes:jpg,png,webp,jpeg',
         'book' => 'mimes:jpg,png,webp,jpeg,pdf',
+        'productType' => 'required',
+
 
     ];
     private $msg = [
-        'price.required_if' => "Please enter selling price"
+        'price.required_if' => "Please enter selling price",
+        'classRoom.required_without' => "Category and Accessories can not be empty at the same time!",
+        'accesory.required_without' => "Category and Accessories can not be empty at the same time!",
+        "productType.required" => "Please select a product type!"
     ];
 
 
@@ -49,10 +55,13 @@ class BookController extends Controller
 
 
         //* validation
+
         $request->validate($this->rules, $this->msg);
+
 
         //* STORING FILES ON SERVER
         $thumbnail = $this->uploadSingleMedia($request->thumbnail, 'thumbnails', str($request->name)->slug());
+
 
         if ($request->hasFile('demoPdf')) {
 
@@ -71,10 +80,11 @@ class BookController extends Controller
         $book->title = $request->name;
         $book->slug =  $this->getSlug($request, Book::class);
         $book->detail = $request->detail;
-        $book->isPaid = $request->type ?? false;
+        $book->isPaid = $request->type ?? true;
         $book->price = $request->price;
         $book->selling_price = $request->sellPrice;
         $book->lang = $request->lang;
+        $book->type = $request->productType;
         $book->thumbnail = $thumbnail['url'];
         $book->thumbnail_path = $thumbnail['name'];
         $book->dummy_pdf = $request->hasFile('dummyPdf') ?  $dummyFile : null;
@@ -88,6 +98,28 @@ class BookController extends Controller
         $book->total_pages = $request->totalPages;
         $book->is_featured = $request->isFeatured ?? false;
         $book->save();
+
+        if ($request->hasFile('galleryImages')) {
+
+            $acceptTypes = ['jpeg', 'png', 'webp', 'jpg'];
+
+            foreach ($request->galleryImages as $gallImg) {
+                $ext = $gallImg->getClientOriginalExtension();
+                $isValidExt = array_search($ext, $acceptTypes);
+                //* IF ERROR FOUND!
+                if (!$isValidExt) {
+                    return back()->withErrors(['galleryImages' => "Gallery Images extensions are jpeg, png, webp, jpg"]);
+                }
+
+                //* NO EXCEPTION OCCRED
+                $gallArray = $this->uploadSingleMedia($gallImg, 'gallery');
+                GalleryImage::create([
+                    "book_id" =>  $book->id,
+                    'gall_url' => $gallArray['name'],
+                    "gall_path" => $gallArray["url"]
+                ]);
+            }
+        }
         notify()->success('Book Successfully inserted');
         return back();
     }

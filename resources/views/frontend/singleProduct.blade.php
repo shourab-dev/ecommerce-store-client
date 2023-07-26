@@ -20,10 +20,12 @@
                     <div class="col-md-7 pl-0 summary entry-summary border-left">
                         <div class="space-top-2 px-4 px-xl-7 border-bottom pb-5">
                             <h1 class="product_title entry-title font-size-7 mb-3">{{ $book->title }}</h1>
+                            @if(isset($book->author))
                             <div class="font-size-2 mb-4">
                                 <span class="font-size-3 font-weight-medium">By {{ str($book->author->name)->headline() }}</span>
                                 <span class="ml-2 text-gray-600">{{ $book->class->name }}</span>
                             </div>
+                            @endif
                             <p class="price font-size-22 font-weight-medium mb-3">
                                 @if ($book->price !=null)
                                 @if ($book->selling_price)
@@ -149,7 +151,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publisher:</th>
-                                                        <td>{{ str($book->author->name)->headline() }}</td>
+                                                        <td>{{ str($book->author->name ?? env('APP_NAME'))->headline() }}</td>
                                                     </tr>
 
 
@@ -216,8 +218,11 @@
                                                 alt="{{ $relatedBook->tittle }}"></a>
                                     </div>
                                     <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-                                        <div class="text-uppercase font-size-1 mb-1 text-truncate"><a
+                                        <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                            @if(isset($relatedBook->class))
+                                            <a
                                                 href="single-product-v3.html">{{ $relatedBook->class->name }}</a>
+                                                @endif
 
 
                                         </div>
@@ -226,10 +231,15 @@
                                             <a href="{{ route('frontend.product.show',$relatedBook->slug) }}">{{
                                                 $relatedBook->title }}</a>
                                         </h2>
-                                        <div class="font-size-2  mb-1 text-truncate"><a
+                                        <div class="font-size-2  mb-1 text-truncate">
+                                            @if(isset($relatedBook->author))
+                                            <a
                                                 href="{{ route('frontend.author.all', $relatedBook->author->id) }}"
                                                 class="text-gray-700">{{
-                                                $relatedBook->author->name }}</a></div>
+                                                $relatedBook->author->name }}</a>
+                                                @endif
+                                                
+                                            </div>
                                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                             @if ($relatedBook->price !=null)
                                             @if ($relatedBook->selling_price)

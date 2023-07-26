@@ -27,6 +27,11 @@ class Book extends Model
         "dummy_pdf"
     ];
 
+    //* GET GALLERY IMAGES
+    public function gallery()
+    {
+        return $this->hasMany(GalleryImage::class)->latest();
+    }
 
     //* GET AUTHOR 
     public function author()
@@ -118,7 +123,7 @@ class Book extends Model
             ->where('carts.customer_id', $authId)
             ->where('books.selling_price', '!=', null)
             ->first()->discounts;
-            return $regular + $discount;
+        return $regular + $discount;
     }
 
     //* GET SORTED PRODUCT

@@ -50,18 +50,24 @@
                                         </div>
                                         <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                                             <div class="text-uppercase font-size-1 mb-1 text-truncate">
+                                                @if(isset($book->class))
                                                 <a href="{{ route('frontend.product.class', $book->class->slug) }}">{{
                                                     $book->class->name }}</a>
                                               
+                                              @endif
                                             </div>
                                             <h2
                                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                                                 <a href="{{ route('frontend.product.show',$book->slug) }}">{{
                                                     $book->title }}</a>
                                             </h2>
-                                            <div class="font-size-2  mb-1 text-truncate"><a
+                                            <div class="font-size-2  mb-1 text-truncate">
+                                                @if(isset($book->author))
+                                                <a
                                                     href="{{ route('frontend.author.all', $book->author->id) }}"
-                                                    class="text-gray-700">{{ $book->author->name }}</a></div>
+                                                    class="text-gray-700">{{ $book->author->name }}</a>
+                                                    @endif
+                                                </div>
                                             <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                                 @if ($book->price !=null)
                                                 @if ($book->selling_price)

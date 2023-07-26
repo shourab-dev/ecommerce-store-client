@@ -309,14 +309,19 @@
                             width="120px" alt="image-description"></a>
                     <div class="media-body ml-4d875">
                         <div class="text-uppercase font-size-1 mb-1 text-truncate">
-                            <a class="mr-2" href="../shop/single-product-v1.html">{{ $newBook->class->name }}</a>
+                            <a class="mr-2" href="../shop/single-product-v1.html">{{ $newBook->class->name ?? '' }}</a>
                             
                         </div>
                         <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                             <a href="{{ route('frontend.product.show', $newBook->slug) }}">{{ $newBook->title }}</a>
                         </h2>
-                        <div class="font-size-2 mb-1 text-truncate"><a href="{{ route('frontend.author.all', $newBook->author->id) }}"
-                                class="text-gray-700">{{ $newBook->author->name }}</a></div>
+                        <div class="font-size-2 mb-1 text-truncate">
+                            @if (isset($newBook->author->id))
+                                
+                            <a href="{{ route('frontend.author.all', $newBook->author->id) }}"
+                                class="text-gray-700">{{ $newBook->author->name }}</a>
+                            </div>
+                            @endif
                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                             @if ($newBook->price !=null)
                             @if ($newBook->selling_price)

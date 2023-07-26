@@ -14,7 +14,7 @@ trait BestSellingBook
     {
         $mostSellingBooks = OrderItem::getBestSellingBooksId($limit)->get();
         $bookIds = $mostSellingBooks->pluck('book_id')->toArray();
-        $books = Book::query()->whereIn('id', $bookIds);
+        $books = Book::query()->whereIn('id', $bookIds)->where('type', 0);
         return $books;
     }
 }

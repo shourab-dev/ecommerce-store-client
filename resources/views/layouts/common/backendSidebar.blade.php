@@ -129,17 +129,17 @@
                 <span class="icon">
                     <i class="lni lni-book"></i>
                 </span>
-                <span class="text">Manage Books</span>
+                <span class="text">Products</span>
             </a>
             <ul id="books" class="collapse ">
                 <li>
                     <a href="{{ route('admin.books.create') }}">
-                        Add Book
+                        Add Product
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('admin.books.all') }}">
-                        Books List
+                        Product List
                     </a>
                 </li>
 
