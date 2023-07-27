@@ -31,8 +31,17 @@
                     @enderror
                 </div>
                 <div class="form-group my-2">
+                    <label for="short_detail">Product Short Details</label>
+                    <textarea name="short_detail" id="short_detail" style="min-height: 250px"
+                        class="form-control">{{ old('detail') }}</textarea>
+                    @error('short_detail')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group my-2">
                     <label for="detail">Product Details</label>
-                    <textarea name="detail" id="detail" style="min-height: 250px" class="form-control">{{ old('detail') }}</textarea>
+                    <textarea name="detail" id="detail" style="min-height: 250px"
+                        class="form-control">{{ old('detail') }}</textarea>
                     @error('detail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -42,7 +51,7 @@
                     <div class="form-group my-2 col-lg-6">
                         <label for="type">Product Type <span class="text-danger">*</span></label>
                         <select name="productType" id="type" class="form-control">
-                            
+
                             <option value="0">Books</option>
                             <option value="1">Accessories</option>
                         </select>
@@ -52,7 +61,7 @@
                     </div>
                     <div class="form-group my-2 col-lg-6">
                         <label for="isEbook">Book Type <span class="text-danger">*</span></label>
-                        <select name="isEbook"  id="isEbook" class="form-control">
+                        <select name="isEbook" id="isEbook" class="form-control">
                             <option disabled selected>Select A Book Type</option>
                             <option value="{{ true }}">Ebook</option>
                             <option value="{{ 0 }}">Physical</option>
@@ -136,7 +145,7 @@
                     @enderror
                 </div>
 
-                
+
 
 
                 <div class="form-group my-2">
@@ -203,9 +212,18 @@
     </form>
 </div>
 @push('customJs')
+<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    ClassicEditor
+    .create( document.querySelector( '#detail' ), {
+      removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar',
+    'ImageUpload'],
+    } )
+    .catch( error => {
+    console.error( error );
+    } );
     $('#author').select2({
            width: 'element',
            placeholder: "Search Here...",
@@ -253,9 +271,6 @@
     })
 </script>
 <script>
-
- 
-
     $('select[name="country"]').change(function(e){
     
     let selectCountry = $(this).val()

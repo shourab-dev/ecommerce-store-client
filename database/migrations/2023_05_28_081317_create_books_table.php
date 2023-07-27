@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
+            $table->longText('short_detail')->nullable();
             $table->longText('detail')->nullable();
             $table->boolean('isPaid');
             $table->integer('price')->nullable();
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->string('publication_date')->nullable();
             $table->string('total_pages')->nullable();
             $table->boolean('status')->default(true);
+            
             $table->timestamps();
         });
     }

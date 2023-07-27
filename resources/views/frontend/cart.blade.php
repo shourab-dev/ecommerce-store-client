@@ -78,16 +78,19 @@
                                             <tr class="woocommerce-cart-form__cart-item cart_item">
                                                 <td class="product-name" data-title="Product">
                                                     <div class="d-flex align-items-center">
-                                                        <a href="cart.html#">
-                                                            <img src="../../assets/img/90x138/img1.jpg"
+                                                        <a href="{{ route('frontend.product.show', $cart->books->slug) }}">
+                                                            <img src="{{ $cart->books->thumbnail }}"
                                                                 class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                                 alt>
                                                         </a>
                                                         <div class="ml-3 m-w-200-lg-down">
-                                                            <a href="cart.html#">{{ $cart->books->title }}  ({{ $cart->amount }} pieces)</a>
+                                                            <a href="{{ route('frontend.product.show', $cart->books->slug) }}">{{ $cart->books->title }}  ({{ $cart->amount }} pieces)</a>
+                                                            @if (isset($cart->books->author))
+                                                                
                                                             <a href="cart.html#"
-                                                                class="text-gray-700 font-size-2 d-block"
-                                                                tabindex="0">{{ $cart->books->author->name }}</a>
+                                                            class="text-gray-700 font-size-2 d-block"
+                                                            tabindex="0">{{ $cart->books->author->name }}</a>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>

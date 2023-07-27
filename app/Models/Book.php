@@ -30,7 +30,7 @@ class Book extends Model
     //* GET GALLERY IMAGES
     public function gallery()
     {
-        return $this->hasMany(GalleryImage::class)->latest();
+        return $this->hasMany(GalleryImage::class)->select('id', 'book_id','gall_path')->latest();
     }
 
     //* GET AUTHOR 

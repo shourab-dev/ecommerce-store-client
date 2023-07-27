@@ -27,7 +27,9 @@
                             style="width: 50px;height:50px;object-fit:cover;margin:auto;">
                     </td>
                     <td class="text-start">{{ $book->title }}</td>
-                    <td>{{ $book->class->name }}</td>
+                    <td>{{ $book->class->name ?? '' }}
+                        {{ $book->subject->name ?? '' }}
+                    </td>
                     <td>
                         @if ($book->selling_price)
                         <span style="text-decoration: line-through">{{ $book->price }} tk</span>

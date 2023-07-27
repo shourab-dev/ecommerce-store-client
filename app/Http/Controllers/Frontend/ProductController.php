@@ -12,14 +12,16 @@ class ProductController extends Controller
     {
         if ($slug) {
 
-            $book = Book::where('slug', $slug)->classRoomName()->getAuthorName()->first();
+            $book = Book::where('slug', $slug)->where('status', true)->with('gallery')->classRoomName()->getAuthorName()->first();
             $relatedBooks = Book::where('class_room_id', $book->class_room_id)->where('status', 1)->take(8)->select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price', 'isPaid')
                 ->getAuthorName()->subjectName()->classroomName()->get();
+                
             return view('frontend.singleProduct', compact('book', 'relatedBooks'));
         } else {
             $book = null;
             $relatedBooks =  Book::select('id', 'slug', 'subject_id', 'class_room_id', 'user_id', 'title', 'thumbnail', 'is_featured', 'price', 'selling_price', 'isPaid')->where('status', 1)
                 ->getAuthorName()->subjectName()->classroomName()->filterBooks(request())->orderByType(request()->orderby)->latest()->paginate(12);
+
             return view('frontend.shop', compact('relatedBooks'));
         }
     }

@@ -13,6 +13,13 @@
                                     <img src="{{ $book->thumbnail }}" alt="{{ $book->title }}"
                                         class="mx-auto img-fluid">
                                 </div>
+                                @foreach ($book->gallery as $gallaryImg)
+                                <div class="js-slide">
+                                    <img src="{{ $gallaryImg->gall_path }}" alt="{{ $book->title }}"
+                                        class="mx-auto img-fluid">
+                                </div>
+
+                                @endforeach
 
                             </div>
                         </figure>
@@ -22,7 +29,8 @@
                             <h1 class="product_title entry-title font-size-7 mb-3">{{ $book->title }}</h1>
                             @if(isset($book->author))
                             <div class="font-size-2 mb-4">
-                                <span class="font-size-3 font-weight-medium">By {{ str($book->author->name)->headline() }}</span>
+                                <span class="font-size-3 font-weight-medium">By {{ str($book->author->name)->headline()
+                                    }}</span>
                                 <span class="ml-2 text-gray-600">{{ $book->class->name }}</span>
                             </div>
                             @endif
@@ -50,13 +58,13 @@
                             </p>
                             <div class="mb-2 font-size-2">
                                 <span class="font-weight-medium">Book Format:</span>
-                                
+
                             </div>
 
 
 
                             <div class="woocommerce-product-details__short-description font-size-2 mb-5">
-                                <p class>{!! str($book->detail)->substr(0,150) !!}</p>
+                                <p class>{{ str($book->short_detail) }}</p>
                             </div>
 
 
@@ -106,11 +114,13 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if($book->type == 0)
                                 <li class="flex-shrink-0 flex-md-shrink-1 nav-item">
                                     <a class="nav-link py-4 font-weight-medium" href="#detailTab">
                                         Product Details
                                     </a>
                                 </li>
+                                @endif
 
                             </ul>
                         </div>
@@ -128,6 +138,7 @@
                             </div>
                         </div>
                         @endif
+                        @if($book->type == 0)
                         <div class="tab-content font-size-2 container" id="detailTab">
                             <div class="row">
                                 <div class="col-xl-8 offset-xl-2">
@@ -147,11 +158,13 @@
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publication date: </th>
-                                                        <td>{{ Carbon\Carbon::parse($book->publication_date)->format("d M, Y") }}</td>
+                                                        <td>{{ Carbon\Carbon::parse($book->publication_date)->format("d
+                                                            M, Y") }}</td>
                                                     </tr>
                                                     <tr>
                                                         <th class="px-4 px-xl-5">Publisher:</th>
-                                                        <td>{{ str($book->author->name ?? env('APP_NAME'))->headline() }}</td>
+                                                        <td>{{ str($book->author->name ?? env('APP_NAME'))->headline()
+                                                            }}</td>
                                                     </tr>
 
 
@@ -167,6 +180,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                     </div>
 
@@ -220,9 +234,8 @@
                                     <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                                         <div class="text-uppercase font-size-1 mb-1 text-truncate">
                                             @if(isset($relatedBook->class))
-                                            <a
-                                                href="single-product-v3.html">{{ $relatedBook->class->name }}</a>
-                                                @endif
+                                            <a href="single-product-v3.html">{{ $relatedBook->class->name }}</a>
+                                            @endif
 
 
                                         </div>
@@ -233,13 +246,12 @@
                                         </h2>
                                         <div class="font-size-2  mb-1 text-truncate">
                                             @if(isset($relatedBook->author))
-                                            <a
-                                                href="{{ route('frontend.author.all', $relatedBook->author->id) }}"
+                                            <a href="{{ route('frontend.author.all', $relatedBook->author->id) }}"
                                                 class="text-gray-700">{{
                                                 $relatedBook->author->name }}</a>
-                                                @endif
-                                                
-                                            </div>
+                                            @endif
+
+                                        </div>
                                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                             @if ($relatedBook->price !=null)
                                             @if ($relatedBook->selling_price)

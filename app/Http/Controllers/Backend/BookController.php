@@ -52,7 +52,7 @@ class BookController extends Controller
      */
     public function storeBook(Request $request)
     {
-
+        // dd($request->is_ebook);
 
         //* validation
 
@@ -79,6 +79,7 @@ class BookController extends Controller
         $book->subject_id = $request->accesory ?? null;
         $book->title = $request->name;
         $book->slug =  $this->getSlug($request, Book::class);
+        $book->short_detail = $request->short_detail;
         $book->detail = $request->detail;
         $book->isPaid = $request->type ?? true;
         $book->price = $request->price;
@@ -132,7 +133,8 @@ class BookController extends Controller
 
 
 
-        $books = $query->select('id', 'class_room_id', 'title', 'slug', 'price', 'selling_price', 'is_ebook', 'thumbnail', 'status', 'is_featured')->classRoomName()->paginate(20);
+        $books = $query->select('id', 'subject_id','class_room_id', 'title', 'slug', 'price', 'selling_price', 'is_ebook', 'thumbnail', 'status', 'is_featured')->subjectName()->classRoomName()->paginate(20);
+        
         return view('backend.books.allBook', compact('books'));
     }
 

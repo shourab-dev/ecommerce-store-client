@@ -37,9 +37,20 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
+               
                 <div class="row">
-                    <div class="form-group my-2 col-lg-3">
+                    <div class="form-group my-2 col-lg-6">
+                        <label for="type">Product Type <span class="text-danger">*</span></label>
+                        <select name="productType" id="type" class="form-control">
+                    
+                            <option value="0">Books</option>
+                            <option value="1">Accessories</option>
+                        </select>
+                        @error('productType')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group my-2 col-lg-6">
                         <label for="isEbook">Book Type <span class="text-danger">*</span></label>
                         <select name="isEbook" id="isEbook" class="form-control">
                             <option {{ $book->is_ebook == 1 ? "selected" : '' }} value="{{ true }}">Ebook</option>
@@ -49,7 +60,7 @@
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="form-group my-2 col-lg-3">
+                    {{-- <div class="form-group my-2 col-lg-3">
                         <label for="type">Book Value <span class="text-danger">*</span></label>
                         <select name="type" id="type" class="form-control">
                             <option {{ $book->isPaid == 1 ? "selected" : '' }} value="{{ true }}">Paid</option>
@@ -58,15 +69,15 @@
                         @error('type')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
-                    </div>
-                    <div class="form-group my-2 col-lg-3">
+                    </div> --}}
+                    <div class="form-group my-2 col-lg-6">
                         <label for="price">Book Price</label>
                         <input type="number" id="price" name="price" class="form-control" placeholder="Example: 240 tk" value="{{ $book->price }}">
                         @error('price')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="form-group my-2 col-lg-3">
+                    <div class="form-group my-2 col-lg-6">
                         <label for="sellPrice">Sell Price Book Price</label>
                         <input type="number" id="sellPrice" name="sellPrice" class="form-control" value="{{ $book->selling_price }}"
                             placeholder="Example: 90 tk">
@@ -175,9 +186,18 @@
     </form>
 </div>
 @push('customJs')
+<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    ClassicEditor
+    .create( document.querySelector( '#detail' ), {
+    removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar',
+    'ImageUpload'],
+    } )
+    .catch( error => {
+    console.error( error );
+    } );
     $('#author').select2({
            width: 'element',
            placeholder: "Search Here...",

@@ -167,13 +167,13 @@
                             </div>
                         </div>
                         {{-- ! SUBJECT IS DEDECTED IN PRODUCTION --}}
-                        {{-- <div id="woocommerce_product_categories-2"
+                        <div id="woocommerce_product_categories-2"
                             class="widget p-4d875 border woocommerce widget_product_categories">
                             <div id="subject" class="widget-head">
                                 <a class="d-flex align-items-center justify-content-between text-dark" href="v1.html#"
                                     data-toggle="collapse" data-target="#subjectCollapse" aria-expanded="true"
                                     aria-controls="widgetCollapseOne">
-                                    <h3 class="widget-title mb-0 font-weight-medium font-size-3">Subject</h3>
+                                    <h3 class="widget-title mb-0 font-weight-medium font-size-3">Accessories</h3>
                                     <svg class="mins" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="2px">
                                         <path fill-rule="evenodd" fill="rgb(22, 22, 25)"
@@ -191,13 +191,13 @@
                                <div class="row justify-content-between">
                                 @foreach ($subjects as $subject)
                                 <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="subject{{ $subject->id }}">
-                                    <input type="checkbox" name="subjects[]" value="{{ $subject->id }}" id="subject{{ $subject->id }}"> {{ $subject->name }}
+                                    <input type="checkbox" name="subjects[]" value="{{ $subject->id }}" id="subject{{ $subject->id }}"> {{ str($subject->name)->headline() }}
                                 </label>
                             
                                 @endforeach
                             </div>
                             </div>
-                        </div> --}}
+                        </div>
                         {{-- ! SUBJECT IS DEDECTED IN PRODUCTION --}}
                         <div id="Authors" class="widget widget_search widget_author p-4d875 border">
                             <div id="widgetHeading21" class="widget-head">

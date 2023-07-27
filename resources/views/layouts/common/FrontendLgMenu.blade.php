@@ -24,26 +24,25 @@
         </ul>
     </li>
     {{-- ! SUBJECT IS DEDUCTED FROM PRODUCTION --}}
-    {{-- <li class="nav-item dropdown">
+    <li class="nav-item dropdown">
         <a id="homeDropdownInvoker" href="#"
             class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
             aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#subjects"
             data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50"
             data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-            Subjects
-
+            Accessories
         </a>
         <ul id="subjects" class="dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900"
             aria-labelledby="homeDropdownInvoker">
             @foreach ($subjects as $subject)
 
             <li><a href="{{ route('frontend.product.subject',$subject->slug) }}" class="dropdown-item link-black-100">{{
-                    $subject->name
+                    str($subject->name)->headline()
                     }}</a></li>
             @endforeach
 
         </ul>
-    </li> --}}
+    </li>
     {{-- ! SUBJECT IS DEDUCTED FROM PRODUCTION --}}
 
 

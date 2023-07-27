@@ -803,7 +803,7 @@
                                         <a href="#" class="text-dark">${cart.books.title} (${cart.amount} pieces)</a>
                                     </h2>
                                     <div class="font-size-2 mb-1 text-truncate">
-                                        <a href="#" class="text-gray-700">${cart.books.author.name}</a>
+                                        <a href="#" class="text-gray-700">${cart.books.author ? cart.books.author.name : ""}</a>
                                         </div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                         <span class="woocommerce-Price-amount amount"> 
@@ -932,7 +932,8 @@
                                         <a href="${bookSlugUrl}">
                                             <h4>${book.title}</h4>
                                         </a>
-                                        <span>${book.class.name}</span>
+                                        <span>${book.class ? book.class.name : ''}</span>
+                                        <span>${book.subject ? book.subject.name : ''}</span>
                                         
                                     </div>
                                 </div>

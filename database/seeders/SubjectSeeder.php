@@ -17,16 +17,16 @@ class SubjectSeeder extends Seeder
     {
         $subjects = [
             [
-                'name' => 'English',
-                'slug' => 'english'
+                'name' => 'paint',
+                'slug' => str('paint')->slug(),
             ],
             [
-                'name' => 'Math',
-                'slug' => 'math'
+                'name' => 'papers',
+                'slug' => str('papers')->slug(),
             ],
             [
-                'name' => 'Ict',
-                'slug' => 'ict'
+                'name' => 'pen',
+                'slug' => str('pen')->slug(),
             ],
         ];
 
