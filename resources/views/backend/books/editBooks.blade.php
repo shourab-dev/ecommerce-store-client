@@ -13,6 +13,10 @@
         display: table;
         table-layout: fixed;
     }
+    .overlayBook{
+        position: absolute;
+        inset: 0;
+    }
 </style>
 @endpush
 <div class="container  py-3">
@@ -31,20 +35,29 @@
                     @enderror
                 </div>
                 <div class="form-group my-2">
+                    <label for="short_detail">Product Short Details</label>
+                    <textarea name="short_detail" id="short_detail" style="min-height: 250px"
+                        class="form-control">{{ $book->short_detail }}</textarea>
+                    @error('short_detail')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="form-group my-2">
                     <label for="detail">Book Details</label>
-                    <textarea name="detail" id="detail" style="min-height: 250px" class="form-control">{{ $book->detail }}</textarea>
+                    <textarea name="detail" id="detail" style="min-height: 250px"
+                        class="form-control">{{ $book->detail }}</textarea>
                     @error('detail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-               
+
                 <div class="row">
                     <div class="form-group my-2 col-lg-6">
                         <label for="type">Product Type <span class="text-danger">*</span></label>
                         <select name="productType" id="type" class="form-control">
-                    
-                            <option value="0">Books</option>
-                            <option value="1">Accessories</option>
+
+                            <option {{ $book->type == 0 ? "selected" : '' }} value="0">Books</option>
+                            <option {{ $book->type == 1 ? "selected" : '' }} value="1">Accessories</option>
                         </select>
                         @error('productType')
                         <span class="text-danger">{{ $message }}</span>
@@ -72,15 +85,16 @@
                     </div> --}}
                     <div class="form-group my-2 col-lg-6">
                         <label for="price">Book Price</label>
-                        <input type="number" id="price" name="price" class="form-control" placeholder="Example: 240 tk" value="{{ $book->price }}">
+                        <input type="number" id="price" name="price" class="form-control" placeholder="Example: 240 tk"
+                            value="{{ $book->price }}">
                         @error('price')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group my-2 col-lg-6">
                         <label for="sellPrice">Sell Price Book Price</label>
-                        <input type="number" id="sellPrice" name="sellPrice" class="form-control" value="{{ $book->selling_price }}"
-                            placeholder="Example: 90 tk">
+                        <input type="number" id="sellPrice" name="sellPrice" class="form-control"
+                            value="{{ $book->selling_price }}" placeholder="Example: 90 tk">
                         @error('sellPrice')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -92,9 +106,10 @@
             <div class="col-lg-4">
 
                 <div class="form-group my-2">
-                    <label for="author">Author ( {{ str()->headline($book->author->name) }} ) </label>
+                    <label for="author">Author ( {{ isset($book->author) ? str()->headline($book->author->name) : 'none'
+                        }} ) </label>
                     <select name="author" style="width: 100%" id="author">
-                        
+
                     </select>
                     @error('author')
                     <span class="text-danger">{{ $message }}</span>
@@ -104,9 +119,10 @@
                 <div class="form-group my-2">
                     <label for="country">Country <span class="text-danger">*</span></label>
                     <select name="country" id="country" class="form-control">
-                        
+
                         @foreach ($countries as $country)
-                        <option {{ $country->id == $book->country_id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
+                        <option {{ $country->id == $book->country_id ? 'selected' : '' }} value="{{ $country->id }}">{{
+                            $country->name }}</option>
                         @endforeach
                     </select>
                     @error('country')
@@ -116,9 +132,12 @@
                 <div class="form-group my-2">
                     <label for="classRoom">Category <span class="text-danger">*</span></label>
                     <select name="classRoom" id="classRoom" class="form-control">
+                        <option disabled selected>Select Category</option>
+
                         @foreach ($classes as $class)
-                        <option {{ $class->id == $book->class_room_id ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
-                            
+                        <option {{ $class->id == $book->class_room_id ? 'selected' : '' }} value="{{ $class->id }}">{{
+                            $class->name }}</option>
+
                         @endforeach
                     </select>
                     @error('classRoom')
@@ -126,25 +145,58 @@
                     @enderror
                 </div>
 
-                
+                <div class="form-group my-2">
+                    <label for="classRoom">Accesory Category <span class="text-danger">*</span></label>
+                    <select name="accesory" id="accesory" class="form-control">
+                        <option disabled selected>Select Accesory</option>
+                        @foreach ($accesories as $acc)
+                        <option {{ $acc->id == $book->subject_id ? 'selected' : '' }} value="{{ $acc->id }}">{{
+                            $acc->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('accesory')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
 
 
                 <div class="form-group my-2">
+                    <img src="{{ isset($book->thumbnail) ? $book->thumbnail : '' }}" alt="" width="50%">
                     <label for="thubnail">Thumbnail Image <span class="text-danger">*</span></label>
                     <input type="file" name="thumbnail" id="thubnail" class="form-control">
                     @error('thumbnail')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <div class="form-group my-2">
+                    @if (isset($book->gallery))
+                        <div class="row">
+                            @foreach ($book->gallery as $gallery)
+                            <div class="col-3 mb-2">
+                                <img  src="{{ $gallery->gall_path }}" alt="{{ $book->title }}">
+                                <div class="overlayBook">
+                                    <i class="lni lni-cross-circle"></i>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    @endif
+                    <label for="gallImges">Produt Gallery Images </label>
+                    <input type="file" name="galleryImages[]" multiple id="gallImges" class="form-control">
+                    @error('galleryImages')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                {{-- <div class="form-group my-2">
                     <label for="demoPdf">Demo PDF </label>
                     <input type="file" name="demoPdf" id="demoPdf" class="form-control">
                     @error('demoPdf')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group my-2">
+
                     <label for="book">Main PDF <span class="text-danger">*</span></label>
                     <input type="file" name="book" id="book" class="form-control">
                     @error('book')
@@ -155,16 +207,19 @@
 
                 <div class="form-group my-2 ">
                     <label for="lang">Book Language</label>
-                    <input type="text" id="lang" name="lang" class="form-control" placeholder="Bangla | English" value="{{ $book->lang }}">
+                    <input type="text" id="lang" name="lang" class="form-control" placeholder="Bangla | English"
+                        value="{{ $book->lang }}">
                 </div>
 
                 <div class="form-group my-2 ">
                     <label for="format">Book Format</label>
-                    <input type="text" id="format" name="format" class="form-control" placeholder="Paperback" value="{{ $book->format }}">
+                    <input type="text" id="format" name="format" class="form-control" placeholder="Paperback"
+                        value="{{ $book->format }}">
                 </div>
                 <div class="form-group my-2 ">
                     <label for="totalPages">Book Total Page</label>
-                    <input type="text" id="totalPages" name="totalPages" class="form-control" placeholder="68 | 250" value="{{ $book->total_pages }}">
+                    <input type="text" id="totalPages" name="totalPages" class="form-control" placeholder="68 | 250"
+                        value="{{ $book->total_pages }}">
                 </div>
                 <div class="form-group my-2 ">
                     <label for="dimension">Book Dimension & Weight</label>
@@ -173,7 +228,8 @@
                 </div>
                 <div class="form-group my-2 ">
                     <label for="publication_date">Book Publication Date</label>
-                    <input type="date" id="publication_date" name="publication_date" class="form-control" value="{{ $book->publication_date }}">
+                    <input type="date" id="publication_date" name="publication_date" class="form-control"
+                        value="{{ $book->publication_date }}">
                 </div>
 
 

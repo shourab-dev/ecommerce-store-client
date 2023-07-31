@@ -145,9 +145,10 @@ class BookController extends Controller
     {
         $countries = Country::latest()->get();
         $classes = ClassRoom::latest()->get();
+        $accesories = Subject::select('id', 'name')->get();
         $book = Book::getAuthorName()->findOrFail($id);
 
-        return view('backend.books.editBooks', compact('book', 'countries', 'classes'));
+        return view('backend.books.editBooks', compact('book', 'countries', 'classes', 'accesories'));
     }
 
 
@@ -173,7 +174,7 @@ class BookController extends Controller
      */
     public function updateBook(Request $request, $id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::with('gallery')->findOrFail($id);
         //* validation
 
 
@@ -204,16 +205,29 @@ class BookController extends Controller
         }
 
         //* BOOK STORE
-
+      
         $book->country_id = $request->country;
         $book->class_room_id = $request->classRoom;
+        $book->subject_id = $request->accesory ?? null;
         $book->title = $request->name;
         $book->slug =  $this->getSlug($request, Book::class);
+        $book->short_detail = $request->short_detail;
         $book->detail = $request->detail;
-        $book->isPaid = $request->type ?? false;
+        $book->isPaid = $request->type ?? true;
         $book->price = $request->price;
         $book->selling_price = $request->sellPrice;
         $book->lang = $request->lang;
+        $book->type = $request->productType;
+       
+        $book->is_ebook = $request->isEbook;
+        $book->format = $request->format;
+        $book->dimension = $request->dimension;
+        $book->publication_date = $request->publication_date;
+        $book->total_pages = $request->totalPages;
+        $book->is_featured = $request->isFeatured ?? false;
+
+        
+
         if ($request->thumbnail) {
 
             $book->thumbnail = $thumbnail['url'];
@@ -226,12 +240,7 @@ class BookController extends Controller
         if ($request->hasFile('book')) {
             $book->book_pdf = $bookFile;
         }
-        $book->is_ebook = $request->isEbook;
-        $book->format = $request->format;
-        $book->dimension = $request->dimension;
-        $book->publication_date = $request->publication_date;
-        $book->total_pages = $request->totalPages;
-        $book->is_featured = $request->isFeatured ?? false;
+      
         if ($request->user_id != null) {
             $book->user_id = $request->author;
         }
