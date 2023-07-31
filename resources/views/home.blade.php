@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+@push('customCss')
+    <style>
+        .bg-green-100 {
+            background-image: linear-gradient(to bottom , #c3fec3, transparent);
+        }
+    </style>
+@endpush
 <!-- ========== section start ========== -->
 <section class="section">
 
@@ -25,19 +32,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4">
-                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center bg-green-100 ">
                     <h2 class="">{{ $todaysOrder }}</h2>
                     <h6 class="mt-2 ">Todays Order</h6>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysOrder }}</h2>
+                    <h6 class="mt-2 ">Todays Paid Order</h6>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysOrder }}</h2>
+                    <h6 class="mt-2 ">Todays Un-Paid Order</h6>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $monthlyOrder }}</h2>
                     <h6 class="mt-2 ">This Month Order</h6>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card border-0 shadow rounded-lg  px-2 py-4 text-center">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $orders }}</h2>
                     <h6 class="mt-2 ">All Orders</h6>
                 </div>

@@ -90,6 +90,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/update/{id}', 'updateBook')->name('update');
         Route::get('/status/{id}', 'changeStatus')->name('status');
         Route::get('/featured/{id}', 'changeFeatured')->name('featured');
+        Route::get('/remove-gallery/{id}', 'removeGalleryImages')->name('remove.gall');
+        Route::get('/view-book/{id}', 'viewBook')->name('view.pdf');
     });
 
 

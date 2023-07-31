@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Backend;
 use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Country;
+use App\Models\Subject;
+
 use App\Models\ClassRoom;
+use App\Models\GalleryImage;
 use Illuminate\Http\Request;
 use App\Http\Helpers\MediaUploader;
 use App\Http\Helpers\SlugGenerator;
 use App\Http\Controllers\Controller;
-use App\Models\GalleryImage;
-use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -133,8 +135,8 @@ class BookController extends Controller
 
 
 
-        $books = $query->select('id', 'subject_id','class_room_id', 'title', 'slug', 'price', 'selling_price', 'is_ebook', 'thumbnail', 'status', 'is_featured')->subjectName()->classRoomName()->paginate(20);
-        
+        $books = $query->select('id', 'subject_id', 'class_room_id', 'title', 'slug', 'price', 'selling_price', 'is_ebook', 'thumbnail', 'status', 'is_featured')->subjectName()->classRoomName()->paginate(20);
+
         return view('backend.books.allBook', compact('books'));
     }
 
@@ -205,7 +207,7 @@ class BookController extends Controller
         }
 
         //* BOOK STORE
-      
+
         $book->country_id = $request->country;
         $book->class_room_id = $request->classRoom;
         $book->subject_id = $request->accesory ?? null;
@@ -218,7 +220,7 @@ class BookController extends Controller
         $book->selling_price = $request->sellPrice;
         $book->lang = $request->lang;
         $book->type = $request->productType;
-       
+
         $book->is_ebook = $request->isEbook;
         $book->format = $request->format;
         $book->dimension = $request->dimension;
@@ -226,7 +228,7 @@ class BookController extends Controller
         $book->total_pages = $request->totalPages;
         $book->is_featured = $request->isFeatured ?? false;
 
-        
+
 
         if ($request->thumbnail) {
 
@@ -240,7 +242,7 @@ class BookController extends Controller
         if ($request->hasFile('book')) {
             $book->book_pdf = $bookFile;
         }
-      
+
         if ($request->user_id != null) {
             $book->user_id = $request->author;
         }
@@ -262,5 +264,34 @@ class BookController extends Controller
         $book->save();
         notify()->success("Featued Book Added ⭐");
         return back();
+    }
+
+    /**
+     * * REMOVE GALL IMAGES
+     */
+    function removeGalleryImages($id)
+    {
+        $gallery = GalleryImage::findOrFail($id);
+        if (Storage::disk('public')->exists($gallery->gall_url)) {
+            Storage::disk('public')->delete($gallery->gall_url);
+        }
+        $gallery->delete();
+        notify()->success('Gallery Image Removed');
+        return redirect()->route('admin.books.edit', $gallery->book_id);
+    }
+
+    /**
+     * * VIEW BOOK
+     */
+
+    function viewBook($id)
+    {
+        $book  =  Book::findOrFail($id);
+        if (Storage::disk('local')->exists('books/' . $book->book_pdf)) {
+            return Storage::response('books/' . $book->book_pdf);
+        } else {
+            Auth::logout();
+            return redirect()->route('login');
+        }
     }
 }

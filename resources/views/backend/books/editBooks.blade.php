@@ -13,7 +13,8 @@
         display: table;
         table-layout: fixed;
     }
-    .overlayBook{
+
+    .overlayBook {
         position: absolute;
         inset: 0;
     }
@@ -171,16 +172,17 @@
                 </div>
                 <div class="form-group my-2">
                     @if (isset($book->gallery))
-                        <div class="row">
-                            @foreach ($book->gallery as $gallery)
-                            <div class="col-3 mb-2">
-                                <img  src="{{ $gallery->gall_path }}" alt="{{ $book->title }}">
-                                <div class="overlayBook">
-                                    <i class="lni lni-cross-circle"></i>
-                                </div>
+                    <div class="row">
+                        @foreach ($book->gallery as $gallery)
+                        <div class="col-3 mb-2 position-relative">
+                            <img src="{{ $gallery->gall_path }}" alt="{{ $book->title }}">
+                            <div class="overlayBook text-right pe-2">
+                                <a href="{{ route('admin.books.remove.gall',$gallery->id) }}"><i
+                                        class="lni lni-cross-circle"></i></a>
                             </div>
-                            @endforeach
                         </div>
+                        @endforeach
+                    </div>
                     @endif
                     <label for="gallImges">Produt Gallery Images </label>
                     <input type="file" name="galleryImages[]" multiple id="gallImges" class="form-control">
@@ -197,7 +199,11 @@
                 </div> --}}
                 <div class="form-group my-2">
 
-                    <label for="book">Main PDF <span class="text-danger">*</span></label>
+                    <label for="book">Main PDF <span class="text-danger">*</span>
+                        @if ($book->book_pdf)
+                        <a target="_blank" href="{{ route('admin.books.view.pdf',$book->id) }}" class="btn btn-dark rounded-0 ">{{
+                            $book->title }}</a>
+                        @endif</label>
                     <input type="file" name="book" id="book" class="form-control">
                     @error('book')
                     <span class="text-danger">{{ $message }}</span>

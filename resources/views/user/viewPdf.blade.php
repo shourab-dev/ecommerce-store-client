@@ -339,7 +339,7 @@ btns.map(btn=>{
 
 
   </script>
-  {{--
+  
   <script>
     document.addEventListener('keydown', event => {
         console.log(`User pressed: ${event.key}`);
@@ -356,7 +356,7 @@ btns.map(btn=>{
                 
             });
            devtoolsDetector.launch();
-  </script> --}}
+  </script>
 </body>
 
 </html>
