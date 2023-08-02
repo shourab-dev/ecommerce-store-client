@@ -3,11 +3,12 @@
 <div class="mt-4 px-4">
     <div class="card shadow rounded p-3">
         <form action="{{ route('admin.orders.all') }}" method="get">
-          
+
             <div class="row align-items-center">
                 <div class="form-group col-lg-4">
                     <label for="orderId">Order Id</label>
-                    <input id="orderId" type="text" class="form-control" placeholder="Order Id" value="{{ request()->order_id }}" name="order_id">
+                    <input id="orderId" type="text" class="form-control" placeholder="Order Id"
+                        value="{{ request()->order_id }}" name="order_id">
                 </div>
                 <div class="form-group col-lg-4">
                     <label for="from">From Date</label>
@@ -24,15 +25,21 @@
                 </div>
                 <div class="form-group col-lg-3 mt-2">
                     <label for="status">Status</label>
-                    <select id="status" name="status" class="form-control" >
-                        <option {{ request()->status == "Complete" ? 'selected' : '' }} value="Complete">Complete</option>
-                        <option {{ request()->status == "Processing" ? 'selected' : '' }} value="Processing">Processing</option>
+                    <select id="status" name="status" class="form-control">
+                        <option {{ request()->status == "Complete" ? 'selected' : '' }} value="Complete">Paid
+                        </option>
+                        <option {{ request()->status == "Processing" ? 'selected' : '' }} value="delivered">Delivered
+                        </option>
+                        <option {{ request()->status == "Processing" ? 'selected' : '' }} value="Processing">Processing
+                        </option>
+                        <option {{ request()->status == "Processing" ? 'selected' : '' }} value="Pending">Pending
+                        </option>
                     </select>
                 </div>
                 <div class="form-group col-lg-3 mt-2">
                     <label for="type">Book Type</label>
                     <select id="type" name="type" class="form-control">
-                        <option  value="{{ null }}">All</option>
+                        <option value="{{ null }}">All</option>
                         <option {{ request()->type == 1 ? "selected" : '' }} value="1">Ebook</option>
                         <option {{ request()->type === "0" ? "selected" : '' }} value="0">Physical</option>
                     </select>
@@ -50,41 +57,59 @@
 
     {{-- * ALL ORDERS --}}
     <div class="card shadow border-0 rounded my-5">
-       <div class="row">
-        @foreach ($orders as $order)
-        <div class="col-xxl-6">
-            <div class="rounded shadow py-3 px-4 bg-light my-3  bgImage">
-                <div class="row justify-between pt-3 align-items-center">
-        
-                    <div class="col-sm-6 d-flex align-items-center">
-                        <h4 class="me-3">Order No: #{{ $order->id }} </h4>
-                        @if ($order->status == "Complete")
+        <div class="row">
+            @foreach ($orders as $order)
+            <div class="col-xxl-6">
+                <div class="rounded shadow py-3 px-4 bg-light my-3  bgImage">
+                    <div class="row justify-between pt-3 align-items-center">
+
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <h4 class="me-3">Order No: #{{ $order->id }} </h4>
+                            @if ($order->status == "Complete" || $order->status == "delivered")
                             <span class="rounded-0 btn btn-success">Paid</span>
                             @else
                             <span class="rounded-0 btn btn-danger">Un-Paid</span>
 
+                            @endif
+                        </div>
+                        <p class="text-sm-end col-sm-6">Transaction ID: {{ $order->transaction_id }}</p>
+                    </div>
+                    <hr>
+                    <strong>Date : {{ Carbon\Carbon::parse($order->created_at)->format("d / M / y") }}</strong>
+                    <p>Customer Name: <strong>{{ str($order->name)->headline() }}</strong></p>
+                    <p>Customer Email: <strong>{{ $order->email}}</strong></p>
+                    <p>Customer Phone: <strong>{{ $order->phone}}</strong></p>
+                    <p>Customer Post-Code: <strong>{{ $order->post_code}}</strong></p>
+                    <p>Customer Address: <strong>{{ $order->address}}</strong></p>
+                    <p>Number of Items: {{ $order->totalItems }} {{ $order->totalItems == 1 ? "piece" : "pieces" }}</p>
+                    <hr>
+                    <br>
+                    <h5 class="float-end btn btn-outline-primary">Total Price: {{ $order->amount }} tk</h5>
+
+                    <div class="btn-group">
+                        <a target="__blank" href="{{ route('admin.orders.view', $order->id) }}"
+                            class="btn text-light d-flex align-items-center" style="background:#4A6CF7;">View
+                            Invoice <i class="lni lni-eye ms-2"></i></a>
+                        @if ($order->status == 'Processing' || $order->status == 'Pending')
+
+                        <a target="__blank" href="{{ route('admin.orders.paid', $order->id) }}"
+                            class="btn d-flex align-items-center" style="background: rgb(134, 255, 134)">Mark as Paid <i
+                                class="lni lni-coin ms-2"></i></a>
+                        @endif
+                        @if ($order->status == 'Complete')
+
+                        <a target="__blank" href="{{ route('admin.orders.deliver', $order->id) }}"
+                            class="btn btn-warning d-flex align-items-center">Mark as Delivered <i
+                                class="lni lni-delivery ms-2"></i></a>
                         @endif
                     </div>
-                    <p class="text-sm-end col-sm-6">Transaction ID: {{ $order->transaction_id }}</p>
+
+                    <br>
+                    <br>
                 </div>
-                <hr>
-                <strong>Date : {{ Carbon\Carbon::parse($order->created_at)->format("d / M / y") }}</strong>
-                <p>Customer Name: <strong>{{ str($order->name)->headline() }}</strong></p>
-                <p>Customer Email: <strong>{{ $order->email}}</strong></p>
-                <p>Customer Phone: <strong>{{ $order->phone}}</strong></p>
-                <p>Customer Post-Code: <strong>{{ $order->post_code}}</strong></p>
-                <p>Customer Address: <strong>{{ $order->address}}</strong></p>
-                <p>Number of Items: {{ $order->totalItems }} {{ $order->totalItems == 1 ? "piece" : "pieces" }}</p>
-                <hr>
-                <h5 class="float-end btn btn-outline-primary">Total Price: {{ $order->amount }} tk</h5>
-                <a target="__blank" href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary float-start">View
-                    Invoice</a>
-                <br>
-                <br>
             </div>
+            @endforeach
         </div>
-        @endforeach
-       </div>
 
     </div>
 

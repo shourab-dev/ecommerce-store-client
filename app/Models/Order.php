@@ -27,4 +27,14 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    function scopeGetUnpaid($query)
+    {
+        return $query->where('status', 'Pending')->orWhere('status', 'Processing');
+    }
+
+    function scopeGetPaid($query)
+    {
+        return $query->where('status', 'Complete')->OrWhere('status', 'delivered');
+    }
 }

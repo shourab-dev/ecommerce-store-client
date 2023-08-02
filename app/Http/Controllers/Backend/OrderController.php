@@ -31,6 +31,13 @@ class OrderController extends Controller
         if ($request->status) {
             $query->where('status', $request->status);
         }
+        
+        if ($request->status == null) {
+            $query->where('status', "!=", 'delivered');
+            
+
+        }
+        
 
 
         if ($request->from) {
@@ -57,7 +64,7 @@ class OrderController extends Controller
         }
 
         $orders = $query->withSum('orderItems as totalItems', 'total_orders')->latest()->paginate(20);
-        
+
         return view('backend.orders.order', compact('orders'));
     }
 
@@ -66,5 +73,29 @@ class OrderController extends Controller
         $order = Order::with('orderItems')->latest()->find($orderId);
 
         return view('backend.orders.viewOrder', compact('order'));
+    }
+
+
+    /**
+     * * MARK AN ORDER AS PAID
+     */
+    function markPaid($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'Complete'
+        ]);
+        notify()->success('Order Marked as paid');
+        return back();
+    }
+    /**
+     * * MARK AN ORDER AS DELIVERED
+     */
+    function markDelivered($orderId)
+    {
+        Order::findOrFail($orderId)->update([
+            'status' => 'delivered'
+        ]);
+        notify()->success('Order Marked as delivered');
+        return back();
     }
 }

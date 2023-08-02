@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@push('customCss')
-    <style>
-        .bg-green-100 {
-            background-image: linear-gradient(to bottom , #c3fec3, transparent);
-        }
-    </style>
-@endpush
+
 <!-- ========== section start ========== -->
 <section class="section">
 
@@ -32,23 +26,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4">
-                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center bg-green-100 ">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center ">
                     <h2 class="">{{ $todaysOrder }}</h2>
                     <h6 class="mt-2 ">Todays Order</h6>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
-                    <h2 class="">{{ $todaysOrder }}</h2>
-                    <h6 class="mt-2 ">Todays Paid Order</h6>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
-                    <h2 class="">{{ $todaysOrder }}</h2>
-                    <h6 class="mt-2 ">Todays Un-Paid Order</h6>
-                </div>
-            </div>
+         
+         
             <div class="col-lg-4">
                 <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $monthlyOrder }}</h2>
@@ -61,6 +45,51 @@
                     <h6 class="mt-2 ">All Orders</h6>
                 </div>
             </div>
+            <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $orders - $unPaid }}</h2>
+                    <h6 class="mt-2 "> Paid Order</h6>
+                </div>
+            </div>
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $unPaid }}</h2>
+                    <h6 class="mt-2 "> Un-Paid Order</h6>
+                </div>
+            </div>
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysUnPaid }}</h2>
+                    <h6 class="mt-2 "> Todays Un-paid Order</h6>
+                </div>
+            </div>
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $deliveryDue }}</h2>
+                    <h6 class="mt-2 ">Delivery Due </h6>
+                </div>
+            </div>
+           <div class="col-lg-4">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysSell }} tk</h2>
+                    <h6 class="mt-2 ">Todays Sell</h6>
+                </div>
+            </div>
+           <div class="col-lg-4">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $totalRevenue }} tk</h2>
+                    <h6 class="mt-2 "> Total Revenue</h6>
+                </div>
+            </div>
+           <div class="col-lg-4">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $totalDue }} tk</h2>
+                    <h6 class="mt-2 "> Total Due</h6>
+                </div>
+            </div>
+
+
+
            
         </div>
     </div>

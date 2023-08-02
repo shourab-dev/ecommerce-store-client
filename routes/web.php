@@ -100,6 +100,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
     Route::controller(OrderController::class)->prefix('admin/orders/')->name('admin.orders.')->group(function () {
         Route::get('/', 'getOrders')->name('all');
         Route::get('/view/{orderId}', 'viewOrders')->name('view');
+        Route::get('/mark-paid/{orderId}', 'markPaid')->name('paid');
+        Route::get('/mark-deliver/{orderId}', 'markDelivered')->name('deliver');
     });
 
     //* WEB SETTING ROUTES
