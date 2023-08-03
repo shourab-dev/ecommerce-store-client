@@ -79,7 +79,7 @@
                                                 <td class="product-name" data-title="Product">
                                                     <div class="d-flex align-items-center">
                                                         <a href="{{ route('frontend.product.show', $cart->books->slug) }}">
-                                                            <img src="{{ $cart->books->thumbnail }}"
+                                                            <img src="{{ $cart->books->thumbnail }}" style="max-width: 100px"
                                                                 class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                                 alt>
                                                         </a>

@@ -47,14 +47,14 @@
                         <span class="icon">
                             <i class="lni lni-book"></i>
                         </span>
-                        <span class="text">My Orders</span>
+                        <span class="text">Orders</span>
                     </a>
                     <ul id="order" class="collapse dropdown-nav">
                         <li>
                             <a href="{{ route('user.myorder.ebook') }}"> Ebooks </a>
                         </li>
                         <li>
-                            <a href="{{ route('user.myorder.physical') }}"> Delivered Books </a>
+                            <a href="{{ route('user.myorder.physical') }}"> My Orders </a>
                         </li>
                     </ul>
                 </li>

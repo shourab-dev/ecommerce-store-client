@@ -92,13 +92,13 @@
                             Invoice <i class="lni lni-eye ms-2"></i></a>
                         @if ($order->status == 'Processing' || $order->status == 'Pending')
 
-                        <a target="__blank" href="{{ route('admin.orders.paid', $order->id) }}"
+                        <a  href="{{ route('admin.orders.paid', $order->id) }}"
                             class="btn d-flex align-items-center" style="background: rgb(134, 255, 134)">Mark as Paid <i
                                 class="lni lni-coin ms-2"></i></a>
                         @endif
                         @if ($order->status == 'Complete')
 
-                        <a target="__blank" href="{{ route('admin.orders.deliver', $order->id) }}"
+                        <a  href="{{ route('admin.orders.deliver', $order->id) }}"
                             class="btn btn-warning d-flex align-items-center">Mark as Delivered <i
                                 class="lni lni-delivery ms-2"></i></a>
                         @endif

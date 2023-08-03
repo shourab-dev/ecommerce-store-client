@@ -35,8 +35,11 @@ class HomeController extends Controller
         $totalRevenue = Order::getPaid()->sum('amount');
         $totalDue = Order::getUnpaid()->sum('amount');
         $todaysSell  = Order::whereDate('created_at', today())->getPaid()->sum('amount');
+        $todaysDue  = Order::whereDate('created_at', today())->getUnpaid()->sum('amount');
+        $monthlySell = Order::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->getPaid()->sum('amount');
+        $monthlyDue = Order::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])->getUnpaid()->sum('amount');
         $deliveryDue = Order::where('status', '!=', 'delivered')->getPaid()->count();
         
-        return view('home', compact('orders', 'todaysOrder', 'monthlyOrder', 'unPaid', 'totalRevenue', 'totalDue', 'todaysSell', 'todaysUnPaid',  'deliveryDue'));
+        return view('home', compact('orders', 'todaysOrder', 'monthlyOrder', 'unPaid', 'totalRevenue', 'todaysDue', 'totalDue', 'todaysSell', 'todaysUnPaid',  'deliveryDue','monthlySell', 'monthlyDue'));
     }
 }

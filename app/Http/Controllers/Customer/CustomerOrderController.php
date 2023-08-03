@@ -29,12 +29,23 @@ class CustomerOrderController extends Controller
         $orderItemsIds = $user->orderedBooks->pluck('book_id');
         $query = Book::query();
         if (request()->routeIs('user.myorder.ebook')) {
-            $query->whereIn('id', $orderItemsIds)->where('is_ebook', true);
-        } else {
-            $query->whereIn('id', $orderItemsIds)->where('is_ebook', false);
+            $query->whereIn('id', $orderItemsIds)->where('type', 0)->where('is_ebook', true);
         }
         $orderBooks = $query->select('id', 'user_id', 'class_room_id', 'subject_id', "title", "slug", "thumbnail", 'is_ebook')->classRoomName()->subjectName()->get();
         return view('user.myOrders', compact('orderBooks'));
+    }
+
+
+    /**
+     * * GET ALL ORDERS 
+     */
+    function getMyOrders()
+    {
+        $orders = Order::where('customer_id', auth()->user()->id)
+            ->where('status', 'Complete')
+            ->orWhere('status', 'delivered')
+            ->latest()->with('orderItems')->paginate(10);
+        return view('user.orderDelivered', compact('orders'));
     }
 
     /**

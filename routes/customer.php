@@ -26,7 +26,7 @@ Route::middleware(['isUser'])->prefix('/dashboard')->name('user.')->group(functi
     //* CUSTOMER PURCHASE PRODUCT URL
     Route::prefix('my-orders')->name('myorder.')->controller(CustomerOrderController::class)->group(function () {
         Route::get('/ebook', 'getMyBooks')->name('ebook');
-        Route::get('/', 'getMyBooks')->name('physical');
+        Route::get('/', 'getMyOrders')->name('physical');
         Route::get('/my-book/{id}', 'viewMyBook')->name('book.view')->middleware('confirmOrder');
         Route::get('/get-book-pdf/{id}', 'getBookPdf')->name('book.pdf')->middleware('confirmOrder');
     });

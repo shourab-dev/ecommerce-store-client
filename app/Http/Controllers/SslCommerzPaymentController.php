@@ -50,7 +50,7 @@ class SslCommerzPaymentController extends Controller
     //* CART CONFIRM DETAILS PAGE
     public function index(Request $request)
     {
-        
+
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
@@ -168,9 +168,8 @@ class SslCommerzPaymentController extends Controller
 
 
         #Before  going to initiate the payment order status need to update as Pending.
-        $update_product = DB::table('orders')
-            ->where('transaction_id', $post_data['tran_id'])
-            ->updateOrInsert([
+        $update_product = Order::where('transaction_id', $post_data['tran_id'])
+            ->updateOrCreate([
                 'customer_id' => auth()->guard('user')->user()->id,
                 'name' => $post_data['cus_name'],
                 'email' => $post_data['cus_email'],
@@ -183,6 +182,16 @@ class SslCommerzPaymentController extends Controller
                 'currency' => $post_data['currency'],
                 'created_at' => now(),
             ]);
+        $carts = Cart::where('customer_id', $update_product->customer_id)->get();
+        foreach ($carts as $cart) {
+            $order_item = new OrderItem();
+            $order_item->order_id = $update_product->id;
+            $order_item->book_id = $cart->book_id;
+            $order_item->sold_price = $cart->price;
+            $order_item->total_orders = $cart->amount;
+            $order_item->save();
+            $cart->delete();
+        }
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -209,7 +218,7 @@ class SslCommerzPaymentController extends Controller
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('id', 'customer_id', 'email', 'transaction_id', 'status', 'currency', 'amount')->first();
-        
+
         if ($order_details->status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
@@ -225,16 +234,10 @@ class SslCommerzPaymentController extends Controller
 
 
                 //* UPDATE ORDER ITEMS
-                $carts = Cart::where('customer_id', $order_details->customer_id)->get();
-                foreach ($carts as $cart) {
-                    $order_item = new OrderItem();
-                    $order_item->order_id = $order_details->id;
-                    $order_item->book_id = $cart->book_id;
-                    $order_item->sold_price = $cart->price;
-                    $order_item->total_orders = $cart->amount;
-                    $order_item->save();
-                    $cart->delete();
-                }
+                // $carts = Cart::where('customer_id', $order_details->customer_id)->get();
+                // foreach ($carts as $cart) {
+                //     $cart->delete();
+                // }
 
 
                 // echo "<br >Transaction is successfully Completed ";

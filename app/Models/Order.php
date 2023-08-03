@@ -17,7 +17,8 @@ class Order extends Model
         "status",
         "address",
         "transaction_id",
-        "currency"
+        "currency",
+        "post_code"
     ];
 
 

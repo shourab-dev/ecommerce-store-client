@@ -69,19 +69,37 @@
                     <h6 class="mt-2 ">Delivery Due </h6>
                 </div>
             </div>
-           <div class="col-lg-4">
+           <div class="col-lg-3">
                 <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $todaysSell }} tk</h2>
                     <h6 class="mt-2 ">Todays Sell</h6>
                 </div>
             </div>
-           <div class="col-lg-4">
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $todaysDue }} tk</h2>
+                    <h6 class="mt-2 ">Todays Due</h6>
+                </div>
+            </div>
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $monthlySell }} tk</h2>
+                    <h6 class="mt-2 ">{{ Carbon\Carbon::now()->format("F") }} Sell</h6>
+                </div>
+            </div>
+           <div class="col-lg-3">
+                <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
+                    <h2 class="">{{ $monthlyDue }} tk</h2>
+                    <h6 class="mt-2 ">{{ Carbon\Carbon::now()->format("F") }} Due</h6>
+                </div>
+            </div>
+           <div class="col-lg-6">
                 <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $totalRevenue }} tk</h2>
                     <h6 class="mt-2 "> Total Revenue</h6>
                 </div>
             </div>
-           <div class="col-lg-4">
+           <div class="col-lg-6">
                 <div class="card mb-3 border-0 shadow rounded-lg  px-2 py-4 text-center">
                     <h2 class="">{{ $totalDue }} tk</h2>
                     <h6 class="mt-2 "> Total Due</h6>
