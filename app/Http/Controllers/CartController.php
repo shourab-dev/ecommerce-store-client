@@ -8,6 +8,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\HeaderSeeting;
 use Illuminate\Http\Client\ResponseSequence;
 
 class CartController extends Controller
@@ -15,9 +16,9 @@ class CartController extends Controller
     /**
      * * ADD TO CART
      */
-    public function addToCart(Request $req,$productId)
+    public function addToCart(Request $req, $productId)
     {
-        
+
         $hasAlreadyOrdered = OrderItem::whereHas('book', function ($q) {
             $q->where('is_ebook', 1);
         })->where('book_id', $productId)->whereHas('order', function ($q) {
@@ -48,13 +49,12 @@ class CartController extends Controller
         //* ADDING ITEMS TO CART
         $isAdded = Cart::where('book_id', $book->id)->where('customer_id', auth()->guard('user')->user()->id)->exists();
         if ($isAdded) {
-            
-            if($book->is_ebook == 0){
+
+            if ($book->is_ebook == 0) {
                 Cart::where('book_id', $book->id)->where('customer_id', auth()->guard('user')->user()->id)->update(['amount' => abs($req->amount)]);
             }
-
         } else {
-            
+
             Cart::create([
                 'customer_id' => auth()->guard('user')->user()->id,
                 'book_id' => $book->id,
@@ -115,10 +115,11 @@ class CartController extends Controller
 
         $totalPrice = Book::getCartSubTotal($authId);
 
-
+        $deliveryFee = HeaderSeeting::select('delivery_fee')->first();
 
         //* COMPACTING DATA
-        $data = ["carts" => $carts, "totalPrice" => $totalPrice];
+        $data = ["carts" => $carts, "totalPrice" => $totalPrice, "delivery_fee" => $deliveryFee];
+        
         return view('frontend.cart', compact('data'));
     }
 

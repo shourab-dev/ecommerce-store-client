@@ -69,51 +69,59 @@
                         <b>Enable Questions</b>
                     </label>
                 </div>
-
-
-                <hr>
-                <h5 class="my-3">Website Seo</h5>
-                <div class="col-lg-6 my-3">
-                    <label for="title" class="w-100">
-                        <b>Site Title</b> <br>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ $header->title }}">
-                    </label>
+                <div class="col-lg-4 my-3">
+                    <label for="delivery" class="w-100 d-flex align-items-center  ">
+                        Delivery </label>
+                        <input class="form-control" name="delivery_fee" id="delivery" type="text" value="{{ $header->delivery_fee }}">
                 </div>
-                <div class="col-lg-6 my-3">
-                    <label for="canonical" class="w-100">
-                        <b>Site Canonical</b> <br>
-                        <input type="text" class="form-control" id="canonical" name="canonical"
-                            value="{{ $header->canonical }}">
-                    </label>
-                </div>
-                <div class="col-lg-6 my-3">
-                    <label for="favicon" class="w-100">
-                        <b>Site FavIcon</b> <br>
-                        <input type="file" class="form-control" id="favicon" name="favicon">
-                    </label>
-                </div>
-                <div class="col-lg-6 my-3">
-                    <label for="apple-touch-icon" class="w-100">
-                        <b>Apple Device Icon</b> <br>
-                        <input type="file" class="form-control" id="apple-touch-icon" name="apple_site_icon">
-                    </label>
-                </div>
-                <div class="col-lg-12 my-3">
-                    <label for="detail" class="w-100">
-                        <b>Description</b> <br>
-                        <textarea style="height: 150px;resize:none;" name="detail" id="detail"
-                            class="form-control">{{ $header->detail }}</textarea>
-                    </label>
-                </div>
-                <hr>
-                <br>
-
-                <div class="w-100">
-                    <button class="btn btn-outline-primary w-50 m-auto d-block">Update Setting</button>
-                </div>
-
+                <b>Enable Questions</b>
+                </label>
             </div>
+
+
+            <hr>
+            <h5 class="my-3">Website Seo</h5>
+            <div class="col-lg-6 my-3">
+                <label for="title" class="w-100">
+                    <b>Site Title</b> <br>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ $header->title }}">
+                </label>
+            </div>
+            <div class="col-lg-6 my-3">
+                <label for="canonical" class="w-100">
+                    <b>Site Canonical</b> <br>
+                    <input type="text" class="form-control" id="canonical" name="canonical"
+                        value="{{ $header->canonical }}">
+                </label>
+            </div>
+            <div class="col-lg-6 my-3">
+                <label for="favicon" class="w-100">
+                    <b>Site FavIcon</b> <br>
+                    <input type="file" class="form-control" id="favicon" name="favicon">
+                </label>
+            </div>
+            <div class="col-lg-6 my-3">
+                <label for="apple-touch-icon" class="w-100">
+                    <b>Apple Device Icon</b> <br>
+                    <input type="file" class="form-control" id="apple-touch-icon" name="apple_site_icon">
+                </label>
+            </div>
+            <div class="col-lg-12 my-3">
+                <label for="detail" class="w-100">
+                    <b>Description</b> <br>
+                    <textarea style="height: 150px;resize:none;" name="detail" id="detail"
+                        class="form-control">{{ $header->detail }}</textarea>
+                </label>
+            </div>
+            <hr>
+            <br>
+
+            <div class="w-100">
+                <button class="btn btn-outline-primary w-50 m-auto d-block">Update Setting</button>
+            </div>
+
         </div>
-    </form>
+</div>
+</form>
 </div>
 @endsection

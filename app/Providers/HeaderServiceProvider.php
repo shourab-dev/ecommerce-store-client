@@ -25,8 +25,10 @@ class HeaderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         return view()->composer('layouts.frontendLayouts', function ($view) {
             $view->with('headerSetting', HeaderSeeting::first())->with('socials', SocialLink::select("name", 'link', 'icon')->where('link', "!=", null)->get());
         });
+    
     }
 }

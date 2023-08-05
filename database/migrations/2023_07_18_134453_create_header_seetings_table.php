@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('canonical')->nullable();
             $table->text('favicon')->nullable();
             $table->text('apple_icon')->nullable();
+            $table->integer('delivery_fee')->default(100);
             $table->timestamps();
         });
     }

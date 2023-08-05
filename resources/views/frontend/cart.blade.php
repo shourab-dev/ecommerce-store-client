@@ -11,41 +11,66 @@
                     <form action="{{ route('checkout') }}" method="POST" class="p-4">
                         <h5 class="mb-4">Check Out Form</h5>
                         @csrf
-                        <input type="text" class="form-control my-2" value="{{ auth()->guard('user')->user()->name }}" name="name" placeholder="User Name">
+                        <input type="text" class="form-control my-2" value="{{ auth()->guard('user')->user()->name }}"
+                            name="name" placeholder="User Name">
                         @error('name')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <input type="text" class="form-control my-2" name="email" value="{{ auth()->guard('user')->user()->email }}" placeholder="Email">
+                        <input type="text" class="form-control my-2" name="email"
+                            value="{{ auth()->guard('user')->user()->email }}" placeholder="Email">
                         @error('email')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <input type="text" value="{{ auth()->guard('user')->user()->details->phone  ?? '' }}" class="form-control my-2" name="phone" placeholder="Phone">
+                        <input type="text" value="{{ auth()->guard('user')->user()->details->phone  ?? '' }}"
+                            class="form-control my-2" name="phone" placeholder="Phone">
                         @error('phone')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <input type="number" value="{{ auth()->guard('user')->user()->details->post_code ?? '' }}" class="form-control my-2" name="postCode" placeholder="Post Code">
+                        <input type="number" value="{{ auth()->guard('user')->user()->details->post_code ?? '' }}"
+                            class="form-control my-2" name="postCode" placeholder="Post Code">
                         @error('postCode')
                         <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                        <textarea name="address" class="form-control my-2" placeholder="Your Address">{{ auth()->guard('user')->user()->details->address ?? '' }}</textarea>
+                        <textarea name="address" class="form-control my-2"
+                            placeholder="Your Address">{{ auth()->guard('user')->user()->details->address ?? '' }}</textarea>
                         @error('address')
-                            <span class="text-danger my-2 d-block">{{ $message }}</span>
+                        <span class="text-danger my-2 d-block">{{ $message }}</span>
                         @enderror
-                    
-                    <div class="p-4d875 border">
-                        <table class="shop_table shop_table_responsive">
-                            <tbody>
-                                <tr class="order-total">
-                                    <th>Total</th>
-                                    <td data-title="Total"><strong><span class="woocommerce-Price-amount amount"><span
-                                                    class="woocommerce-Price-currencySymbol">tk </span>{{
-                                                $data['totalPrice']
-                                                }}</span></strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                        <div class="p-4d875 border">
+                            <table class="shop_table shop_table_responsive">
+                                <tbody>
+                                    <tr class="order-total">
+                                        <th>Delivery</th>
+                                        <td data-title="delivery"><strong><span
+                                                    class="woocommerce-Price-amount amount"><span
+                                                        class="woocommerce-Price-currencySymbol">tk </span>{{
+                                                    $data['delivery_fee']->delivery_fee }}</span></strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        <th>Product Total</th>
+                                        <td data-title="Total"><strong><span
+                                                    class="woocommerce-Price-amount amount"><span
+                                                        class="woocommerce-Price-currencySymbol">tk </span>{{
+                                                    $data['totalPrice']
+                                                    }}</span></strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        
+                                        <th>Sub Total</th>
+                                        
+                                        <td data-title="Total"><strong><span
+                                                    class="woocommerce-Price-amount amount"><span
+                                                        class="woocommerce-Price-currencySymbol">tk </span>{{
+                                                    $data['totalPrice'] + $data['delivery_fee']->delivery_fee
+                                                    }}</span></strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                 </div>
                 <div class="wc-proceed-to-checkout">
                     <button type="submit"
@@ -78,29 +103,36 @@
                                             <tr class="woocommerce-cart-form__cart-item cart_item">
                                                 <td class="product-name" data-title="Product">
                                                     <div class="d-flex align-items-center">
-                                                        <a href="{{ route('frontend.product.show', $cart->books->slug) }}">
-                                                            <img src="{{ $cart->books->thumbnail }}" style="max-width: 100px"
+                                                        <a
+                                                            href="{{ route('frontend.product.show', $cart->books->slug) }}">
+                                                            <img src="{{ $cart->books->thumbnail }}"
+                                                                style="max-width: 100px"
                                                                 class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image"
                                                                 alt>
                                                         </a>
                                                         <div class="ml-3 m-w-200-lg-down">
-                                                            <a href="{{ route('frontend.product.show', $cart->books->slug) }}">{{ $cart->books->title }}  ({{ $cart->amount }} pieces)</a>
+                                                            <a
+                                                                href="{{ route('frontend.product.show', $cart->books->slug) }}">{{
+                                                                $cart->books->title }} ({{ $cart->amount }} pieces)</a>
                                                             @if (isset($cart->books->author))
-                                                                
+
                                                             <a href="cart.html#"
-                                                            class="text-gray-700 font-size-2 d-block"
-                                                            tabindex="0">{{ $cart->books->author->name }}</a>
+                                                                class="text-gray-700 font-size-2 d-block"
+                                                                tabindex="0">{{ $cart->books->author->name }}</a>
                                                             @endif
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="product-price" data-title="Price">
                                                     <span class="woocommerce-Price-amount amount"> {{
-                                                        $cart->books->selling_price ?? $cart->books->price }} <span class="woocommerce-Price-currencySymbol">tk</span></span>
+                                                        $cart->books->selling_price ?? $cart->books->price }} <span
+                                                            class="woocommerce-Price-currencySymbol">tk</span></span>
                                                 </td>
                                                 <td class="product-price" data-title="Price">
                                                     <span class="woocommerce-Price-amount amount"> {{
-                                                       ($cart->books->selling_price ?? $cart->books->price) * $cart->amount }} <span class="woocommerce-Price-currencySymbol">tk</span></span>
+                                                        ($cart->books->selling_price ?? $cart->books->price) *
+                                                        $cart->amount }} <span
+                                                            class="woocommerce-Price-currencySymbol">tk</span></span>
                                                 </td>
 
 
