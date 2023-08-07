@@ -100,4 +100,11 @@ class UserAuthController extends Controller
         ]);
         return back();
     }
+
+    function userRegister()  {
+        
+    }
+    function userRegisterHandle(){
+        
+    }
 }

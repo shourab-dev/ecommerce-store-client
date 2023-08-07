@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [UserAuthController::class, 'userLogin'])->name('user.login');
 Route::post('login', [UserAuthController::class, 'handleUserLogin'])->name('user.login.check');
+Route::get('register', [UserAuthController::class, 'userRegister'])->name('user.register');
+Route::post('register', [UserAuthController::class, 'userRegisterHandle'])->name('user.register.confirm');
 
 Route::middleware(['isUser'])->prefix('/dashboard')->name('user.')->group(function () {
 
@@ -33,7 +35,7 @@ Route::middleware(['isUser'])->prefix('/dashboard')->name('user.')->group(functi
 
 
     //* CUSTOMER PROFILE INVOICES
-    Route::prefix('my-invoices')->name('myinvoice.')->controller(CustomerInvoiceController::class)->group(function(){
+    Route::prefix('my-invoices')->name('myinvoice.')->controller(CustomerInvoiceController::class)->group(function () {
         Route::get('/', 'getAllInvoices')->name('all');
     });
 });
