@@ -13,6 +13,7 @@ class InvoiceEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
     public $order;
+    public $deliveryFee;
    
 
     /**
@@ -20,9 +21,10 @@ class InvoiceEmail extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct($order, $deliveryFee)
     {
         $this->order = $order;
+        $this->deliveryFee = $deliveryFee;
         
         
     }

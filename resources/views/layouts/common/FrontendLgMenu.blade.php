@@ -3,7 +3,7 @@
             class="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium {{ request()->routeIs('frontend.home') ? 'active border-bottom' : '' }}  border-primary border-width-2">Home</a>
     </li>
     <li class="nav-item dropdown">
-        <a id="homeDropdownInvoker" href="index.html#"
+        <a id="homeDropdownInvoker" href="#"
             class="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
             aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#classes"
             data-unfold-type="css-animation" data-unfold-duration="200" data-unfold-delay="50"

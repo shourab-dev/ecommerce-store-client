@@ -35,8 +35,7 @@
             <div class="container-fluid px-2 px-md-5 px-xl-8d75">
                 <div class="topbar__nav d-md-flex justify-content-between align-items-center">
                     <ul class="topbar__nav--left nav ml-md-n3">
-                        <li class="nav-item"><a href="index.html#" class="nav-link link-black-100"><i
-                                    class="glph-icon flaticon-question mr-2"></i>Can we help you?</a></li>
+                       
                         @if (isset($headerSetting->phone))
                         @foreach (json_decode($headerSetting->phone) as $phone)
 
@@ -507,6 +506,40 @@
                                 <div class="u-sidebar__navigation">
                                 </div>
                             </div>
+                           
+
+                            {{-- sidebar menu --}}
+                            <div class="border-bottom">
+                                <div class="zeynep pt-4" style="transform: translateX(0px); width: 295px;">
+                                    <ul>
+                                       
+                                        <li class="has-submenu">
+                                            <a href="#" data-submenu="art-photo"> Category</a>
+                                            <div id="art-photo" class="submenu">
+                                                <div class="submenu-header" data-submenu-close="art-photo">
+                                                    <a href="#"> Category</a>
+                                                </div>
+                                                <ul>
+                                                    @foreach ($classRooms as $classRoom)
+                                                    <li>
+                                                        
+                                                        <a href="{{ route('frontend.product.class',$classRoom->slug) }}">{{
+                                                            $classRoom->name
+                                                            }}</a>
+                                                    </li>
+                                                    @endforeach
+                                                   
+                                                </ul>
+                                            </div>
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                            {{-- sidebar menu end --}}
+
+
+
                             <div class="px-4 px-md-5 pt-5 pb-4 border-bottom">
                                 <h2 class="font-size-3 mb-3">HELP & SETTINGS </h2>
                                 <ul class="list-group list-group-flush list-group-borderless">

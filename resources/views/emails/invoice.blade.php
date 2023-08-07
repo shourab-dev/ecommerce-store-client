@@ -90,10 +90,17 @@
                                         tk</td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <td colspan="1" style="text-align: center;">Delivery Fee</td>
+                                    <td colspan="1"></td>
+                                    <td colspan="1"></td>
+                                    <td style="text-align:center;" colspan="1">{{ $deliveryFee }} tk</td>
 
+                                </tr>
 
                             </tbody>
                             <tfoot class="card-footer">
+
                                 <tr>
                                     <td colspan="3" class="text-end border-bottom-0"><strong>Total:</strong></td>
                                     <td class="text-end border-bottom-0">{{ $order->amount }} tk</td>

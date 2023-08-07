@@ -99,7 +99,15 @@
                         <td class="col-2 text-end">{{ $orderItem->sold_price * $orderItem->total_orders }} tk</td>
                     </tr>
                     @endforeach
+                    <tr style="border-top: 1px solid #ccc">
+                        <td   colspan="1" style="text-align: center;">Delivery Fee</td>
+                        <td   colspan="1"></td>
+                        <td   colspan="1"></td>
+                        <td  style="text-align:center;" colspan="1">{{ $deliveryFee }} tk</td>
+                    
+                    </tr>
                     <tfoot style="background: #ececec;">
+                       
                         <tr>
                             <td align="right" colspan="3" class="text-end border-bottom-0"><strong>Total:</strong></td>
                             <td align="center" class="text-end border-bottom-0">{{ $order->amount }} tk</td>

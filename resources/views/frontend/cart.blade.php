@@ -1,5 +1,6 @@
 @extends('layouts.frontendLayouts')
 @section('frontendContent')
+ @if (count($data['carts']) > 0) 
 <div class="site-content bg-light overflow-hidden" id="content">
     <div class="container">
         <header class="entry-header space-top-2 space-bottom-1 mb-2">
@@ -169,4 +170,15 @@
         </div>
     </div>
 </div>
+@else
+    <div class="container" style="height: 50vh">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="cnt text-center">
+                <h2 class="text-center">You have no Items in your Cart!</h2>
+                <a class="btn btn-dark mt-2 rounded-0" href="{{ route('frontend.product.show') }}">Go to Shop</a>
+            </div>
+        </div>
+    </div>
+@endif
+
 @endsection

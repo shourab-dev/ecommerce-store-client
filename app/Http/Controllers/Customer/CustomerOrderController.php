@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Mail\InvoiceEmail;
 use Illuminate\Http\Request;
+use App\Models\HeaderSeeting;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -41,7 +42,7 @@ class CustomerOrderController extends Controller
      */
     function getMyOrders()
     {
-        $orders = Order::where('customer_id', auth()->user()->id)
+        $orders = Order::where('customer_id', auth()->guard('user')->user()->id)
             ->where('status', 'Complete')
             ->orWhere('status', 'delivered')
             ->latest()->with('orderItems')->paginate(10);
@@ -80,7 +81,9 @@ class CustomerOrderController extends Controller
     public function sendOrderInvoice($orderId)
     {
         $order = Order::with('orderItems')->find($orderId);
-        $data = ["order" => $order];
+        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        $data = ["order" => $order, "deliveryFee" => $deliveryFee];
+
 
         $pdf = Pdf::loadView('emails.downloadInvoice', $data);
         return $pdf->download('Order-Invoice-' . today()->format("d-m-y") . '.pdf');

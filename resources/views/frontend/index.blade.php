@@ -47,7 +47,7 @@
     <div class="container">
         <header class="mb-5 d-md-flex justify-content-between align-items-center">
             <h2 class="font-size-7 mb-3 mb-md-0">Bestselling Books</h2>
-            <a href="../shop/v1.html" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
+            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
         </header>
         <div class="js-slick-carousel products no-gutters border-top border-left border-right"
             data-pagi-classes="d-xl-none text-center position-absolute right-0 left-0 u-slick__pagination mt-4 mb-0"
@@ -72,12 +72,12 @@
                 }, {
                    &quot;breakpoint&quot;: 768,
                    &quot;settings&quot;: {
-                     &quot;slidesToShow&quot;: 1
+                     &quot;slidesToShow&quot;: 2
                    }
                 }, {
                    &quot;breakpoint&quot;: 554,
                    &quot;settings&quot;: {
-                     &quot;slidesToShow&quot;: 1
+                     &quot;slidesToShow&quot;: 2
                    }
                 }]">
 
@@ -282,7 +282,7 @@
     <div class="container">
         <header class="mb-5 d-md-flex justify-content-between align-items-center">
             <h2 class="font-size-7 mb-3 mb-md-0">Books Shops</h2>
-            <a href="../shop/v1.html" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
+            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
         </header>
         <div class="js-slick-carousel u-slick products border"
             data-pagi-classes="text-center u-slick__pagination mt-md-8 mt-4 position-absolute right-0 left-0"
@@ -357,7 +357,7 @@
     <div class="container">
         <header class="d-md-flex justify-content-between align-items-center mb-8">
             <h2 class="font-size-7 mb-3 mb-md-0">Favorite Authors</h2>
-            <a href="../others/authors-list.html" class="h-primary d-block">View All <i
+            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i
                     class="glyph-icon flaticon-next"></i></a>
         </header>
         <ul class="row rows-cols-5 no-gutters authors list-unstyled js-slick-carousel u-slick" data-slides-show="5"

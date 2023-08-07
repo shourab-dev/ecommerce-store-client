@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\HeaderSeeting;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -34,7 +35,10 @@ class SslCommerzPaymentController extends Controller
         ]);
 
         $authId =  auth()->guard('user')->user()->id;
-        $totalPrice = Book::getCartSubTotal($authId);
+        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        
+        $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
+        
 
         $data = $request->all();
 
@@ -126,7 +130,10 @@ class SslCommerzPaymentController extends Controller
         $data = (array) json_decode($request->cart_json);
 
         $authId =  auth()->guard('user')->user()->id;
-        $totalPrice = Book::getCartSubTotal($authId);
+        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+
+        $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
+        
 
         $post_data = array();
         $post_data['total_amount'] = $totalPrice; # You cant not pay less than 10
@@ -242,8 +249,9 @@ class SslCommerzPaymentController extends Controller
 
                 // echo "<br >Transaction is successfully Completed ";
                 $order = Order::with('orderItems')->find($order_details->id);
+                $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
                 $customerOrderId = $order->id;
-                Mail::to($order_details->email)->send(new InvoiceEmail($order));
+                Mail::to($order_details->email)->send(new InvoiceEmail($order, $deliveryFee));
                 return view('frontend.paymentSuccess', compact('customerOrderId'));
             }
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
