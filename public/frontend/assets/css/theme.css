@@ -24140,3 +24140,8 @@ footer .widget select.custom-select,
 .search_result span{
     font-size: 14px;
 }
+.whatsapp{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}

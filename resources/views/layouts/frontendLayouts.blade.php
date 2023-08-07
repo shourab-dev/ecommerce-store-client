@@ -25,17 +25,18 @@
         href="{{ asset('frontend/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/theme.css') }}">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     @stack('customCss')
 </head>
 
 <body>
-    
+
     <header id="site-header" class="site-header__v1">
         <div class="topbar border-bottom d-none d-md-block">
             <div class="container-fluid px-2 px-md-5 px-xl-8d75">
                 <div class="topbar__nav d-md-flex justify-content-between align-items-center">
                     <ul class="topbar__nav--left nav ml-md-n3">
-                       
+
                         @if (isset($headerSetting->phone))
                         @foreach (json_decode($headerSetting->phone) as $phone)
 
@@ -45,7 +46,7 @@
                         @endforeach
                         @endif
                         @if (isset($headerSetting->email) && $headerSetting->email != null)
-                        
+
                         @foreach (json_decode($headerSetting->email) as $email)
                         <li class="nav-item"><a href="mailto:{{ $email }}" class="nav-link link-black-100">
                                 <i class="fa fa-envelope mr-2"></i>{{
@@ -506,13 +507,13 @@
                                 <div class="u-sidebar__navigation">
                                 </div>
                             </div>
-                           
+
 
                             {{-- sidebar menu --}}
                             <div class="border-bottom">
                                 <div class="zeynep pt-4" style="transform: translateX(0px); width: 295px;">
                                     <ul>
-                                       
+
                                         <li class="has-submenu">
                                             <a href="#" data-submenu="art-photo"> Category</a>
                                             <div id="art-photo" class="submenu">
@@ -522,17 +523,18 @@
                                                 <ul>
                                                     @foreach ($classRooms as $classRoom)
                                                     <li>
-                                                        
-                                                        <a href="{{ route('frontend.product.class',$classRoom->slug) }}">{{
+
+                                                        <a
+                                                            href="{{ route('frontend.product.class',$classRoom->slug) }}">{{
                                                             $classRoom->name
                                                             }}</a>
                                                     </li>
                                                     @endforeach
-                                                   
+
                                                 </ul>
                                             </div>
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
@@ -595,6 +597,16 @@
     @yield('frontendContent')
     {{-- main end --}}
 
+    {{-- * WHATSAPP INTEGRATION --}}
+    <div class="whatsapp">
+
+        <a title="Contact Us on Whatsapp" href="https://wa.me/01997492233" target="_blank">
+            <lottie-player src="https://lottie.host/072162f0-f204-4113-bc58-46691dc0c65a/JamgHUQtKt.json"
+                background="transparent" speed="1" style="width: 80px; height: 80px" loop autoplay direction="1"
+                mode="normal"></lottie-player>
+        </a>
+    </div>
+    {{-- * WHATSAPP INTEGRATION END --}}
 
     <footer>
         <div class="border-top space-top-3">
@@ -688,7 +700,7 @@
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Sitemap</a>
                                 </li>
-                             
+
                             </ul>
                         </div>
 
@@ -703,7 +715,7 @@
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Terms Of Use</a>
                                 </li>
-                               
+
                                 <li class="pt-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
                                         href="index.html#">Privacy</a>
@@ -731,7 +743,8 @@
                 <div class="container">
                     <div class="d-lg-flex text-center  text-lg-left justify-content-center align-items-center">
 
-                        <p class="mb-3 mb-lg-0 font-size-2">©{{ Carbon\Carbon::today()->format("Y") }} {{ env('APP_NAME') }}. All rights reserved</p>
+                        <p class="mb-3 mb-lg-0 font-size-2">©{{ Carbon\Carbon::today()->format("Y") }} {{
+                            env('APP_NAME') }}. All rights reserved</p>
 
 
                     </div>
@@ -739,6 +752,7 @@
             </div>
         </div>
     </footer>
+
 
 
     <script src="{{ asset('frontend/assets/vendor/jquery/dist/jquery.min.js') }}"></script>
