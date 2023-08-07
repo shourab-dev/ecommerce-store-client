@@ -69,6 +69,12 @@
                                                     }}</span></strong>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td width="100%">
+                                            <input type="radio" checked class="mr-2" id="cod" name="paymentMethod" value="cod" ><label for="cod">Cash on Delivery</label> <br>
+                                            <input type="radio" class="mr-2" id="ssl" name="paymentMethod" value="ssl" ><label for="ssl">SSl Commerce</label>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

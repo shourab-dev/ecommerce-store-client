@@ -18,32 +18,79 @@ class SslCommerzPaymentController extends Controller
 
     public function exampleEasyCheckout(Request $request)
     {
+
         //* VALIDATE USER DATA
         $request->validate([
             'name' => 'required',
             'email' => 'email',
             'phone' => 'required',
             'address' => 'required',
-            'postCode' => 'required'
+            'postCode' => 'required',
+            "paymentMethod" => 'required'
         ], [
             'postCode.required' => "Please fill up your Post Code",
             'name.required' => "Please fill up your name",
             'email.email' => "Please make sure you enter a valid email",
             'phone.required' => "Please fill up a your phone number",
             'address.required' => "Please fill up a your address",
+            "paymentMethod.required" => "Please select a payment methods."
 
         ]);
+        if ($request->paymentMethod == 'cod') {
+            return $this->cashOnDelivery($request);
+        } else if ($request->paymentMethod == 'ssl') {
+            $authId =  auth()->guard('user')->user()->id;
+            $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+
+            $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
+
+
+            $data = $request->all();
+
+
+            return view('frontend.checkout', compact('totalPrice', 'data'));
+        }
+    }
+    function cashOnDelivery($request)
+    {
+        $transId = uniqid();
 
         $authId =  auth()->guard('user')->user()->id;
         $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
-        
+
         $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
-        
+        $update_product = Order::
+            where('transaction_id', $transId)
+            ->updateOrCreate([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'amount' => $totalPrice,
+                'status' => 'Pending',
+                'address' => $request->address,
+                'transaction_id' => $transId,
+                'currency' => "BDT",
+            "post_code" => $request->postCode,
+            'customer_id' => auth()->guard('user')->user()->id,
+        ]);
 
-        $data = $request->all();
+        $carts = Cart::where('customer_id', $update_product->customer_id)->get();
+        foreach ($carts as $cart) {
+            $order_item = new OrderItem();
+            $order_item->order_id = $update_product->id;
+            $order_item->book_id = $cart->book_id;
+            $order_item->sold_price = $cart->price;
+            $order_item->total_orders = $cart->amount;
+            $order_item->save();
+            $cart->delete();
+        }
 
+        $order = Order::with('orderItems')->find($update_product->id);
+        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        $customerOrderId = $order->id;
+        Mail::to($order->email)->send(new InvoiceEmail($order, $deliveryFee));
+        return view('frontend.paymentSuccess', compact('customerOrderId'));
 
-        return view('frontend.checkout', compact('totalPrice', 'data'));
     }
 
     public function exampleHostedCheckout()
@@ -133,7 +180,7 @@ class SslCommerzPaymentController extends Controller
         $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
 
         $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
-        
+
 
         $post_data = array();
         $post_data['total_amount'] = $totalPrice; # You cant not pay less than 10
