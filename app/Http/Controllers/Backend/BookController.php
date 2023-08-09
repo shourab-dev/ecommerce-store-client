@@ -247,6 +247,27 @@ class BookController extends Controller
             $book->user_id = $request->author;
         }
         $book->save();
+        if ($request->hasFile('galleryImages')) {
+
+            $acceptTypes = ['jpeg', 'png', 'webp', 'jpg'];
+
+            foreach ($request->galleryImages as $gallImg) {
+                $ext = $gallImg->getClientOriginalExtension();
+                $isValidExt = array_search($ext, $acceptTypes);
+                //* IF ERROR FOUND!
+                if (!$isValidExt) {
+                    return back()->withErrors(['galleryImages' => "Gallery Images extensions are jpeg, png, webp, jpg"]);
+                }
+
+                //* NO EXCEPTION OCCRED
+                $gallArray = $this->uploadSingleMedia($gallImg, 'gallery');
+                GalleryImage::create([
+                    "book_id" =>  $book->id,
+                    'gall_url' => $gallArray['name'],
+                    "gall_path" => $gallArray["url"]
+                ]);
+            }
+        }
         notify()->success('Book Successfully inserted');
         return back();
     }
