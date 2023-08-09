@@ -20,6 +20,7 @@ class SettingController extends Controller
 
     function updateSetting(Request $request)
     {
+        
         $header = HeaderSeeting::first();
         if ($request->hasFile('logo')) {
             if (Storage::disk('public')->exists($this->removeUrl($header->logo))) {
@@ -55,6 +56,7 @@ class SettingController extends Controller
         $header->email = $this->buildJson($request->email);
         $header->is_question = $request->is_question ?? false;
         $header->title = $request->title;
+        $header->delivery_fee = $request->delivery_fee;
         $header->whatsapp = $request->whatsapp;
         $header->detail = $request->detail;
         $header->canonical = $request->canonical;

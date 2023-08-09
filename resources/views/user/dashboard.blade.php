@@ -4,7 +4,7 @@
 @section('customerUi')
 
     <div class="container py-4">
-        <h2>Welcome to Tally Academy {{ auth()->guard('user')->user()->name }}</h2>
+        <h2>Welcome to {{ env('APP_NAME') }} {{ auth()->guard('user')->user()->name }}</h2>
 
 
         <br>

@@ -1,4 +1,8 @@
 @extends('layouts.frontendLayouts')
+
+@section('title')
+    {{ str($book->title)->headline() }} - {{ env('APP_NAME') }}
+@endsection
 @section('frontendContent')
 <div id="primary" class="content-area">
     <main id="main" class="site-main ">

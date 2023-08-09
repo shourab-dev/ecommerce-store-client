@@ -141,7 +141,7 @@
                     <div class="site-branding pr-md-4">
                         <a href="{{ url('/') }}" class="d-flex align-items-center mb-1">
                             <img src="{{ $headerSetting->logo }}" alt="" height="60">
-                            <h2 class="ml-2 text-dark">Tally</h2>
+                            <h2 class="ml-2 text-dark">{{ env('APP_NAME') }}</h2>
                         </a>
                     </div>
                     <div class="site-navigation m-auto d-none d-xl-block">
@@ -489,7 +489,8 @@
                             <header
                                 class="border-bottom px-4 px-md-5 py-4 d-flex align-items-center justify-content-between">
                                 <h2 class="d-flex align-items-center mb-0"><img src="{{ asset('frontend/logo.png') }}"
-                                        alt="Talley" height="50"><span class="ml-2">Talley</span></h2>
+                                        alt="{{ env('APP_NAME') }}" height="50"><span class="ml-2">{{ env('APP_NAME')
+                                        }}</span></h2>
 
                                 <div class="d-flex align-items-center">
                                     <button type="button" class="close ml-auto" aria-controls="sidebarContent2"
