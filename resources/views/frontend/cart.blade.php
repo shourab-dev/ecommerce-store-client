@@ -1,6 +1,6 @@
 @extends('layouts.frontendLayouts')
 @section('frontendContent')
- @if (count($data['carts']) > 0) 
+@if (count($data['carts']) > 0)
 <div class="site-content bg-light overflow-hidden" id="content">
     <div class="container">
         <header class="entry-header space-top-2 space-bottom-1 mb-2">
@@ -46,7 +46,7 @@
                                         <td data-title="delivery"><strong><span
                                                     class="woocommerce-Price-amount amount"><span
                                                         class="woocommerce-Price-currencySymbol">tk </span>{{
-                                                    $data['delivery_fee']->delivery_fee }}</span></strong>
+                                                    $data['delivery_fee'] }}</span></strong>
                                         </td>
                                     </tr>
                                     <tr class="order-total">
@@ -59,20 +59,22 @@
                                         </td>
                                     </tr>
                                     <tr class="order-total">
-                                        
+
                                         <th>Sub Total</th>
-                                        
+
                                         <td data-title="Total"><strong><span
                                                     class="woocommerce-Price-amount amount"><span
                                                         class="woocommerce-Price-currencySymbol">tk </span>{{
-                                                    $data['totalPrice'] + $data['delivery_fee']->delivery_fee
+                                                    $data['totalPrice'] + $data['delivery_fee']
                                                     }}</span></strong>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="100%">
-                                            <input type="radio" checked class="mr-2" id="cod" name="paymentMethod" value="cod" ><label for="cod">Cash on Delivery</label> <br>
-                                            <input type="radio" class="mr-2" id="ssl" name="paymentMethod" value="ssl" ><label for="ssl">SSl Commerce</label>
+                                            <input type="radio" checked class="mr-2" id="cod" name="paymentMethod"
+                                                value="cod"><label for="cod">Cash on Delivery</label> <br>
+                                            <input type="radio" class="mr-2" id="ssl" name="paymentMethod"
+                                                value="ssl"><label for="ssl">SSl Commerce</label>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -177,14 +179,14 @@
     </div>
 </div>
 @else
-    <div class="container" style="height: 50vh">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="cnt text-center">
-                <h2 class="text-center">You have no Items in your Cart!</h2>
-                <a class="btn btn-dark mt-2 rounded-0" href="{{ route('frontend.product.show') }}">Go to Shop</a>
-            </div>
+<div class="container" style="height: 50vh">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="cnt text-center">
+            <h2 class="text-center">You have no Items in your Cart!</h2>
+            <a class="btn btn-dark mt-2 rounded-0" href="{{ route('frontend.product.show') }}">Go to Shop</a>
         </div>
     </div>
+</div>
 @endif
 
 @endsection

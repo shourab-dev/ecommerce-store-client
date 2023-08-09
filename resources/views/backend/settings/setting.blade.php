@@ -73,9 +73,15 @@
                     <label for="delivery" class="w-100 d-flex align-items-center  ">
                         Delivery </label>
                         <input class="form-control" name="delivery_fee" id="delivery" type="text" value="{{ $header->delivery_fee }}">
+                    </label>
                 </div>
-                <b>Enable Questions</b>
-                </label>
+                <div class="col-lg-4 my-3">
+                    <label for="delivery" class="w-100 d-flex align-items-center  ">
+                        Whatsapp number </label>
+                        <input class="form-control" name="whatsapp" id="delivery" type="text" value="{{ $header->whatsapp }}">
+                    </label>
+                </div>
+                
             </div>
 
 

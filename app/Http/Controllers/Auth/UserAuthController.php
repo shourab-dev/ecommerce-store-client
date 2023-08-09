@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Book;
-use App\Models\OrderItem;
 use App\Models\Customer;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\CustomerAddress;
 use App\Http\Helpers\MediaUploader;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserAuthController extends Controller
@@ -101,10 +102,27 @@ class UserAuthController extends Controller
         return back();
     }
 
-    function userRegister()  {
-        
+    function userRegister()
+    {
+
+        return view('auth.userRegister');
     }
-    function userRegisterHandle(){
+    function userRegisterHandle(Request $req)
+    {
         
+        $req->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user =  Customer::create([
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+        ]);
+        
+        Auth::guard('user')->login($user);
+        return redirect()->route('user.dashboard');
     }
 }

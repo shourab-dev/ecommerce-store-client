@@ -108,18 +108,24 @@ class CartController extends Controller
         }])->where('customer_id', $authId)->latest()->get();
 
 
+
+
+
         //* GET CART TOTAL PRICE
 
 
         // $dis = Book::getCartDiscountPrice($authId);
 
         $totalPrice = Book::getCartSubTotal($authId);
-
-        $deliveryFee = HeaderSeeting::select('delivery_fee')->first();
+        // IF CONTAINS EBOOK
+        $hasBookOnCart = Cart::where('customer_id', $authId)->whereHas('books', function ($q) {
+            $q->where("type", 0)->where('is_ebook', false)->orWhere('is_ebook', null);
+        })->count();
+        $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
 
         //* COMPACTING DATA
         $data = ["carts" => $carts, "totalPrice" => $totalPrice, "delivery_fee" => $deliveryFee];
-        
+
         return view('frontend.cart', compact('data'));
     }
 

@@ -42,7 +42,7 @@
             <div class="row">
                 <div class="col-lg-4 p-4 br">
                     <label for="profileImage" class="profileLabel">
-                        <img class="profile_url" src="{{ auth()->guard('user')->user()->profile_url ?? env('AVATAR_API').auth()->guard('user')->user()->name }}" alt="">
+                        <img class="profile_url" src="{{ auth()->guard('user')->user()->profile_url ?? env('AVATAR').auth()->guard('user')->user()->name }}" alt="">
                     </label>
                     <input type="file" id="profileImage" name="profile">
                     <p>Click Profile Picture to Upload new Photo</p>

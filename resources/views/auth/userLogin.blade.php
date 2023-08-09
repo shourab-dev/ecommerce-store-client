@@ -16,10 +16,14 @@
             <div class="col-lg-6">
                 <div class="signin-wrapper">
                     <div class="form-wrapper">
-                        <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.png') }}" alt="" style="width: 50px;margin-bottom:20px"></a>
-                        <h6 class="mb-15">User Sign In</h6>
+                       <div class="text-center mb-5">
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.png') }}" alt=""
+                                    style="width: 50px;margin-bottom:20px"></a>
+                            <h6 class="mb-15">User Register</h6>
                         
-                        <form action="{{ route('user.login.check') }}" method="POST">
+                        </div>
+                        
+                        <form action="{{ route('user.register.confirm') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -74,6 +78,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <a href="{{ route('user.register') }}" class="text-center d-block mt-2">Return To Register </a>
                             <!-- end row -->
                         </form>
 

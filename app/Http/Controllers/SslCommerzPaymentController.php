@@ -56,11 +56,14 @@ class SslCommerzPaymentController extends Controller
         $transId = uniqid();
 
         $authId =  auth()->guard('user')->user()->id;
-        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
-
+        // IF CONTAINS EBOOK
+        $hasBookOnCart = Cart::where('customer_id', $authId)->whereHas('books', function ($q) {
+            $q->where("type", 0)->where('is_ebook', false)->orWhere('is_ebook', null);
+        })->count();
+        $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
+        
         $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
-        $update_product = Order::
-            where('transaction_id', $transId)
+        $update_product = Order::where('transaction_id', $transId)
             ->updateOrCreate([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -70,9 +73,9 @@ class SslCommerzPaymentController extends Controller
                 'address' => $request->address,
                 'transaction_id' => $transId,
                 'currency' => "BDT",
-            "post_code" => $request->postCode,
-            'customer_id' => auth()->guard('user')->user()->id,
-        ]);
+                "post_code" => $request->postCode,
+                'customer_id' => auth()->guard('user')->user()->id,
+            ]);
 
         $carts = Cart::where('customer_id', $update_product->customer_id)->get();
         foreach ($carts as $cart) {
@@ -90,7 +93,6 @@ class SslCommerzPaymentController extends Controller
         $customerOrderId = $order->id;
         Mail::to($order->email)->send(new InvoiceEmail($order, $deliveryFee));
         return view('frontend.paymentSuccess', compact('customerOrderId'));
-
     }
 
     public function exampleHostedCheckout()

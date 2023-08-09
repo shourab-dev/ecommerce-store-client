@@ -26,13 +26,20 @@ class CustomerOrderController extends Controller
     function getMyBooks()
     {
 
-        $user = Customer::where('id', auth()->guard('user')->user()->id)->select('id')->with('orderedBooks')->first();
-        $orderItemsIds = $user->orderedBooks->pluck('book_id');
+        $user = Customer::where('id', auth()->guard('user')->user()->id)->select('id')->whereHas('orders', function ($q) {
+            $q->where('status', "Complete")->orWhere('status', "Delivered");
+        })->with('orderedBooks')->first();
+        if ($user != null) {
+            $orderItemsIds = $user->orderedBooks->pluck('book_id');
+        } else {
+            $orderItemsIds = [];
+        }
         $query = Book::query();
         if (request()->routeIs('user.myorder.ebook')) {
             $query->whereIn('id', $orderItemsIds)->where('type', 0)->where('is_ebook', true);
         }
         $orderBooks = $query->select('id', 'user_id', 'class_room_id', 'subject_id', "title", "slug", "thumbnail", 'is_ebook')->classRoomName()->subjectName()->get();
+
         return view('user.myOrders', compact('orderBooks'));
     }
 

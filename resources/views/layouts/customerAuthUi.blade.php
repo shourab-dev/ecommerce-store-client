@@ -106,7 +106,7 @@
                                             <h6>{{ auth()->guard('user')->user()->name }}</h6>
 
                                             <div class="image">
-                                                <img src="{{ auth()->guard('user')->user()->profile_url ?? env('AVATAR_API').auth()->guard('user')->user()->name }}"
+                                                <img src="{{ auth()->guard('user')->user()->profile_url ?? env('AVATAR').auth()->guard('user')->user()->name }}"
                                                     alt="{{ auth()->guard('user')->user()->name }}" />
                                                 <span class="status"></span>
                                             </div>

@@ -55,9 +55,11 @@ class SettingController extends Controller
         $header->email = $this->buildJson($request->email);
         $header->is_question = $request->is_question ?? false;
         $header->title = $request->title;
+        $header->whatsapp = $request->whatsapp;
         $header->detail = $request->detail;
         $header->canonical = $request->canonical;
         $header->save();
+        notify()->success('Your settings has been updated');
 
 
         return back();
@@ -86,7 +88,7 @@ class SettingController extends Controller
     }
     function updateSocial(Request $request)
     {
-        
+
         $socialArray =  $request->social;
         foreach ($socialArray as $key => $social) {
             SocialLink::find($key)->update([

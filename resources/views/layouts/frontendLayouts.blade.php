@@ -600,7 +600,7 @@
     {{-- * WHATSAPP INTEGRATION --}}
     <div class="whatsapp">
 
-        <a title="Contact Us on Whatsapp" href="https://wa.me/01997492233" target="_blank">
+        <a title="Contact Us on Whatsapp" href="https://wa.me/{{ $headerSetting->whatsapp }}" target="_blank">
             <lottie-player src="https://lottie.host/072162f0-f204-4113-bc58-46691dc0c65a/JamgHUQtKt.json"
                 background="transparent" speed="1" style="width: 80px; height: 80px" loop autoplay direction="1"
                 mode="normal"></lottie-player>

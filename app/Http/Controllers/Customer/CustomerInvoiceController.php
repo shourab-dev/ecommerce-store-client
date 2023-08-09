@@ -19,7 +19,7 @@ class CustomerInvoiceController extends Controller
         $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
 
 
-        
+
         return view('user.invoices', compact('orders', 'deliveryFee'));
     }
 }

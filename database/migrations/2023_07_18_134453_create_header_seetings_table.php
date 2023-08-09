@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('footer_logo')->nullable();
             $table->string('address')->nullable();
             $table->json('phone')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->json('email')->nullable();
             $table->boolean('is_question')->default(false);
             $table->string('title')->nullable();

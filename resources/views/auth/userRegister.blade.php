@@ -1,50 +1,120 @@
-<div id="signup1" style="display: none; opacity: 0;" data-target-group="idForm1">
+@extends('layouts.adminAuthUi')
 
-    <header class="border-bottom px-4 px-md-6 py-4">
-        <h2 class="font-size-3 mb-0 d-flex align-items-center"><i class="flaticon-resume mr-3 font-size-5"></i>Create
-            Account</h2>
-    </header>
+@section('authUi')
 
-    <div class="p-4 p-md-6">
+<!-- ========== signin-section start ========== -->
+<section class="signin-section">
+    <div class="container-fluid">
+        <!-- ========== title-wrapper start ========== -->
+        <div class="title-wrapper pt-30">
 
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signinEmailLabel11" class="form-label" for="signinEmail11">Email *</label>
-                <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail11"
-                    placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com"
-                    aria-describedby="signinEmailLabel11" required>
+        </div>
+        <!-- ========== title-wrapper end ========== -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="signin-wrapper">
+                    <div class="form-wrapper ">
+                        <div class="text-center mb-5">
+                            <a href="{{ url('/') }}"><img src="{{ asset('frontend/logo.png') }}" alt=""
+                                    style="width: 50px;margin-bottom:20px"></a>
+                            <h6 class="mb-15">User Register</h6>
+                            
+                        </div>
+
+                        <form action="{{ route("user.register.confirm") }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-style-1">
+                                        <label>Name</label>
+                                        <input type="text" name="name" placeholder="Your Name" />
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-style-1">
+                                        <label>Email</label>
+                                        <input type="email" name="email" placeholder="Your Email" />
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-md-6 ">
+                                    <div class="input-style-1">
+                                        <label>Password</label>
+                                        <input type="password" name="password" placeholder="Password" />
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="input-style-1">
+                                        <label>Confirm Password</label>
+                                        <input type="password" name="password_confirmation" placeholder="Password" />
+                                        @error('confirmation_password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-xxl-6 col-lg-12 col-md-6">
+                                    <div class="form-check checkbox-style mb-30">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-remember"
+                                            name="remember" />
+                                        <label class="form-check-label" for="checkbox-remember">
+                                            Remember me next time</label>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-xxl-6 col-lg-12 col-md-6">
+                                    <div class="
+                            text-start text-md-end text-lg-start text-xxl-end
+                            mb-30
+                          ">
+                                        <a href="{{ route('password.request') }}" class="hover-underline">Forgot
+                                            Password?</a>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-12">
+                                    <div class="
+                            button-group
+                            d-flex
+                            justify-content-center
+                            flex-wrap
+                          ">
+                                        <button class="
+                              main-btn
+                              primary-btn
+                              btn-hover
+                              w-100
+                              text-center
+                            ">
+                                            Sign In
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ route('user.login') }}" class="text-center d-block mt-2">Return To Login </a>
+                            <!-- end row -->
+                        </form>
+
+                    </div>
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signinPasswordLabel11" class="form-label" for="signinPassword11">Password *</label>
-                <input type="password" class="form-control rounded-0 height-4 px-4" name="password"
-                    id="signinPassword11" placeholder aria-label aria-describedby="signinPasswordLabel11" required>
-            </div>
         </div>
-
-
-        <div class="form-group mb-4">
-            <div class="js-form-message js-focus-state">
-                <label id="signupConfirmPasswordLabel9" class="form-label" for="signupConfirmPassword9">Confirm Password
-                    *</label>
-                <input type="password" class="form-control rounded-0 height-4 px-4" name="confirmPassword"
-                    id="signupConfirmPassword9" placeholder aria-label aria-describedby="signupConfirmPasswordLabel9"
-                    required>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create
-                Account</button>
-        </div>
-        <div class="text-center mb-4">
-            <span class="small text-muted">Already have an account?</span>
-            <a class="js-animation-link small" href="javascript:;" data-target="#login1" data-link-group="idForm1"
-                data-animation-in="fadeIn">Login
-            </a>
-        </div>
+        <!-- end row -->
     </div>
-</div>
+</section>
+
+
+
+@endsection
