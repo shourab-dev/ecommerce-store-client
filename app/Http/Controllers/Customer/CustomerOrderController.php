@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\OrderItem;
 use App\Mail\InvoiceEmail;
 use Illuminate\Http\Request;
 use App\Models\HeaderSeeting;
@@ -88,7 +89,14 @@ class CustomerOrderController extends Controller
     public function sendOrderInvoice($orderId)
     {
         $order = Order::with('orderItems')->find($orderId);
-        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        // IF CONTAINS EBOOK
+        $hasBookOnCart = OrderItem::where('order_id', $orderId)->whereHas('book', function ($q) {
+            $q->where("type", 0)->where(
+                'is_ebook',
+                false
+            )->orWhere('is_ebook', null);
+        })->count();
+        $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
         $data = ["order" => $order, "deliveryFee" => $deliveryFee];
 
 

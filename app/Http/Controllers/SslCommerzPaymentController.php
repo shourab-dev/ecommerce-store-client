@@ -40,10 +40,14 @@ class SslCommerzPaymentController extends Controller
             return $this->cashOnDelivery($request);
         } else if ($request->paymentMethod == 'ssl') {
             $authId =  auth()->guard('user')->user()->id;
-            $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+            $hasBookOnCart = Cart::where('customer_id', $authId)->whereHas('books', function ($q) {
+                $q->where("type", 0)->where('is_ebook', false)->orWhere('is_ebook', null);
+            })->count();
+            $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
+            
 
             $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
-
+            
 
             $data = $request->all();
 
@@ -61,7 +65,7 @@ class SslCommerzPaymentController extends Controller
             $q->where("type", 0)->where('is_ebook', false)->orWhere('is_ebook', null);
         })->count();
         $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
-        
+
         $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
         $update_product = Order::where('transaction_id', $transId)
             ->updateOrCreate([
@@ -89,7 +93,7 @@ class SslCommerzPaymentController extends Controller
         }
 
         $order = Order::with('orderItems')->find($update_product->id);
-        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        
         $customerOrderId = $order->id;
         Mail::to($order->email)->send(new InvoiceEmail($order, $deliveryFee));
         return view('frontend.paymentSuccess', compact('customerOrderId'));
@@ -179,7 +183,11 @@ class SslCommerzPaymentController extends Controller
         $data = (array) json_decode($request->cart_json);
 
         $authId =  auth()->guard('user')->user()->id;
-        $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+        // IF CONTAINS EBOOK
+        $hasBookOnCart = Cart::where('customer_id', $authId)->whereHas('books', function ($q) {
+            $q->where("type", 0)->where('is_ebook', false)->orWhere('is_ebook', null);
+        })->count();
+        $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
 
         $totalPrice = Book::getCartSubTotal($authId) + $deliveryFee;
 
@@ -298,7 +306,14 @@ class SslCommerzPaymentController extends Controller
 
                 // echo "<br >Transaction is successfully Completed ";
                 $order = Order::with('orderItems')->find($order_details->id);
-                $deliveryFee = HeaderSeeting::select('delivery_fee')->first()->delivery_fee;
+                // IF CONTAINS EBOOK
+                $hasBookOnCart = OrderItem::where('order_id', $order_details->id)->whereHas('book', function ($q) {
+                    $q->where("type", 0)->where('is_ebook',
+                        false
+                    )->orWhere('is_ebook', null);
+                })->count();
+                $deliveryFee = $hasBookOnCart > 0 ? HeaderSeeting::select('delivery_fee')->first()->delivery_fee : 0;
+                
                 $customerOrderId = $order->id;
                 Mail::to($order_details->email)->send(new InvoiceEmail($order, $deliveryFee));
                 return view('frontend.paymentSuccess', compact('customerOrderId'));
