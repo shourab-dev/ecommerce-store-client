@@ -23,7 +23,7 @@
                         
                         </div>
                         
-                        <form action="{{ route('user.register.confirm') }}" method="POST">
+                        <form action="{{ route('user.login.check') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">

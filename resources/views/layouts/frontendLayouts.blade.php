@@ -386,8 +386,8 @@
                                                 In</button>
                                         </div>
                                         <div class="mb-2">
-                                            <a href="#"
-                                                class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium">Create
+                                            <a href="{{ route('user.register') }}"
+                                                class=" btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium">Create
                                                 Account</a>
                                         </div>
                                     </div>
@@ -536,9 +536,30 @@
                                             </div>
                                         </li>
 
+                                        <li class="has-submenu">
+                                            <a href="#" data-submenu="accessories"> Accessories</a>
+                                            <div id="accessories" class="submenu">
+                                                <div class="submenu-header" data-submenu-close="accessories">
+                                                    <a href="#"> Accessories</a>
+                                                </div>
+                                                <ul>
+                                                    @foreach ($subjects as $subject)
+                                                    <li>
+                                        
+                                                        <a href="{{ route('frontend.product.class',$subject->slug) }}">{{
+                                                            str($subject->name)->headline()
+                                                            }}</a>
+                                                    </li>
+                                                    @endforeach
+                                        
+                                                </ul>
+                                            </div>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
+                            
                             {{-- sidebar menu end --}}
 
 

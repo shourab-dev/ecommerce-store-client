@@ -150,11 +150,11 @@ class Book extends Model
     //* GET FILTERED PRODUCTS
     public function scopeFilterBooks($query, $req)
     {
-        if ($req->class) {
-            $query->whereIn('class_room_id', $req->class);
+        if ($req->category) {
+            $query->whereIn('class_room_id', $req->category);
         }
-        if ($req->subjects) {
-            $query->whereIn('subject_id', $req->subjects);
+        if ($req->products) {
+            $query->whereIn('subject_id', $req->products);
         }
         if ($req->authors) {
             $query->whereIn('user_id', $req->authors);

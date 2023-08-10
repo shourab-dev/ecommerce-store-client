@@ -156,9 +156,11 @@
                             <div id="widgetCollapseOne" class="mt-3 widget-content collapse show"
                                 aria-labelledby="widgetHeadingOne" data-parent="#widgetAccordion">
                                 <div class="row justify-content-between">
+                                    
                                     @foreach ($classRooms as $class)
                                     <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="category{{ $class->id }}">
-                                        <input type="checkbox" value="{{ $class->id }}" name="class[]" id="category{{ $class->id }}"> {{ $class->name }}
+                                        
+                                        <input {{ in_array($class->id,request()->category ?? []) ? "checked" : "" }} type="checkbox" value="{{ $class->id }}" name="category[]" id="category{{ $class->id }}"> {{ $class->name }}
                                     </label>
                                         
                                     @endforeach
@@ -191,7 +193,7 @@
                                <div class="row justify-content-between">
                                 @foreach ($subjects as $subject)
                                 <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="subject{{ $subject->id }}">
-                                    <input type="checkbox" name="subjects[]" value="{{ $subject->id }}" id="subject{{ $subject->id }}"> {{ str($subject->name)->headline() }}
+                                    <input {{ in_array($subject->id,request()->products ?? []) ? "checked" : "" }} type="checkbox" name="products[]" value="{{ $subject->id }}" id="subject{{ $subject->id }}"> {{ str($subject->name)->headline() }}
                                 </label>
                             
                                 @endforeach
@@ -222,7 +224,7 @@
                                <div class="row justify-content-between">
                                 @foreach ($authors as $author)
                                 <label class="border border-1 px-2 py-1" style="border-radius:25px;" for="author{{ $author->id }}">
-                                    <input type="checkbox" name="authors[]" value="{{ $author->id }}" id="author{{ $author->id }}"> {{ str()->headline($author->name) }}
+                                    <input {{ in_array($author->id,request()->authors ?? []) ? "checked" : "" }} type="checkbox" name="authors[]" value="{{ $author->id }}" id="author{{ $author->id }}"> {{ str()->headline($author->name) }}
                                 </label>
                             
                                 @endforeach

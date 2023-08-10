@@ -1,7 +1,10 @@
 @extends('layouts.frontendLayouts')
 
 @section('title')
-    {{ str($book->title)->headline() }} - {{ env('APP_NAME') }}
+{{ str($book->title)->headline() }} - {{ env('APP_NAME') }}
+@endsection
+@section('detail')
+{{ $book->short_detail }}
 @endsection
 @section('frontendContent')
 <div id="primary" class="content-area">
@@ -61,7 +64,7 @@
 
                             </p>
                             <div class="mb-2 font-size-2">
-                                <span class="font-weight-medium">Book Format:</span>
+                                <span class="font-weight-medium">Short Detail:</span>
 
                             </div>
 

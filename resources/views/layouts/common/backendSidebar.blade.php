@@ -50,11 +50,11 @@
                         Users List
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('role.all') }}">
                         Roles List
                     </a>
-                </li>
+                </li> --}}
 
             </ul>
         </li>
