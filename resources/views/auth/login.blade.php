@@ -16,11 +16,8 @@
             <div class="col-lg-6">
                 <div class="signin-wrapper">
                     <div class="form-wrapper">
-                        <h6 class="mb-15">Sign In Form</h6>
-                        <p class="text-sm mb-25">
-                            Start creating the best possible user experience for you
-                            customers.
-                        </p>
+                        <h6 class="mb-15">Sign In Form only for Admins</h6>
+                       
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="row">
@@ -85,35 +82,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end col -->
-            <div class="col-lg-5 bg-light">
-                <div class="singin-option pt-40">
-                    <p class="text-sm text-medium text-center text-gray">
-                        Easy Sign In With
-                    </p>
-                    <div class="
-                                        button-group
-                                        pt-40
-                                        pb-40
-                                        d-flex
-                                        justify-content-center
-                                        flex-wrap
-                                      ">
-                        <button class="main-btn primary-btn-outline m-2">
-                            <i class="lni lni-facebook-fill mr-10"></i>
-                            Facebook
-                        </button>
-                        <button class="main-btn danger-btn-outline m-2">
-                            <i class="lni lni-google mr-10"></i>
-                            Google
-                        </button>
-                    </div>
-                    <p class="text-sm text-medium text-dark text-center">
-                        Don’t have any account yet?
-                        <a href="signup.html">Create an account</a>
-                    </p>
-                </div>
-            </div>
+           
         </div>
         <!-- end row -->
     </div>

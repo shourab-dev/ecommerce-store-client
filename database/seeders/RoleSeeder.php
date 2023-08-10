@@ -20,14 +20,7 @@ class RoleSeeder extends Seeder
                 'name' => 'admin',
                 'guard' => 'web'
             ],
-            [
-                'name' => 'manager',
-                'guard' => 'web'
-            ],
-            [
-                'name' => 'product-manager',
-                'guard' => 'web'
-            ],
+
             [
                 'name' => 'author',
                 'guard' => 'web'

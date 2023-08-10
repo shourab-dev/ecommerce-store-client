@@ -22,8 +22,8 @@ Route::name('frontend.product.')->controller(ProductController::class)->group(fu
     Route::get('/books/{slug?}', 'show')->name('show');
 
     //* ROUTE FOR CLASSROOM & SUBJECT WITH BOOKS
-    Route::get('/class/{slug}', 'getBooksByClassOrSubject')->name('class');
-    Route::get('/subject/{slug}', 'getBooksByClassOrSubject')->name('subject');
+    Route::get('/category/{slug}', 'getBooksByClassOrSubject')->name('class');
+    Route::get('/product/{slug}', 'getBooksByClassOrSubject')->name('subject');
 
     //* ROUTE FOR SEARCH
     Route::get("/search", 'getSearchResultsViaAjax')->name('search');

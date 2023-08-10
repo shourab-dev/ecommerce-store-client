@@ -149,7 +149,8 @@
 
 
                 <div class="form-group my-2">
-                    <label for="thubnail">Thumbnail Image <span class="text-danger">*</span></label>
+                    <label for="thubnail">Thumbnail Image <span class="text-danger">*</span> (Size: 300 * 449 px)</label>
+
                     <input type="file" name="thumbnail" id="thubnail" class="form-control">
                     @error('thumbnail')
                     <span class="text-danger">{{ $message }}</span>

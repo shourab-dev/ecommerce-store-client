@@ -34,7 +34,8 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
 
         //* USER MANAGEMENT
         Route::prefix('/users')->name('user.')->group(function () {
-            Route::GET('/', 'getAllUsers')->name('all');
+            Route::GET('/{id?}', 'getAllUsers')->name('all');
+            Route::put('/update/{id}', 'updateUser')->name('update');
         });
     });
 
@@ -102,6 +103,7 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::get('/view/{orderId}', 'viewOrders')->name('view');
         Route::get('/mark-paid/{orderId}', 'markPaid')->name('paid');
         Route::get('/mark-deliver/{orderId}', 'markDelivered')->name('deliver');
+        Route::delete('/delete-order/{id}', 'deleteOrder')->name('delete');
     });
 
     //* WEB SETTING ROUTES

@@ -92,16 +92,22 @@
                             Invoice <i class="lni lni-eye ms-2"></i></a>
                         @if ($order->status == 'Processing' || $order->status == 'Pending')
 
-                        <a  href="{{ route('admin.orders.paid', $order->id) }}"
-                            class="btn d-flex align-items-center" style="background: rgb(134, 255, 134)">Mark as Paid <i
-                                class="lni lni-coin ms-2"></i></a>
+                        <a href="{{ route('admin.orders.paid', $order->id) }}" class="btn d-flex align-items-center"
+                            style="background: rgb(134, 255, 134)">Mark as Paid <i class="lni lni-coin ms-2"></i></a>
                         @endif
                         @if ($order->status == 'Complete')
 
-                        <a  href="{{ route('admin.orders.deliver', $order->id) }}"
+                        <a href="{{ route('admin.orders.deliver', $order->id) }}"
                             class="btn btn-warning d-flex align-items-center">Mark as Delivered <i
                                 class="lni lni-delivery ms-2"></i></a>
                         @endif
+                        <a href="#" class="btn btn-danger deleteOrderBtn" style="border-radius: 0 5px 5px 0">
+                            Delete Order
+                        </a>
+                        <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                        </form>
                     </div>
 
                     <br>
@@ -116,4 +122,28 @@
 
 
 </div>
+@push('customJs')
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('.deleteOrderBtn').click(function(){
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                 $(this).next('form').submit()
+                
+            }
+        })
+
+        })
+</script>
+@endpush
 @endsection

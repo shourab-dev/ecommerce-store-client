@@ -24147,3 +24147,23 @@ footer .widget select.custom-select,
     bottom: 20px;
     right: 20px;
 }
+
+#authorSlider .slick-list{
+    width: 100%;
+}
+
+
+.search_result{
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+@media (min-width: 320px) and (max-width: 768px){
+
+    .search_result{
+        max-height:300px;
+        overflow-y: auto;
+    }
+}

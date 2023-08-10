@@ -7,27 +7,29 @@
             <div class="js-slick-carousel u-slick"
                 data-pagi-classes="text-center u-slick__pagination position-absolute right-0 left-0 mb-n8 mb-lg-4 bottom-0">
                 @foreach ($featuredBooks as $banner)
-               
+
                 <div class="js-slide">
                     <div class="hero row min-height-588 align-items-center">
                         <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
                                 <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2"
-                                    data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">{{ $banner->class->name }}</p>
+                                    data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">{{
+                                    $banner->class->name }}</p>
                                 <h2 class="hero__title font-size-14 mb-4" data-scs-animation-in="fadeInUp"
                                     data-scs-animation-delay="300">
-                                    <span class="hero__title-line-1 font-weight-regular d-block">{{ $banner->title }}</span>
-                                    <span class="hero__title-line-2 font-weight-bold d-block">{{ Carbon\Carbon::parse($banner->created_at)->format("F") }}</span>
+                                    <span class="hero__title-line-1 font-weight-regular d-block">{{ $banner->title
+                                        }}</span>
+                                    <span class="hero__title-line-2 font-weight-bold d-block">{{
+                                        Carbon\Carbon::parse($banner->created_at)->format("F") }}</span>
                                 </h2>
-                                <a target="_blank" href="{{ route('frontend.product.show',$banner->slug) }}" class="btn btn-dark btn-wide rounded-0 hero__btn"
-                                    data-scs-animation-in="fadeInLeft" data-scs-animation-delay="400">See More</a>
+                                <a target="_blank" href="{{ route('frontend.product.show',$banner->slug) }}"
+                                    class="btn btn-dark btn-wide rounded-0 hero__btn" data-scs-animation-in="fadeInLeft"
+                                    data-scs-animation-delay="400">See More</a>
                             </div>
                         </div>
                         <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight"
                             data-scs-animation-delay="500">
-                            <img class="img-fluid"
-                                src="{{ $banner->thumbnail }}"
-                                alt="image-description">
+                            <img class="img-fluid mx-auto" src="{{ $banner->thumbnail }}" alt="image-description">
                         </div>
                     </div>
                 </div>
@@ -47,7 +49,8 @@
     <div class="container">
         <header class="mb-5 d-md-flex justify-content-between align-items-center">
             <h2 class="font-size-7 mb-3 mb-md-0">Bestselling Books</h2>
-            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
+            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i
+                    class="glyph-icon flaticon-next"></i></a>
         </header>
         <div class="js-slick-carousel products no-gutters border-top border-left border-right"
             data-pagi-classes="d-xl-none text-center position-absolute right-0 left-0 u-slick__pagination mt-4 mb-0"
@@ -96,13 +99,15 @@
                         <div class="woocommerce-loop-product__body product__body pt-3 bg-white">
                             <div class="text-uppercase font-size-1 mb-1 text-truncate">
                                 <a href="../shop/single-product-v1.html">{{ $mostSellingBook->class->name }}</a>
-                                
+
                             </div>
                             <h2
                                 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                <a href="{{ route('frontend.product.show', $mostSellingBook->slug) }}">{{ $mostSellingBook->title }}</a>
+                                <a href="{{ route('frontend.product.show', $mostSellingBook->slug) }}">{{
+                                    $mostSellingBook->title }}</a>
                             </h2>
-                            <div class="font-size-2  mb-1 text-truncate"><a href="{{ route('frontend.author.all', $mostSellingBook->author->id) }}"
+                            <div class="font-size-2  mb-1 text-truncate"><a
+                                    href="{{ route('frontend.author.all', $mostSellingBook->author->id) }}"
                                     class="text-gray-700">{{ $mostSellingBook->author->name }}</a></div>
                             <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                 @if ($mostSellingBook->selling_price)
@@ -185,8 +190,8 @@
                             <div
                                 class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                                 <div class="woocommerce-loop-product__thumbnail">
-                                    <a href="{{ route('frontend.product.show', $featureBook->slug) }}" class="d-block"><img
-                                            src="{{ $featureBook->thumbnail }}"
+                                    <a href="{{ route('frontend.product.show', $featureBook->slug) }}"
+                                        class="d-block"><img src="{{ $featureBook->thumbnail }}"
                                             class="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                                             alt="image-description"></a>
                                 </div>
@@ -194,15 +199,18 @@
                                     <div class="text-uppercase font-size-1 mb-1 text-truncate">
                                         <a class="mr-2" href="../shop/single-product-v1.html">{{
                                             $featureBook->class->name }}</a>
-                                        
+
 
 
                                     </div>
                                     <h2
                                         class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-                                        <a href="{{ route('frontend.product.show', $featureBook->slug) }}">{{ $featureBook->title }}</a>
+                                        <a href="{{ route('frontend.product.show', $featureBook->slug) }}">{{
+                                            $featureBook->title }}</a>
                                     </h2>
-                                    <div class="font-size-2  mb-1 text-truncate"><a href="{{ route('frontend.author.all', $featureBook->author->id) }}" class="text-gray-700">{{
+                                    <div class="font-size-2  mb-1 text-truncate"><a
+                                            href="{{ route('frontend.author.all', $featureBook->author->id) }}"
+                                            class="text-gray-700">{{
                                             str($featureBook->author->name)->headline() }}</a></div>
                                     <div class="price d-flex align-items-center font-weight-medium font-size-3">
                                         @if ($featureBook->price != null)
@@ -282,7 +290,8 @@
     <div class="container">
         <header class="mb-5 d-md-flex justify-content-between align-items-center">
             <h2 class="font-size-7 mb-3 mb-md-0">Books Shops</h2>
-            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i class="glyph-icon flaticon-next"></i></a>
+            <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i
+                    class="glyph-icon flaticon-next"></i></a>
         </header>
         <div class="js-slick-carousel u-slick products border"
             data-pagi-classes="text-center u-slick__pagination mt-md-8 mt-4 position-absolute right-0 left-0"
@@ -305,23 +314,23 @@
             @foreach ($newBooks as $newBook)
             <div class="product product__card border-right">
                 <div class="media p-3 p-md-4d875">
-                    <a href="{{ route('frontend.product.show', $newBook->slug) }}" class="d-block"><img src="{{ $newBook->thumbnail }}"
-                            width="120px" alt="image-description"></a>
+                    <a href="{{ route('frontend.product.show', $newBook->slug) }}" class="d-block"><img
+                            src="{{ $newBook->thumbnail }}" width="120px" alt="image-description"></a>
                     <div class="media-body ml-4d875">
                         <div class="text-uppercase font-size-1 mb-1 text-truncate">
                             <a class="mr-2" href="../shop/single-product-v1.html">{{ $newBook->class->name ?? '' }}</a>
-                            
+
                         </div>
                         <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
                             <a href="{{ route('frontend.product.show', $newBook->slug) }}">{{ $newBook->title }}</a>
                         </h2>
                         <div class="font-size-2 mb-1 text-truncate">
                             @if (isset($newBook->author->id))
-                                
-                            <a href="{{ route('frontend.author.all', $newBook->author->id) }}"
-                                class="text-gray-700">{{ $newBook->author->name }}</a>
-                            </div>
-                            @endif
+
+                            <a href="{{ route('frontend.author.all', $newBook->author->id) }}" class="text-gray-700">{{
+                                $newBook->author->name }}</a>
+                        </div>
+                        @endif
                         <div class="price d-flex align-items-center font-weight-medium font-size-3">
                             @if ($newBook->price !=null)
                             @if ($newBook->selling_price)
@@ -360,8 +369,8 @@
             <a href="{{ route('frontend.product.show') }}" class="h-primary d-block">View All <i
                     class="glyph-icon flaticon-next"></i></a>
         </header>
-        <ul class="row rows-cols-5 no-gutters authors list-unstyled js-slick-carousel u-slick" data-slides-show="5"
-            data-arrows-classes="u-slick__arrow u-slick__arrow-centered--y"
+        <ul id="authorSlider" class="row rows-cols-5 no-gutters authors list-unstyled js-slick-carousel u-slick"
+            data-slides-show="5" data-arrows-classes="u-slick__arrow u-slick__arrow-centered--y"
             data-arrow-left-classes="fas fa-chevron-left u-slick__arrow-inner u-slick__arrow-inner--left ml-lg-n10"
             data-arrow-right-classes="fas fa-chevron-right u-slick__arrow-inner u-slick__arrow-inner--right mr-lg-n10"
             data-responsive="[{
@@ -387,8 +396,8 @@
                 }]">
             @foreach ($authors as $author)
             <li class="author col">
-                <a href="{{ route('frontend.author.all', $author->id) }}" class="text-reset">
-                    <img width="120" src="https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $author->name }}"
+                <a href="books?authors%5B%5D={{ $author->id }}" class="text-reset">
+                    <img width="120" src="https://api.dicebear.com/6.x/initials/svg?seed={{ $author->name }}"
                         class="mx-auto mb-5 d-block rounded-circle" alt="image-description">
                     <div class="author__body text-center">
                         <h2 class="author__name h6 mb-0">{{ str($author->name)->slug() }}</h2>
@@ -396,6 +405,7 @@
                     </div>
                 </a>
             </li>
+            
 
 
 

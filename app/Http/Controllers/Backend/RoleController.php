@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Svg\Tag\Rect;
 
 class RoleController extends Controller
 {
@@ -65,9 +67,10 @@ class RoleController extends Controller
 
     public function getAuthors(Request $req)
     {
-        $authors = User::whereHas("roles", function($q){ $q->where("name", "author"); })->select('id', 'name')->where('name', 'LIKE', '%' . $req->name . '%')->get();
+        $authors = User::whereHas("roles", function ($q) {
+            $q->where("name", "author");
+        })->select('id', 'name')->where('name', 'LIKE', '%' . $req->name . '%')->get();
         return response()->json($authors);
-        
     }
 
 
@@ -76,13 +79,52 @@ class RoleController extends Controller
      * * GET ALL USERS
      */
 
-     public function getAllUsers()
-     {
+    public function getAllUsers($id = null)
+    {
+        if ($id) {
+            $editedUser = User::findOrFail($id);
+        } else {
+            $editedUser = null;
+        }
         $roles = Role::where('name', "!=", "admin")->get();
-        $users = User::whereHas('roles', function($q){
-            $q->where('name',"!=",'admin');
+        $users = User::whereHas('roles', function ($q) {
+            $q->where('name', "!=", 'admin');
         })->latest()->paginate(10);
-        
-        return view('backend.roles.addUser',compact('roles','users'));
-     }
+
+        return view('backend.roles.addUser', compact('roles', 'users', 'editedUser'));
+    }
+
+
+    /**
+     * * UPDATE USER
+     */
+    function updateUser(Request $req, $id)
+    {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => "confirmed",
+            'password_confirmation' => "required_with:password"
+        ], [
+            'password_confirmation.required_with' => "Please Confirm your password"
+        ]);
+
+
+        $user = User::findOrFail($id);
+        $user->name = $req->name;
+        $user->email = $req->email;
+        $user->phone = $req->phone;
+
+        if($req->password){
+
+            $user->password = Hash::make($req->password);
+        }
+        $user->save();
+
+       $user->assignRole($req->role);
+        notify()->success('User Updated');
+        return redirect()->route('role.user.all');
+
+
+    }
 }

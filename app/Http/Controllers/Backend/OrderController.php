@@ -98,4 +98,15 @@ class OrderController extends Controller
         notify()->success('Order Marked as delivered');
         return back();
     }
+
+    /**
+     ** DELETE AN ORDER 
+     */
+    function deleteOrder($id) {
+    
+        Order::findOrFail($id)->delete();
+        notify()->success("Order Deleted");
+        return back();
+    
+    }
 }

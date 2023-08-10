@@ -844,7 +844,7 @@
                         <div class="px-4 py-5 px-md-6 border-bottom">
                             <div class="media">
                                 <a href="#" class="d-block">
-                                    <img src="${cart.books.thumbnail}" class="img-fluid mCS_img_loaded" alt="${cart.books.title}" width="100"></a>
+                                    <img src="${cart.books.thumbnail}" class="img-fluid mCS_img_loaded" alt="${cart.books.title}" width="100" ></a>
                                 <div class="media-body ml-4d875">
                                    
                                     <h2 class="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2">
@@ -972,9 +972,9 @@
                         let bookSlugUrl = "{{ route('frontend.product.show', '::slug') }}"
                         bookSlugUrl = bookSlugUrl.replace('::slug', book.slug)
                             let li = `<li>
-                                <div class="row">
+                                <div class="row align-items-center">
                                     <div class="col-4">
-                                        <a href="${bookSlugUrl}"><img width="80" src="${book.thumbnail}" alt="${book.title}"></a>
+                                        <a href="${bookSlugUrl}"><img style="height:95px;object-fit:cover;" width="80" src="${book.thumbnail}" alt="${book.title}"></a>
                                     </div>
                                     <div class="col-8">
                                         <a href="${bookSlugUrl}">
