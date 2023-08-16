@@ -138,9 +138,9 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="site-branding pr-md-4">
-                        <a href="{{ url('/') }}" class="d-flex align-items-center mb-1">
-                            <img src="{{ $headerSetting->logo }}" alt="" height="60">
+                    <div class="site-branding pr-md-4 col-8 col-md">
+                        <a href="{{ url('/') }}" class="d-flex align-items-center mb-1 justify-content-center justify-content-md-start">
+                            <img src="{{ $headerSetting->logo }}" alt="" height="40">
                             <h2 class="ml-2 text-dark">{{ env('APP_NAME') }}</h2>
                         </a>
                     </div>
@@ -164,6 +164,9 @@
                                 <i class="glph-icon flaticon-user"></i>
                             </a>
                             @endguest
+                            @auth('user')
+                                
+                            
                             <a id="sidebarNavToggler1" href="javascript:;" role="button"
                                 class="nav-link link-black-100 position-relative cartTogglerBtn"
                                 aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false"
@@ -180,10 +183,11 @@
                                     $cartTotalCount }}</span>
                                 <i class="glph-icon flaticon-icon-126515"></i>
                             </a>
+                            @endauth
                         </li>
                         @auth('user')
 
-                        <li class="nav-item">
+                        <li class="nav-item d-none d-md-block">
                             <a href="{{ route('user.dashboard') }}" target="__blank" class="nav-link">{{
                                 str(auth()->guard('user')->user()->name)->headline() }}</a>
                         </li>
@@ -191,7 +195,7 @@
                     </ul>
                     <div class="site-search ml-xl-0 ml-md-auto w-r-100 my-2 my-xl-0">
                         <form class="form-inline">
-                            <div class="input-group position-relative">
+                            <div class="input-group w-100 position-relative">
                                 <div class="input-group-prepend">
                                     <i
                                         class="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>

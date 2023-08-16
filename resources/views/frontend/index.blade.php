@@ -1,7 +1,7 @@
 @extends('layouts.frontendLayouts')
 @section('frontendContent')
 {{-- *BANNER --}}
-<section class="space-bottom-3">
+<section id="banner" class="space-bottom-3">
     <div class="bg-gray-200 space-2 space-lg-0 bg-img-hero">
         <div class="container">
             <div class="js-slick-carousel u-slick"
@@ -10,7 +10,7 @@
 
                 <div class="js-slide">
                     <div class="hero row min-height-588 align-items-center">
-                        <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0">
+                        <div class="col-lg-7 col-wd-6 mb-4 mb-lg-0 order-2 order-md-1">
                             <div class="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
                                 <p class="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2"
                                     data-scs-animation-in="fadeInUp" data-scs-animation-delay="200">{{
@@ -27,7 +27,7 @@
                                     data-scs-animation-delay="400">See More</a>
                             </div>
                         </div>
-                        <div class="col-lg-5 col-wd-6" data-scs-animation-in="fadeInRight"
+                        <div class="col-lg-5 col-wd-6 order-1 order-md-2" data-scs-animation-in="fadeInRight"
                             data-scs-animation-delay="500">
                             <img class="img-fluid mx-auto" src="{{ $banner->thumbnail }}" alt="image-description">
                         </div>
@@ -44,6 +44,8 @@
 `
 
 {{-- * BEST SELLING --}}
+@if (count($mostSellingBooks) > 2)
+    
 
 <section class="space-bottom-3">
     <div class="container">
@@ -159,6 +161,7 @@
         </div>
     </div>
 </section>
+@endif
 {{-- * BEST SELLING ENDS --}}
 
 {{-- * FEATURED BOOKS AND ON SALE BOOKS --}}

@@ -9,7 +9,7 @@
         <div class="row pb-8">
             <div id="secondary" class="sidebar col-lg-6 cart-collaterals" role="complementary">
                 <div id="cartAccordion" class="border border-gray-500 bg-white mb-5">
-                    <form action="{{ route('checkout') }}" method="POST" class="p-4">
+                    <form action="{{ route('checkout') }}" method="POST" class="p-lg-4">
                         <h5 class="mb-4">Check Out Form</h5>
                         @csrf
                         <input type="text" class="form-control my-2" value="{{ auth()->guard('user')->user()->name }}"
@@ -73,8 +73,7 @@
                                         <td width="100%">
                                             <input type="radio" checked class="mr-2" id="cod" name="paymentMethod"
                                                 value="cod"><label for="cod">Cash on Delivery</label> <br>
-                                            <input type="radio" class="mr-2" id="ssl" name="paymentMethod"
-                                                value="ssl"><label for="ssl">SSl Commerce</label>
+                                           <label for="ssl"><input type="radio" class="mr-2" id="ssl" name="paymentMethod" value="ssl"> SSl Commerce (Mobile Banking or Card)</label>
                                         </td>
                                     </tr>
                                 </tbody>

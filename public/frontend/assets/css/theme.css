@@ -24167,3 +24167,42 @@ footer .widget select.custom-select,
         overflow-y: auto;
     }
 }
+
+
+.sidebarFilter{
+    transform: scaleX(0);
+    opacity: 0;
+    background-color: white;
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100vh;
+    overflow-y: auto;
+    transition: 0.35s ease;
+    transform-origin: left;
+}
+
+.closeFilterBtn{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+}
+
+.activeFilterSidebar{
+    opacity: 1;
+    transform: scaleX(1);
+    transition: 0.12s ease;
+}
+
+@media (max-width:768px) {
+    
+    #banner img.img-fluid{
+        max-width: 50%;
+    }
+    #banner .font-size-14 {
+	font-size: 2.5rem;
+}
+}

@@ -95,7 +95,9 @@ class UserAuthController extends Controller
         }
         $customer->save();
 
-        $customerAddress = CustomerAddress::where('customer_id', $customer->id)->update([
+        $customerAddress = CustomerAddress::updateOrCreate([
+            'customer_id' => $customer->id
+        ],[
             'phone' => $req->phone,
             'address' => $req->address,
         ]);

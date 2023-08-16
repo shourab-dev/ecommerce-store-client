@@ -2128,7 +2128,10 @@ h6,
     top: auto;
 }
 .header .header-right .profile-box .profile-info .info .image img {
-    width: 100%;
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 50%;
 }
 

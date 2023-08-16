@@ -79,7 +79,7 @@
                                 @auth('user')
                                 @if($book->isPaid == 1)
                                 @if (!$book->is_ebook)
-                                <div class="col-lg-4 col-5  d-flex mb-3 mb-lg-0 cartAmountBtns">
+                                <div class="col-lg-4 col-8  d-flex mb-3 mb-lg-0 cartAmountBtns pl-0 ">
                                     <button type="button" data-type="increment"
                                         class="btn btn-outline-dark btn-sm col">+</button>
                                     <input id="cartAmount" type="number" class="form-control col-7 text-center"

@@ -23,6 +23,8 @@
         border-radius: 50%;
         display: block;
         margin: auto;
+        object-fit: cover;
+        object-position: center;
         
 
     }
@@ -47,7 +49,7 @@
                     <input type="file" id="profileImage" name="profile">
                     <p>Click Profile Picture to Upload new Photo</p>
                 </div>
-                <div class="col-lg-8 px-5 py-3">
+                <div class="col-lg-8 px-lg-5 py-3">
                     <input type="text" value="{{ auth()->guard('user')->user()->name }}" name="name" class="form-control rounded-0 mb-2" placeholder="User Name" >
                     <input type="email" value="{{ auth()->guard('user')->user()->email }}" name="email" class="form-control rounded-0 mb-2" placeholder="User Email" >
                     <input type="text" value="{{ auth()->guard('user')->user()->details->phone ?? '' }}" name="phone" class="form-control rounded-0 mb-2" placeholder="User Phone" >
@@ -55,18 +57,18 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                     <textarea name="address" class="form-control rounded-0 mb-2" placeholder="Address">{{ auth()->guard('user')->user()->details->address ?? '' }}</textarea>
-                    <button class="btn btn-primary rounded-0">Update Profile</button>
+                    <button class="btn btn-primary rounded-0 ms-auto d-block">Update Profile</button>
                 </div>
             </div>
             </form>
         </div>
-        <div class="card col-lg-3 border-0 shadow">
+        <div class="card col-lg-3 border-0 shadow mt-5 pb-4">
             <h6 class="text-primary my-3">Change Password</h6>
             <form action="">
                 <input type="password" name="oldPassword" class="form-control rounded-0 mb-2" placeholder="Old Password">
                 <input type="password" name="password" class="form-control rounded-0 mb-2" placeholder="New Password">
                 <input type="password" name="password_confirmation" class="form-control rounded-0 mb-2" placeholder="Confirm Password">
-                <button class="btn btn-primary rounded-0">Update Password</button>
+                <button class="btn btn-primary rounded-0 ms-auto d-block    ">Update Password</button>
             </form>
         </div>
     </div>

@@ -21,9 +21,11 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
-            <a href="{{ url('/') }}">
-                <img src="{{ asset('frontend/logo.png') }}" target="__blank" alt="logo" width="50" />
+            <a href="{{ url('/') }}" class="d-flex align-items-center justify-content-center">
+                <img  src="{{ asset('frontend/logo.png') }}" target="__blank" alt="logo" width="20" />
+                <h3 class="ms-2">{{ env('APP_NAME') }}</h3>
             </a>
+            <hr>
         </div>
         <nav class="sidebar-nav">
             <ul>
