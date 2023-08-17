@@ -198,6 +198,7 @@ class BookController extends Controller
             $dummyFile = $this->uploadSingleMedia($request->demoPdf, 'demos', null, 'public');
         }
         if ($request->hasFile('book')) {
+
             //* REMOVE PREVIOUS DEMO PDF
             if (Storage::disk('local')->exists("books/" . $book->book_pdf)) {
                 Storage::disk('local')->delete("books/" . $book->book_pdf);
