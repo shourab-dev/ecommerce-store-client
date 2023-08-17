@@ -21,6 +21,8 @@ class HeaderSeetingSeeder extends Seeder
             "email" => json_encode(["tally@gmail.com"]),
             "whatsapp" => '0199999999',
             "is_question" => false,
+            "title" => "Tallymart",
+            "canonical" => "http://tallymart.com",
             "address" => "1418 River Drive, Suite 35 Cottonhall, CA 9622
 United States"
         ]);

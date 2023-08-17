@@ -21,16 +21,17 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PermissionSeeder::class,
             UserSeeder::class,
-            CustomerSeeder::class,
+            // CustomerSeeder::class,
             CountrySeeder::class,
             ClassRoomSeeder::class,
             SubjectSeeder::class,
-            BoardSeeder::class,
-            QuestionTypeSeeder::class,
-            QuestionPaperSeeder::class,
-            BookSeeder::class,
+            
+            // QuestionTypeSeeder::class,
+            // QuestionPaperSeeder::class,
+            // BookSeeder::class,
             HeaderSeetingSeeder::class,
             SocialLinkSeeder::class,
+            AboutSeeder::class,
         ]);
     }
 }

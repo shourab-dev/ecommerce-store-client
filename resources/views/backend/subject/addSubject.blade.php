@@ -45,9 +45,7 @@
                                         <a href="{{ route('admin.subject.edit',$subject) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                        <a href="#" class="text-danger">
-                                            <i class="lni lni-trash-can"></i>
-                                        </a>
+                                       
                                     </div>
                                 </td>
                             </tr>

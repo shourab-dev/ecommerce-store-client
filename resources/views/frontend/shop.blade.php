@@ -119,7 +119,7 @@
                             </li>
                             @empty
                             <li class="text-center d-block col-12 mx-auto mt-5">
-                                <h3 class="d-block">No Books Found!</h3>
+                                <h3 class="d-block">Nothing Found! 👀</h3>
                             </li>
                             @endforelse
 
@@ -257,7 +257,7 @@
             </div>
             <div class="sidebarFilter">
                 <div class="text-right my-3">
-                    <button type="submit" class="closeFilterBtn"><i class="fas fa-times"></i></button>
+                    <button type="button" class="closeFilterBtn"><i class="fas fa-times"></i></button>
                 </div>
                 <form action="{{ request()->getRequestUri() }}" method="get">
 
@@ -390,6 +390,10 @@
         } else{
             $('.sidebarFilter').addClass("activeFilterSidebar")
         }
+    })
+    $('.closeFilterBtn').click(function(e){
+        e.preventDefault()
+        $('.sidebarFilter').removeClass("activeFilterSidebar")
     })
 </script>
 @endpush

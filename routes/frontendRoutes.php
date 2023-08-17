@@ -74,3 +74,9 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 
 //* DOWNLOAD INVOICE FOR THE SPECIFIC ORDER 
 Route::get('/send-invoice/{id}', [CustomerOrderController::class, 'sendOrderInvoice'])->name('send.invoice')->middleware('isUser');
+
+
+
+// * ABOUT PAGE
+Route::get('/about', [HomeController::class, 'aboutPage'])->name('frontend.about');
+Route::get('/pages/{type}', [HomeController::class, 'frontendPages'])->name('frontend.pages');

@@ -62,9 +62,7 @@
                         {{ $message }}
                     </span>
                 @enderror
-                <label for="profile">
-                    User Profile Image
-                    <input type="file" name="profile" class="form-control my-2"></label>
+              
                 <select name="role" class="form-control">
                     <option disabled selected> Select a Role </option>
                     @foreach ($roles as $role)

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\ClassRoomController;
-use App\Http\Controllers\backend\OrderController;
+use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\PagesController;
 use App\Http\Controllers\Backend\QuestionPaperController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -112,5 +114,15 @@ Route::middleware(['isAdmin', 'auth'])->group(function () {
         Route::post('/', 'updateSetting');
         Route::get('/socials', 'getSocialMedia')->name('.social');
         Route::post('/socials', 'updateSocial')->name('.social.update');
+    });
+
+    //* ABOUT SETTING
+    Route::controller(AboutController::class)->prefix('admin/about-us')->name('admin.about')->group(function () {
+        Route::get('/', 'about');
+        Route::put('/update', 'updateAbout')->name('update');
+    });
+    Route::controller(PagesController::class)->prefix('admin/pages')->name('admin.pages')->group(function () {
+        Route::get('/{type}', 'pages');
+        Route::put('/update/{type}', 'updatePages')->name('update');
     });
 });

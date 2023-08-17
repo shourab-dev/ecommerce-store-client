@@ -146,6 +146,42 @@
             </ul>
         </li>
         {{-- * MANAGE BOOKS ENDS --}}
+        {{-- * ABOUT  --}}
+        <li class="nav-item nav-item-has-children ">
+            <a href="#0" class="collapsed" data-bs-toggle="collapse" data-bs-target="#pages" aria-controls="ddmenu_2"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon">
+                  <i class="lni lni-files"></i>
+                </span>
+                <span class="text">Pages</span>
+            </a>
+            <ul id="pages" class="collapse ">
+                <li>
+                    <a href="{{ route('admin.about') }}">
+                        About Page
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.pages','return-policy') }}">
+                        Return Policy Page
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.pages','terms') }}">
+                       Terms Of Use
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.pages','privacy') }}">
+                        Privacy
+                    </a>
+                </li>
+        
+            </ul>
+        </li>
+       
+        {{-- * ABOUT END --}}
+        {{-- * ABOUT  --}}
         {{-- * MANAGE WEB SETTING --}}
         <li class="nav-item  {{ request()->routeIs('admin.setting*') ? 'active' : '' }}">
             <a href="{{ route('admin.setting') }}">

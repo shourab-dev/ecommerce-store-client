@@ -139,7 +139,8 @@
                         </a>
                     </div>
                     <div class="site-branding pr-md-4 col-8 col-md">
-                        <a href="{{ url('/') }}" class="d-flex align-items-center mb-1 justify-content-center justify-content-md-start">
+                        <a href="{{ url('/') }}"
+                            class="d-flex align-items-center mb-1 justify-content-center justify-content-md-start">
                             <img src="{{ $headerSetting->logo }}" alt="" height="40">
                             <h2 class="ml-2 text-dark">{{ env('APP_NAME') }}</h2>
                         </a>
@@ -165,8 +166,8 @@
                             </a>
                             @endguest
                             @auth('user')
-                                
-                            
+
+
                             <a id="sidebarNavToggler1" href="javascript:;" role="button"
                                 class="nav-link link-black-100 position-relative cartTogglerBtn"
                                 aria-controls="sidebarContent1" aria-haspopup="true" aria-expanded="false"
@@ -285,8 +286,8 @@
                                                 </div>
                                             </div>
 
-                                            <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium"
-                                                href="{{ route('password.request') }}" data-animation-in="fadeIn">Forgot
+                                            <a class=" text-dark font-size-2 t-d-u font-weight-medium"
+                                                href="{{ route('password.request') }}">Forgot
                                                 Password?</a>
                                         </div>
                                         <div class="mb-4d75">
@@ -381,9 +382,8 @@
                                                 </div>
                                             </div>
 
-                                            <a class="js-animation-link text-dark font-size-2 t-d-u link-muted font-weight-medium"
-                                                href="javascript:;" data-target="#forgotPassword"
-                                                data-link-group="idForm" data-animation-in="fadeIn">Forgot Password?</a>
+                                            <a class=" text-dark font-size-2 t-d-u link-muted font-weight-medium"
+                                                href="{{ route('password.request') }}">Forgot Password?</a>
                                         </div>
                                         <div class="mb-4d75">
                                             <button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Sign
@@ -549,13 +549,13 @@
                                                 <ul>
                                                     @foreach ($subjects as $subject)
                                                     <li>
-                                        
+
                                                         <a href="{{ route('frontend.product.class',$subject->slug) }}">{{
                                                             str($subject->name)->headline()
                                                             }}</a>
                                                     </li>
                                                     @endforeach
-                                        
+
                                                 </ul>
                                             </div>
                                         </li>
@@ -563,7 +563,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            
+
                             {{-- sidebar menu end --}}
 
 
@@ -639,40 +639,17 @@
             <div class="border-bottom pb-5 space-bottom-lg-3">
                 <div class="container">
 
-                    <div class="space-bottom-2 space-bottom-md-3">
-                        <div class="text-center mb-5">
-                            <h5 class="font-size-7 font-weight-medium">Join Our Newsletter</h5>
-                            <p class="text-gray-700">Signup to be the first to hear about exclusive deals, special
-                                offers and upcoming collections</p>
-                        </div>
 
-                        <div class="form-row justify-content-center">
-                            <div class="col-md-5 mb-3 mb-md-2">
-                                <div class="js-form-message">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control px-5 height-60 border-dark" name="name"
-                                            id="signupSrName" placeholder="Enter email for weekly newsletter."
-                                            aria-label="Your name" required data-msg="Name must contain only letters."
-                                            data-error-class="u-has-error" data-success-class="u-has-success">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-2 ml-md-2">
-                                <button type="submit"
-                                    class="btn btn-dark rounded-0 btn-wide py-3 font-weight-medium">Subscribe
-                                </button>
-                            </div>
-                        </div>
-
-                    </div>
 
                     <div class="row">
                         <div class="col-lg-4 mb-6 mb-lg-0">
                             <div class="pb-6">
-                                <a href="index.html" class="d-inline-block mb-5">
+                                <a href="{{ url('/') }}" class="d-inline-block mb-5 text-dark">
 
                                     <img src="{{ $headerSetting->footer_logo ?? $headerSetting->logo }}" alt=""
                                         height="60">
+                                    <br>
+                                    <h4>{{ $headerSetting->title }}</h4>
 
                                 </a>
                                 <address class="font-size-2 mb-5">
@@ -720,7 +697,7 @@
                             <ul class="list-unstyled mb-0">
                                 <li class="pb-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">About as</a>
+                                        href="{{ route('frontend.about') }}">About as</a>
                                 </li>
                                 <li class="py-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
@@ -735,16 +712,16 @@
                             <ul class="list-unstyled mb-0">
                                 <li class="pb-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Return Policy</a>
+                                        href="{{ route('frontend.pages','return-policy') }}">Return Policy</a>
                                 </li>
                                 <li class="py-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Terms Of Use</a>
+                                        href="{{ route('frontend.pages','terms') }}">Terms Of Use</a>
                                 </li>
 
                                 <li class="pt-2">
                                     <a class="widgets-hover transition-3d-hover font-size-2 link-black-100"
-                                        href="index.html#">Privacy</a>
+                                        href="{{ route('frontend.pages','privacy') }}">Privacy</a>
                                 </li>
                             </ul>
                         </div>
@@ -770,7 +747,7 @@
                     <div class="d-lg-flex text-center  text-lg-left justify-content-center align-items-center">
 
                         <p class="mb-3 mb-lg-0 font-size-2">©{{ Carbon\Carbon::today()->format("Y") }} {{
-                            env('APP_NAME') }}. All rights reserved</p>
+                           $headerSetting->title }}. All rights reserved</p>
 
 
                     </div>

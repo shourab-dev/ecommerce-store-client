@@ -45,7 +45,8 @@
                                         <a href="{{ route('admin.class.edit', $classRoom) }}" class="text-primary me-2">
                                             <i class="lni lni-pencil"></i>
                                         </a>
-                                      
+                                        
+
                                     </div>
                                 </td>
                             </tr>
@@ -96,7 +97,8 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="mt-2 btn btn-outline-primary w-100">{{ isset($editedClassRoom) ? 'Update
+                    <button type="submit" class="mt-2 btn btn-outline-primary w-100">{{ isset($editedClassRoom) ?
+                        'Update
                         Country'
                         : 'Submit' }}</button>
                 </form>
